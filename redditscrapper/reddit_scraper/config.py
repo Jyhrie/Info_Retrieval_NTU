@@ -2,7 +2,7 @@
 
 # Scraping settings
 DEFAULT_QUERIES = [
-    "cryptocurrency",
+    "Donald Trump",
     # "bitcoin",
     # "bitcoin price",
     # "bitcoin 2026"
