@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from .forms import TextForm
 
-# Create your views here.
+def home(request):
+    form = TextForm()
+    return render(request, 'home.html', {'form': form})
