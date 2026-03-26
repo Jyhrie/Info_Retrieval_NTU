@@ -8,3 +8,6 @@ gemini_analysis/gemini.env
 /data
 **/__pycache__/
 **/*.pyc
+
+# Ignore reference project copy
+refer/
