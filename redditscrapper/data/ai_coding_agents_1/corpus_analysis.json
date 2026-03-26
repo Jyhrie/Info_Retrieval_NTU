@@ -1,0 +1,87 @@
+{
+  "Total_records": 55334,
+  "Total_words": 2321707,
+  "Total_types": 41634,
+  "top_words": [
+    {
+      "word": "the",
+      "count": 80777
+    },
+    {
+      "word": "to",
+      "count": 59805
+    },
+    {
+      "word": "it",
+      "count": 52503
+    },
+    {
+      "word": "i",
+      "count": 51635
+    },
+    {
+      "word": "and",
+      "count": 49980
+    },
+    {
+      "word": "a",
+      "count": 49178
+    },
+    {
+      "word": "is",
+      "count": 34736
+    },
+    {
+      "word": "you",
+      "count": 33932
+    },
+    {
+      "word": "of",
+      "count": 32419
+    },
+    {
+      "word": "that",
+      "count": 30879
+    },
+    {
+      "word": "for",
+      "count": 25726
+    },
+    {
+      "word": "in",
+      "count": 24748
+    },
+    {
+      "word": "s",
+      "count": 22050
+    },
+    {
+      "word": "this",
+      "count": 19566
+    },
+    {
+      "word": "with",
+      "count": 17565
+    },
+    {
+      "word": "t",
+      "count": 17204
+    },
+    {
+      "word": "but",
+      "count": 15345
+    },
+    {
+      "word": "on",
+      "count": 15244
+    },
+    {
+      "word": "ai",
+      "count": 13936
+    },
+    {
+      "word": "not",
+      "count": 13671
+    }
+  ]
+}

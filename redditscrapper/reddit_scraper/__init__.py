@@ -17,6 +17,14 @@ from .scraper import Scraper
 from .async_client import AsyncRedditClient
 from .async_scraper import AsyncScraper
 from .enricher import enrich_posts
+from .postprocess import process_scraped_output
 
-__all__ = ["RedditClient", "Scraper", "AsyncRedditClient", "AsyncScraper", "enrich_posts"]
+__all__ = [
+    "RedditClient",
+    "Scraper",
+    "AsyncRedditClient",
+    "AsyncScraper",
+    "enrich_posts",
+    "process_scraped_output",
+]
 __version__ = "1.0.0"

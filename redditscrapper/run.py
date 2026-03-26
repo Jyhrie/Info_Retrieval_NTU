@@ -13,6 +13,7 @@ Usage:
 from __future__ import annotations
 
 import asyncio
+import json
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -24,6 +25,7 @@ from proxy_manager import ProxyRotator
 from reddit_scraper import AsyncRedditClient, AsyncScraper, RedditClient, Scraper
 from reddit_scraper.config import *
 from reddit_scraper.enricher import enrich_posts
+from reddit_scraper.postprocess import process_scraped_output
 from shared import save_json
 
 
@@ -84,12 +86,49 @@ class Logger:
         self.log.close()
 
 
+def _safe_folder_name(name: str, max_len: int = 80) -> str:
+    """Create a filesystem-safe folder name from query text."""
+    cleaned = "".join(ch if ch.isalnum() or ch in (" ", "-", "_") else "_" for ch in name)
+    cleaned = "_".join(cleaned.split())
+    cleaned = cleaned.strip("._") or "query"
+    return cleaned[:max_len]
+
+
+def _next_run_folder(output_dir: Path, base_name: str) -> Path:
+    """Return next available run folder path with numeric suffix if needed."""
+    candidate = output_dir / base_name
+    if not candidate.exists():
+        return candidate
+
+    i = 1
+    while True:
+        numbered = output_dir / f"{base_name}_{i}"
+        if not numbered.exists():
+            return numbered
+        i += 1
+
+
+def _normalize_query_stats(query_stats: dict[str, object]) -> dict[str, dict[str, int]]:
+    """Normalize sync/async scraper stats to {query: {total, unique}}."""
+    normalized: dict[str, dict[str, int]] = {}
+    for query, stats in query_stats.items():
+        if isinstance(stats, dict):
+            total = int(stats.get("total", 0))
+            unique = int(stats.get("unique", total))
+        else:
+            total = int(stats)
+            unique = total
+        normalized[query] = {"total": total, "unique": unique}
+    return normalized
+
+
 def run_scraper(
     queries: list[str] | None = None,
     limit_per_query: int = DEFAULT_LIMIT_PER_QUERY,
     output_dir: str | Path = DEFAULT_OUTPUT_DIR,
     proxy_file: str = None,
     enable_enrichment: bool = ENABLE_ENRICHMENT,
+    enable_postprocessing: bool = ENABLE_POSTPROCESSING,
     async_mode: bool = ASYNC_MODE,
     query_concurrency: int = ASYNC_QUERY_CONCURRENCY,
     verbose: bool = True
@@ -108,9 +147,10 @@ def run_scraper(
     if queries is None:
         queries = DEFAULT_QUERIES
     output_dir = Path(output_dir)
-    first_query = queries[0]
-    # Create output folder named after first query
-    query_folder = output_dir / first_query
+    first_query = queries[0] if queries else "query"
+    # Create output folder named after first query; auto-increment if already used.
+    base_folder_name = _safe_folder_name(first_query)
+    query_folder = _next_run_folder(output_dir, base_folder_name)
     query_folder.mkdir(parents=True, exist_ok=True)
     # Setup logging
     log_file = query_folder / f"console_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
@@ -126,6 +166,36 @@ def run_scraper(
         print(f"Output folder: {query_folder}")
         print(f"Queries: {queries}")
         print(f"{'='*60}\n")
+
+        # Save a snapshot of effective run configuration for reproducibility.
+        run_config = {
+            "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            "first_query": first_query,
+            "run_folder": str(query_folder),
+            "queries": list(queries),
+            "limit_per_query": int(limit_per_query),
+            "batch_size": int(DEFAULT_BATCH_SIZE),
+            "request_delay_seconds": float(DEFAULT_DELAY),
+            "async_mode": bool(async_mode),
+            "query_concurrency": int(query_concurrency),
+            "proxy_file": str(proxy_path),
+            "timeout_seconds": int(TIMEOUT),
+            "max_retries": int(MAX_RETRIES),
+            "retry_backoff_seconds": float(RETRY_BACKOFF),
+            "max_proxy_refreshes": int(MAX_PROXY_REFRESHES),
+            "enable_enrichment": bool(enable_enrichment),
+            "enable_postprocessing": bool(enable_postprocessing),
+            "enrichment_delay_seconds": float(ENRICHMENT_DELAY),
+            "enriched_output_filename": ENRICHED_OUTPUT_FILENAME,
+            "cleaned_output_filename": CLEANED_OUTPUT_FILENAME,
+            "refined_output_filename": REFINED_OUTPUT_FILENAME,
+            "analysis_output_filename": ANALYSIS_OUTPUT_FILENAME,
+            "analysis_top_words": int(ANALYSIS_TOP_WORDS),
+        }
+        config_file = query_folder / "run_config.json"
+        with open(config_file, "w", encoding="utf-8") as f:
+            json.dump(run_config, f, indent=2, ensure_ascii=False)
+        print(f"Run config saved to: {config_file}\n")
         
         # Step 1: Use only proxies.txt, no refresh or testing
         print(f"STEP 1: Preparing proxy pool")
@@ -141,6 +211,10 @@ def run_scraper(
         # Step 2: Run scraper
         print(f"\nSTEP 2: Running Reddit crawler")
         print(f"{'='*60}")
+
+        posts: list[dict] = []
+        query_stats: dict[str, object] = {}
+        query_stats_normalized: dict[str, dict[str, int]] = {}
         
         if async_mode:
             print("Mode: ASYNC (aiohttp)")
@@ -186,38 +260,47 @@ def run_scraper(
                 proxy_file=proxy_path,
                 verbose=verbose
             )
+
+        query_stats_normalized = _normalize_query_stats(query_stats)
         
         # Save results with metadata
         output_file = query_folder / "results.json"
         metadata = {
             "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
             "total_posts": len(posts),
+            "run_folder": str(query_folder),
+            "first_query": first_query,
             "queries": [
                 {
                     "query": q,
                     "posts_collected": stats["total"],
                     "unique_posts": stats["unique"]
                 }
-                for q, stats in query_stats.items()
+                for q, stats in query_stats_normalized.items()
             ]
         }
         
         save_json({"metadata": metadata, "posts": posts}, output_file)
+
+        # Also save a compact per-query summary file in the same folder.
+        query_summary_file = query_folder / "query_post_counts.json"
+        with open(query_summary_file, "w", encoding="utf-8") as f:
+            json.dump(query_stats_normalized, f, indent=2, ensure_ascii=False)
         
         print(f"\n{'='*60}")
         print(f"✓ Scraping complete")
         print(f"  Total unique posts: {len(posts)}")
-        for query, count in query_stats.items():
-            print(f"    - '{query}': {count} posts")
+        for query, stats in query_stats_normalized.items():
+            print(f"    - '{query}': total={stats['total']}, unique={stats['unique']}")
         print(f"  Results saved to: {output_file}")
+        print(f"  Query summary saved to: {query_summary_file}")
         print(f"{'='*60}\n")
         
         # Step 3: Optional enrichment
         if enable_enrichment:
             print(f"STEP 3: Enriching posts with details + comments")
             print(f"{'='*60}")
-            
-            from reddit_scraper.config import ENRICHED_OUTPUT_FILENAME
+
             enrich_posts(
                 input_file=output_file,
                 output_file=Path(output_file).parent / ENRICHED_OUTPUT_FILENAME,
@@ -228,6 +311,38 @@ def run_scraper(
             
             print(f"\n{'='*60}")
             print("✓ Full scrape + enrichment complete!")
+            print(f"{'='*60}\n")
+
+        # Step 4: Cleaning + corpus analysis
+        if enable_postprocessing:
+            print("STEP 4: Cleaning text + corpus analysis")
+            print(f"{'='*60}")
+
+            source_for_processing = output_file
+            enriched_file = Path(output_file).parent / ENRICHED_OUTPUT_FILENAME
+            if enriched_file.exists():
+                source_for_processing = enriched_file
+
+            cleaned_csv = Path(output_file).parent / CLEANED_OUTPUT_FILENAME
+            refined_csv = Path(output_file).parent / REFINED_OUTPUT_FILENAME
+            analysis_json = Path(output_file).parent / ANALYSIS_OUTPUT_FILENAME
+
+            pp = process_scraped_output(
+                input_file=source_for_processing,
+                cleaned_csv_file=cleaned_csv,
+                refined_csv_file=refined_csv,
+                analysis_json_file=analysis_json,
+                top_n=ANALYSIS_TOP_WORDS,
+            )
+
+            print("✓ Post-processing complete")
+            print(f"  Source file: {source_for_processing}")
+            print(f"  Cleaned CSV: {pp['cleaned_csv_file']}")
+            print(f"  Refined CSV: {pp['refined_csv_file']}")
+            print(f"  Analysis JSON: {pp['analysis_json_file']}")
+            print(
+                f"  Corpus stats -> records={pp['Total_records']}, words={pp['Total_words']}, types={pp['Total_types']}"
+            )
             print(f"{'='*60}\n")
         
         print(f"Log saved to: {log_file}")
@@ -253,6 +368,8 @@ if __name__ == "__main__":
     parser.add_argument("--output", default=DEFAULT_OUTPUT_DIR, help="Output directory")
     parser.add_argument("--proxies", default="proxy_manager/proxies.txt", help="Proxy file (always uses proxy_manager/proxies.txt)")
     parser.add_argument("--enrich", action="store_true", help="Enable enrichment")
+    parser.add_argument("--postprocess", action="store_true", help="Enable cleaning + corpus analysis")
+    parser.add_argument("--no-postprocess", action="store_true", help="Disable cleaning + corpus analysis")
     parser.add_argument("--sync", action="store_true", help="Force synchronous mode")
     parser.add_argument(
         "--query-concurrency",
@@ -283,11 +400,19 @@ if __name__ == "__main__":
     if args.prepare_proxies:
         prepare_proxies("proxy_manager/proxies.txt", args.prepare_target, args.prepare_fetch)
         raise SystemExit(0)
+
+    enable_postprocessing = ENABLE_POSTPROCESSING
+    if args.postprocess:
+        enable_postprocessing = True
+    if args.no_postprocess:
+        enable_postprocessing = False
+
     run_scraper(
         queries=args.queries,
         limit_per_query=args.limit,
         output_dir=args.output,
         enable_enrichment=args.enrich,
+        enable_postprocessing=enable_postprocessing,
         async_mode=not args.sync,
         query_concurrency=args.query_concurrency,
     )

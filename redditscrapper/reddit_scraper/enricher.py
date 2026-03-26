@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import time
 from pathlib import Path
 from typing import Any, Dict, List
@@ -10,6 +11,14 @@ from typing import Any, Dict, List
 from tqdm import tqdm
 
 from .client import RedditClient
+
+
+WORD_RE = re.compile(r"\b\w+\b", flags=re.UNICODE)
+
+
+def _tokenize(text: str) -> List[str]:
+    """Tokenize text to lowercase word tokens for corpus stats."""
+    return [t.lower() for t in WORD_RE.findall(str(text or ""))]
 
 
 def enrich_posts(
@@ -80,22 +89,29 @@ def enrich_posts(
     total_comments = 0
     total_records = 0
     total_words = 0
+    corpus_types: set[str] = set()
     for post in enriched:
-        # Count post title and body as records
-        total_records += 1  # post itself
+        # Record definition: post title + post body + each comment body
+        total_records += 2
         title = post.get("title", "")
         body = post.get("body", "")
-        # Only count words in title and all bodies (post + all comments)
-        total_words += len(title.split())
-        total_words += len(body.split())
+        title_tokens = _tokenize(title)
+        body_tokens = _tokenize(body)
+        total_words += len(title_tokens)
+        total_words += len(body_tokens)
+        corpus_types.update(title_tokens)
+        corpus_types.update(body_tokens)
+
         # Count comments recursively (body only)
         def count_comments_and_words(comments):
-            nonlocal total_comments, total_records, total_words
+            nonlocal total_comments, total_records, total_words, corpus_types
             for c in comments:
                 total_comments += 1
                 total_records += 1
                 comment_body = c.get("body", "")
-                total_words += len(comment_body.split())
+                comment_tokens = _tokenize(comment_body)
+                total_words += len(comment_tokens)
+                corpus_types.update(comment_tokens)
                 if c.get("replies"):
                     count_comments_and_words(c["replies"])
         if post.get("comments"):
@@ -105,6 +121,7 @@ def enrich_posts(
     metadata["total_comments"] = total_comments
     metadata["Total_records"] = total_records
     metadata["Total_words"] = total_words
+    metadata["Total_types"] = len(corpus_types)
 
     output_data = {
         "metadata": metadata,
@@ -118,4 +135,5 @@ def enrich_posts(
     print(f"  total_comments: {total_comments}")
     print(f"  Total_records: {total_records}")
     print(f"  Total_words: {total_words}")
+    print(f"  Total_types: {len(corpus_types)}")
     return enriched

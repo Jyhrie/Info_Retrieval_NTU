@@ -1,0 +1,38 @@
+{
+  "ai coding agents": {
+    "total": 100,
+    "unique": 71
+  },
+  "github copilot": {
+    "total": 100,
+    "unique": 97
+  },
+  "openai codex": {
+    "total": 100,
+    "unique": 91
+  },
+  "claude code": {
+    "total": 100,
+    "unique": 91
+  },
+  "gemini code assist": {
+    "total": 100,
+    "unique": 99
+  },
+  "coding agents weakness": {
+    "total": 0,
+    "unique": 0
+  },
+  "coding agents strength": {
+    "total": 100,
+    "unique": 99
+  },
+  "best ai coding agents": {
+    "total": 100,
+    "unique": 68
+  },
+  "ai agents review": {
+    "total": 100,
+    "unique": 83
+  }
+}
