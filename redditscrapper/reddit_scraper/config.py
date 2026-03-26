@@ -2,8 +2,8 @@
 
 # Scraping settings
 DEFAULT_QUERIES = [
-    "Python programming",
-    # "bitcoin",
+    "Python",
+    # "java",
     # "bitcoin price",
     # "bitcoin 2026"
 ]
