@@ -1,42 +1,23 @@
 version: "3.9"
 
 services:
-  pgdb:
-    image: postgres:latest
-    container_name: pgdb
-    environment:
-      POSTGRES_USER: info_retrieval
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: database
-      POSTGRES_HOST_AUTH_METHOD: trust
+  solr:
+    image: solr:latest
+    container_name: solr_node
     ports:
-      - "5432:5432"
-    volumes:
-      - ./data/pgdb:/var/lib/postgresql
-      #- postgres_data:/var/lib/postgresql # ✅ use Docker-managed volume
-    dns:
-      - 8.8.8.8
-      - 1.1.1.1
-
-  fastapi:
-    build: ./api
-    container_name: fastapi
-    ports:
-      - "8000:8000"
-    depends_on:
-      - pgdb
-    env_file:
-      - .env
+      - "8983:8983"
     environment:
-      DATABASE_URL: "postgresql://info:password@pgdb:5432/database"
+      - SOLR_JAVA_MEM=-Xms512m -Xmx512m
     volumes:
-      - ./data/statics:/app/static
-      - ./api/import_data:/app/import_data   # ✅ mount your import_data folder
-    entrypoint: [ "/app/entrypoint.sh" ]
+      - ./data/solr:/var/solr
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - my_core_name  
     dns:
       - 8.8.8.8
       - 1.1.1.1
 
 volumes:
-  postgres_data:
-    name: postgres_data
+  solr_data:
+    name: solr_data

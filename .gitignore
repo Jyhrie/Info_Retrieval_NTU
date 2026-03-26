@@ -1,2 +1,7 @@
 # Ignore scraped datasets committed under redditscrapper
 redditscrapper/data/
+
+/venv
+/data
+**/__pycache__/
+**/*.pyc
