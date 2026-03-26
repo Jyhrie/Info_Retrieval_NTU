@@ -1,0 +1,529 @@
+============================================================
+Reddit Scraper - Started at 2026-03-26 12:00:43
+Output folder: data/ai_coding_agents_1
+Queries: ['ai coding agents', 'github copilot', 'openai codex', 'claude code', 'gemini code assist', 'coding agents weakness', 'coding agents strength', 'best ai coding agents', 'ai agents review']
+============================================================
+
+Run config saved to: data/ai_coding_agents_1/run_config.json
+
+STEP 1: Preparing proxy pool
+============================================================
+✓ Using manual proxy list from /Users/nathanielyew/Documents/NTUY4S2/SC4021/Info_Retrieval_NTU/redditscrapper/proxy_manager/proxies.txt (5 proxies)
+
+STEP 2: Running Reddit crawler
+============================================================
+Mode: ASYNC (aiohttp)
+
+============================================================
+Query 1/9: 'ai coding agents'
+============================================================
+'ai coding agents':   0%|          | 0/100 [00:00<?, ?post/s]                                                             🔄 Proxy pool exhausted - refreshing (attempt 1/3)...
+'ai coding agents':   0%|          | 0/100 [01:42<?, ?post/s]🔄 Refreshing proxy pool (target: 5)
+   Step 1: Fetching 10 new proxies...
+Fetching new proxies; dumping location = /Users/nathanielyew/Documents/NTUY4S2/SC4021/Info_Retrieval_NTU/redditscrapper/proxy_manager/proxies.tmp
+/opt/anaconda3/envs/fyp/lib/python3.11/site-packages/rotating_free_proxies/utils.py:43: UserWarning: No parser was explicitly specified, so I'm using the best available HTML parser for this system ("lxml"). This usually isn't a problem, but if you run this code on another system, or in a different virtual environment, it may use a different parser and behave differently.
+
+The code that caused this warning is on line 43 of the file /opt/anaconda3/envs/fyp/lib/python3.11/site-packages/rotating_free_proxies/utils.py. To get rid of this warning, pass the additional argument 'features="lxml"' to the BeautifulSoup constructor.
+
+  return BeautifulSoup(requests.get(url).text)
+Total proxies listed in source webpage=317
+updating list of proxies (11) to location /Users/nathanielyew/Documents/NTUY4S2/SC4021/Info_Retrieval_NTU/redditscrapper/proxy_manager/proxies.tmp
+[WARN] proxybroker failed: There is no current event loop in thread 'asyncio_0'.
+[WARN] proxyscrape API error: 404
+   ✓ Fetched 11 proxies
+   Step 2: Testing proxies (stop at 5 working)...
+[FAIL] https://195.133.44.205:7777 -> ProxyError
+[FAIL] https://45.144.28.81:10808 -> ProxyError
+[FAIL] https://38.145.208.176:8443 -> ProxyError
+[FAIL] https://38.145.218.208:8443 -> ProxyError
+[FAIL] https://5.129.250.144:1080 -> ProxyError
+[FAIL] http://171.249.163.170:1452 -> ProxyError
+[FAIL] https://38.145.218.27:8443 -> ProxyError
+[FAIL] http://158.160.215.167:8123 -> ProxyError
+[FAIL] https://38.34.183.219:8446 -> ProxyError
+[FAIL] https://38.145.208.185:8449 -> ProxyError
+[FAIL] https://38.34.179.17:8446 -> ProxyError
+   ✓ Found 0 working proxies
+   Step 3: Current pool has 5 proxies
+   ⚠️  No working proxies found, keeping existing pool
+'ai coding agents': 100%|##########| 100/100 [03:48<00:00,  2.29s/post]                                                                       [ai coding agents] page 1: +100 new | collected 100/100
+'ai coding agents': 100%|##########| 100/100 [03:48<00:00,  2.29s/post]'ai coding agents': 100%|##########| 100/100 [03:49<00:00,  2.29s/post]
+✓ 'ai coding agents': 100 posts fetched
+
+============================================================
+Query 2/9: 'github copilot'
+============================================================
+'github copilot':   0%|          | 0/100 [00:00<?, ?post/s]                                                           🔄 Proxy pool exhausted - refreshing (attempt 1/3)...
+'github copilot':   0%|          | 0/100 [00:16<?, ?post/s]🔄 Refreshing proxy pool (target: 5)
+   Step 1: Fetching 10 new proxies...
+Fetching new proxies; dumping location = /Users/nathanielyew/Documents/NTUY4S2/SC4021/Info_Retrieval_NTU/redditscrapper/proxy_manager/proxies.tmp
+Total proxies listed in source webpage=317
+updating list of proxies (11) to location /Users/nathanielyew/Documents/NTUY4S2/SC4021/Info_Retrieval_NTU/redditscrapper/proxy_manager/proxies.tmp
+[WARN] proxybroker failed: There is no current event loop in thread 'asyncio_0'.
+[WARN] proxyscrape API error: 404
+   ✓ Fetched 11 proxies
+   Step 2: Testing proxies (stop at 5 working)...
+[FAIL] https://195.133.44.205:7777 -> ProxyError
+[FAIL] https://45.144.28.81:10808 -> ProxyError
+[FAIL] https://38.145.208.176:8443 -> ProxyError
+[FAIL] https://38.145.218.208:8443 -> ProxyError
+[FAIL] https://5.129.250.144:1080 -> ProxyError
+[ OK ] http://171.249.163.170:1452
+[FAIL] https://38.145.218.27:8443 -> ProxyError
+[ OK ] http://158.160.215.167:8123
+[FAIL] https://38.34.183.219:8446 -> ProxyError
+[FAIL] https://38.145.208.185:8449 -> ProxyError
+[FAIL] https://38.34.179.17:8446 -> ProxyError
+   ✓ Found 2 working proxies
+   Step 3: Current pool has 5 proxies
+   ✓ Final pool: 5 proxies
+      1. http://171.249.163.170:1452
+      2. http://158.160.215.167:8123
+      3. http://113.11.111.145:30226
+      4. http://94.176.3.42:7443
+      5. http://94.176.3.109:7443
+'github copilot': 100%|##########| 100/100 [01:14<00:00,  1.34post/s]                                                                     [github copilot] page 1: +100 new | collected 100/100
+'github copilot': 100%|##########| 100/100 [01:14<00:00,  1.34post/s]'github copilot': 100%|##########| 100/100 [01:14<00:00,  1.34post/s]
+✓ 'github copilot': 100 posts fetched
+
+============================================================
+Query 3/9: 'openai codex'
+============================================================
+'openai codex':   0%|          | 0/100 [00:00<?, ?post/s]                                                         🔄 Proxy pool exhausted - refreshing (attempt 1/3)...
+'openai codex':   0%|          | 0/100 [00:53<?, ?post/s]🔄 Refreshing proxy pool (target: 5)
+   Step 1: Fetching 10 new proxies...
+Fetching new proxies; dumping location = /Users/nathanielyew/Documents/NTUY4S2/SC4021/Info_Retrieval_NTU/redditscrapper/proxy_manager/proxies.tmp
+Total proxies listed in source webpage=317
+updating list of proxies (11) to location /Users/nathanielyew/Documents/NTUY4S2/SC4021/Info_Retrieval_NTU/redditscrapper/proxy_manager/proxies.tmp
+[WARN] proxybroker failed: There is no current event loop in thread 'asyncio_0'.
+[WARN] proxyscrape API error: 404
+   ✓ Fetched 11 proxies
+   Step 2: Testing proxies (stop at 5 working)...
+[FAIL] https://195.133.44.205:7777 -> ProxyError
+[FAIL] https://45.144.28.81:10808 -> ProxyError
+[FAIL] https://38.145.208.176:8443 -> ProxyError
+[FAIL] https://38.145.218.208:8443 -> ProxyError
+[FAIL] https://5.129.250.144:1080 -> ProxyError
+[FAIL] http://171.249.163.170:1452 -> ProxyError
+[FAIL] https://38.145.218.27:8443 -> ProxyError
+[ OK ] http://158.160.215.167:8123
+[FAIL] https://38.34.183.219:8446 -> ProxyError
+[FAIL] https://38.145.208.185:8449 -> ProxyError
+[FAIL] https://38.34.179.17:8446 -> ProxyError
+   ✓ Found 1 working proxies
+   Step 3: Current pool has 5 proxies
+   ✓ Final pool: 5 proxies
+      1. http://158.160.215.167:8123
+      2. http://171.249.163.170:1452
+      3. http://113.11.111.145:30226
+      4. http://94.176.3.42:7443
+      5. http://94.176.3.109:7443
+'openai codex': 100%|##########| 100/100 [01:49<00:00,  1.09s/post]                                                                   [openai codex] page 1: +100 new | collected 100/100
+'openai codex': 100%|##########| 100/100 [01:49<00:00,  1.09s/post]'openai codex': 100%|##########| 100/100 [01:49<00:00,  1.10s/post]
+✓ 'openai codex': 100 posts fetched
+
+============================================================
+Query 4/9: 'claude code'
+============================================================
+'claude code':   0%|          | 0/100 [00:00<?, ?post/s]                                                        🔄 Proxy pool exhausted - refreshing (attempt 1/3)...
+'claude code':   0%|          | 0/100 [01:10<?, ?post/s]🔄 Refreshing proxy pool (target: 5)
+   Step 1: Fetching 10 new proxies...
+Fetching new proxies; dumping location = /Users/nathanielyew/Documents/NTUY4S2/SC4021/Info_Retrieval_NTU/redditscrapper/proxy_manager/proxies.tmp
+Total proxies listed in source webpage=317
+updating list of proxies (11) to location /Users/nathanielyew/Documents/NTUY4S2/SC4021/Info_Retrieval_NTU/redditscrapper/proxy_manager/proxies.tmp
+[WARN] proxybroker failed: There is no current event loop in thread 'asyncio_0'.
+[WARN] proxyscrape API error: 404
+   ✓ Fetched 11 proxies
+   Step 2: Testing proxies (stop at 5 working)...
+[FAIL] https://195.133.44.205:7777 -> ProxyError
+[FAIL] https://45.144.28.81:10808 -> ProxyError
+[FAIL] https://38.145.208.176:8443 -> ProxyError
+[FAIL] https://38.145.218.208:8443 -> ProxyError
+[FAIL] https://5.129.250.144:1080 -> ProxyError
+[ OK ] http://171.249.163.170:1452
+[FAIL] https://38.145.218.27:8443 -> ProxyError
+[FAIL] http://158.160.215.167:8123 -> ProxyError
+[FAIL] https://38.34.183.219:8446 -> ProxyError
+[FAIL] https://38.145.208.185:8449 -> ProxyError
+[FAIL] https://38.34.179.17:8446 -> ProxyError
+   ✓ Found 1 working proxies
+   Step 3: Current pool has 5 proxies
+   ✓ Final pool: 5 proxies
+      1. http://171.249.163.170:1452
+      2. http://158.160.215.167:8123
+      3. http://113.11.111.145:30226
+      4. http://94.176.3.42:7443
+      5. http://94.176.3.109:7443
+'claude code': 100%|##########| 100/100 [02:03<00:00,  1.23s/post]                                                                  [claude code] page 1: +100 new | collected 100/100
+'claude code': 100%|##########| 100/100 [02:03<00:00,  1.23s/post]'claude code': 100%|##########| 100/100 [02:03<00:00,  1.24s/post]
+✓ 'claude code': 100 posts fetched
+
+============================================================
+Query 5/9: 'gemini code assist'
+============================================================
+'gemini code assist':   0%|          | 0/100 [00:00<?, ?post/s]                                                               🔄 Proxy pool exhausted - refreshing (attempt 1/3)...
+'gemini code assist':   0%|          | 0/100 [01:13<?, ?post/s]🔄 Refreshing proxy pool (target: 5)
+   Step 1: Fetching 10 new proxies...
+Fetching new proxies; dumping location = /Users/nathanielyew/Documents/NTUY4S2/SC4021/Info_Retrieval_NTU/redditscrapper/proxy_manager/proxies.tmp
+Total proxies listed in source webpage=317
+updating list of proxies (11) to location /Users/nathanielyew/Documents/NTUY4S2/SC4021/Info_Retrieval_NTU/redditscrapper/proxy_manager/proxies.tmp
+[WARN] proxybroker failed: There is no current event loop in thread 'asyncio_0'.
+[WARN] proxyscrape API error: 404
+   ✓ Fetched 11 proxies
+   Step 2: Testing proxies (stop at 5 working)...
+[FAIL] https://195.133.44.205:7777 -> ProxyError
+[FAIL] https://45.144.28.81:10808 -> ProxyError
+[FAIL] https://38.145.208.176:8443 -> ProxyError
+[FAIL] https://38.145.218.208:8443 -> ProxyError
+[FAIL] https://5.129.250.144:1080 -> ProxyError
+[FAIL] http://171.249.163.170:1452 -> ProxyError
+[FAIL] https://38.145.218.27:8443 -> ProxyError
+[FAIL] http://158.160.215.167:8123 -> ReadTimeout
+[FAIL] https://38.34.183.219:8446 -> ProxyError
+[FAIL] https://38.145.208.185:8449 -> ProxyError
+[FAIL] https://38.34.179.17:8446 -> ProxyError
+   ✓ Found 0 working proxies
+   Step 3: Current pool has 5 proxies
+   ⚠️  No working proxies found, keeping existing pool
+'gemini code assist': 100%|##########| 100/100 [02:52<00:00,  1.73s/post]                                                                         [gemini code assist] page 1: +100 new | collected 100/100
+'gemini code assist': 100%|##########| 100/100 [02:52<00:00,  1.73s/post]'gemini code assist': 100%|##########| 100/100 [02:53<00:00,  1.73s/post]
+✓ 'gemini code assist': 100 posts fetched
+
+============================================================
+Query 6/9: 'coding agents weakness'
+============================================================
+'coding agents weakness':   0%|          | 0/100 [00:00<?, ?post/s]                                                                   🔄 Proxy pool exhausted - refreshing (attempt 1/3)...
+'coding agents weakness':   0%|          | 0/100 [00:29<?, ?post/s]🔄 Refreshing proxy pool (target: 5)
+   Step 1: Fetching 10 new proxies...
+Fetching new proxies; dumping location = /Users/nathanielyew/Documents/NTUY4S2/SC4021/Info_Retrieval_NTU/redditscrapper/proxy_manager/proxies.tmp
+Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x121d2b650>
+Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x1226dcd90>
+Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x122c48a90>
+Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x1226d4590>
+Total proxies listed in source webpage=317
+updating list of proxies (11) to location /Users/nathanielyew/Documents/NTUY4S2/SC4021/Info_Retrieval_NTU/redditscrapper/proxy_manager/proxies.tmp
+[WARN] proxybroker failed: There is no current event loop in thread 'asyncio_0'.
+[WARN] proxyscrape API error: 404
+   ✓ Fetched 11 proxies
+   Step 2: Testing proxies (stop at 5 working)...
+[FAIL] https://195.133.44.205:7777 -> ProxyError
+[FAIL] https://45.144.28.81:10808 -> ProxyError
+[FAIL] https://38.145.208.176:8443 -> ProxyError
+[FAIL] https://38.145.218.208:8443 -> ProxyError
+[FAIL] https://5.129.250.144:1080 -> ProxyError
+[FAIL] http://171.249.163.170:1452 -> ProxyError
+[FAIL] https://38.145.218.27:8443 -> ProxyError
+[FAIL] http://158.160.215.167:8123 -> ReadTimeout
+[FAIL] https://38.34.183.219:8446 -> ProxyError
+[FAIL] https://38.145.208.185:8449 -> ProxyError
+[FAIL] https://38.34.179.17:8446 -> ProxyError
+   ✓ Found 0 working proxies
+   Step 3: Current pool has 5 proxies
+   ⚠️  No working proxies found, keeping existing pool
+'coding agents weakness':   0%|          | 0/100 [02:46<?, ?post/s]
+✓ 'coding agents weakness': 0 posts fetched
+
+============================================================
+Query 7/9: 'coding agents strength'
+============================================================
+'coding agents strength':   0%|          | 0/100 [00:00<?, ?post/s]                                                                   🔄 Proxy pool exhausted - refreshing (attempt 1/3)...
+'coding agents strength':   0%|          | 0/100 [00:00<?, ?post/s]🔄 Refreshing proxy pool (target: 5)
+   Step 1: Fetching 10 new proxies...
+Fetching new proxies; dumping location = /Users/nathanielyew/Documents/NTUY4S2/SC4021/Info_Retrieval_NTU/redditscrapper/proxy_manager/proxies.tmp
+Total proxies listed in source webpage=317
+updating list of proxies (11) to location /Users/nathanielyew/Documents/NTUY4S2/SC4021/Info_Retrieval_NTU/redditscrapper/proxy_manager/proxies.tmp
+[WARN] proxybroker failed: There is no current event loop in thread 'asyncio_0'.
+[WARN] proxyscrape API error: 404
+   ✓ Fetched 11 proxies
+   Step 2: Testing proxies (stop at 5 working)...
+[FAIL] https://195.133.44.205:7777 -> ProxyError
+[FAIL] https://45.144.28.81:10808 -> ProxyError
+[FAIL] https://38.145.208.176:8443 -> ProxyError
+[FAIL] https://38.145.218.208:8443 -> ProxyError
+[FAIL] https://5.129.250.144:1080 -> ProxyError
+[FAIL] http://171.249.163.170:1452 -> ProxyError
+[FAIL] https://38.145.218.27:8443 -> ProxyError
+[FAIL] http://158.160.215.167:8123 -> ReadTimeout
+[FAIL] https://38.34.183.219:8446 -> ProxyError
+[FAIL] https://38.145.208.185:8449 -> ProxyError
+[FAIL] https://38.34.179.17:8446 -> ProxyError
+   ✓ Found 0 working proxies
+   Step 3: Current pool has 5 proxies
+   ⚠️  No working proxies found, keeping existing pool
+Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x122652350>
+'coding agents strength': 100%|##########| 100/100 [01:41<00:00,  1.01s/post]                                                                             [coding agents strength] page 1: +100 new | collected 100/100
+'coding agents strength': 100%|##########| 100/100 [01:41<00:00,  1.01s/post]'coding agents strength': 100%|##########| 100/100 [01:41<00:00,  1.02s/post]
+✓ 'coding agents strength': 100 posts fetched
+
+============================================================
+Query 8/9: 'best ai coding agents'
+============================================================
+'best ai coding agents':   0%|          | 0/100 [00:00<?, ?post/s]                                                                  🔄 Proxy pool exhausted - refreshing (attempt 1/3)...
+'best ai coding agents':   0%|          | 0/100 [00:36<?, ?post/s]🔄 Refreshing proxy pool (target: 5)
+   Step 1: Fetching 10 new proxies...
+Fetching new proxies; dumping location = /Users/nathanielyew/Documents/NTUY4S2/SC4021/Info_Retrieval_NTU/redditscrapper/proxy_manager/proxies.tmp
+Total proxies listed in source webpage=317
+updating list of proxies (11) to location /Users/nathanielyew/Documents/NTUY4S2/SC4021/Info_Retrieval_NTU/redditscrapper/proxy_manager/proxies.tmp
+[WARN] proxybroker failed: There is no current event loop in thread 'asyncio_0'.
+[WARN] proxyscrape API error: 404
+   ✓ Fetched 11 proxies
+   Step 2: Testing proxies (stop at 5 working)...
+[FAIL] https://195.133.44.205:7777 -> ProxyError
+[FAIL] https://45.144.28.81:10808 -> ProxyError
+[FAIL] https://38.145.208.176:8443 -> ProxyError
+[FAIL] https://38.145.218.208:8443 -> ProxyError
+[FAIL] https://5.129.250.144:1080 -> ProxyError
+[FAIL] http://171.249.163.170:1452 -> ProxyError
+[FAIL] https://38.145.218.27:8443 -> ProxyError
+[ OK ] http://158.160.215.167:8123
+[FAIL] https://38.34.183.219:8446 -> ProxyError
+[FAIL] https://38.145.208.185:8449 -> ProxyError
+[FAIL] https://38.34.179.17:8446 -> ProxyError
+   ✓ Found 1 working proxies
+   Step 3: Current pool has 5 proxies
+   ✓ Final pool: 5 proxies
+      1. http://158.160.215.167:8123
+      2. http://171.249.163.170:1452
+      3. http://113.11.111.145:30226
+      4. http://94.176.3.42:7443
+      5. http://94.176.3.109:7443
+'best ai coding agents': 100%|##########| 100/100 [01:50<00:00,  1.10s/post]                                                                            [best ai coding agents] page 1: +100 new | collected 100/100
+'best ai coding agents': 100%|##########| 100/100 [01:50<00:00,  1.10s/post]'best ai coding agents': 100%|##########| 100/100 [01:50<00:00,  1.11s/post]
+✓ 'best ai coding agents': 100 posts fetched
+
+============================================================
+Query 9/9: 'ai agents review'
+============================================================
+'ai agents review':   0%|          | 0/100 [00:00<?, ?post/s]                                                             🔄 Proxy pool exhausted - refreshing (attempt 1/3)...
+'ai agents review':   0%|          | 0/100 [01:26<?, ?post/s]🔄 Refreshing proxy pool (target: 5)
+   Step 1: Fetching 10 new proxies...
+Fetching new proxies; dumping location = /Users/nathanielyew/Documents/NTUY4S2/SC4021/Info_Retrieval_NTU/redditscrapper/proxy_manager/proxies.tmp
+Total proxies listed in source webpage=317
+updating list of proxies (11) to location /Users/nathanielyew/Documents/NTUY4S2/SC4021/Info_Retrieval_NTU/redditscrapper/proxy_manager/proxies.tmp
+[WARN] proxybroker failed: There is no current event loop in thread 'asyncio_0'.
+[WARN] proxyscrape API error: 404
+   ✓ Fetched 11 proxies
+   Step 2: Testing proxies (stop at 5 working)...
+[FAIL] https://195.133.44.205:7777 -> ProxyError
+[FAIL] https://45.144.28.81:10808 -> ProxyError
+[FAIL] https://38.145.208.176:8443 -> ProxyError
+[FAIL] https://38.145.218.208:8443 -> ProxyError
+[FAIL] https://5.129.250.144:1080 -> ProxyError
+[FAIL] http://171.249.163.170:1452 -> ProxyError
+[FAIL] https://38.145.218.27:8443 -> ProxyError
+[FAIL] http://158.160.215.167:8123 -> ProxyError
+[FAIL] https://38.34.183.219:8446 -> ProxyError
+[FAIL] https://38.145.208.185:8449 -> ProxyError
+[FAIL] https://38.34.179.17:8446 -> ProxyError
+   ✓ Found 0 working proxies
+   Step 3: Current pool has 5 proxies
+   ⚠️  No working proxies found, keeping existing pool
+'ai agents review': 100%|##########| 100/100 [04:02<00:00,  2.42s/post]                                                                       [ai agents review] page 1: +100 new | collected 100/100
+'ai agents review': 100%|##########| 100/100 [04:02<00:00,  2.42s/post]'ai agents review': 100%|##########| 100/100 [04:02<00:00,  2.43s/post]
+✓ 'ai agents review': 100 posts fetched
+
+============================================================
+✓ Scraping complete
+  Total unique posts: 746
+    - 'ai coding agents': total=100, unique=71
+    - 'github copilot': total=100, unique=97
+    - 'openai codex': total=100, unique=91
+    - 'claude code': total=100, unique=91
+    - 'gemini code assist': total=100, unique=99
+    - 'coding agents weakness': total=0, unique=0
+    - 'coding agents strength': total=100, unique=99
+    - 'best ai coding agents': total=100, unique=68
+    - 'ai agents review': total=100, unique=83
+  Results saved to: data/ai_coding_agents_1/results.json
+  Query summary saved to: data/ai_coding_agents_1/query_post_counts.json
+============================================================
+
+STEP 3: Enriching posts with details + comments
+============================================================
+Enriching posts:   0%|          | 0/746 [00:00<?, ?post/s]Enriching posts:   0%|          | 1/746 [00:06<1:24:34,  6.81s/post]Enriching posts:   0%|          | 2/746 [00:09<52:35,  4.24s/post]  Enriching posts:   0%|          | 3/746 [00:12<47:04,  3.80s/post]Enriching posts:   1%|          | 4/746 [00:15<44:56,  3.63s/post]Enriching posts:   1%|          | 5/746 [00:19<43:17,  3.51s/post]Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x1235ae390>
+Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x12278bfd0>
+Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x122127690>
+Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x1211054d0>
+Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x122c46a50>, 377784.376162958)])']
+connector: <aiohttp.connector.TCPConnector object at 0x1230fdc90>
+Enriching posts:   1%|          | 6/746 [00:22<43:42,  3.54s/post]Enriching posts:   1%|          | 7/746 [00:25<41:58,  3.41s/post]Enriching posts:   1%|1         | 8/746 [00:29<42:49,  3.48s/post]Enriching posts:   1%|1         | 9/746 [00:33<44:44,  3.64s/post]Enriching posts:   1%|1         | 10/746 [00:37<45:01,  3.67s/post]Enriching posts:   1%|1         | 11/746 [00:41<45:35,  3.72s/post]Enriching posts:   2%|1         | 12/746 [00:44<45:12,  3.70s/post]Enriching posts:   2%|1         | 13/746 [00:48<43:38,  3.57s/post]Enriching posts:   2%|1         | 14/746 [00:51<42:51,  3.51s/post]Enriching posts:   2%|2         | 15/746 [00:54<42:19,  3.47s/post]Enriching posts:   2%|2         | 16/746 [00:58<41:14,  3.39s/post]Enriching posts:   2%|2         | 17/746 [01:00<39:11,  3.23s/post]Enriching posts:   2%|2         | 18/746 [01:04<39:25,  3.25s/post]Enriching posts:   3%|2         | 19/746 [01:07<40:30,  3.34s/post]Enriching posts:   3%|2         | 20/746 [01:10<38:04,  3.15s/post]Enriching posts:   3%|2         | 21/746 [01:14<39:40,  3.28s/post]Enriching posts:   3%|2         | 22/746 [01:17<40:03,  3.32s/post]Enriching posts:   3%|3         | 23/746 [01:20<39:36,  3.29s/post]Enriching posts:   3%|3         | 24/746 [01:23<39:39,  3.30s/post]Enriching posts:   3%|3         | 25/746 [01:27<40:36,  3.38s/post]Enriching posts:   3%|3         | 26/746 [01:31<41:03,  3.42s/post]Enriching posts:   4%|3         | 27/746 [01:35<43:09,  3.60s/post]Enriching posts:   4%|3         | 28/746 [01:38<41:29,  3.47s/post]Enriching posts:   4%|3         | 29/746 [01:41<40:05,  3.36s/post]Enriching posts:   4%|4         | 30/746 [01:44<39:26,  3.30s/post]Enriching posts:   4%|4         | 31/746 [01:47<38:34,  3.24s/post]Enriching posts:   4%|4         | 32/746 [01:50<37:54,  3.19s/post]Enriching posts:   4%|4         | 33/746 [01:54<39:13,  3.30s/post]Enriching posts:   5%|4         | 34/746 [01:57<37:59,  3.20s/post]Enriching posts:   5%|4         | 35/746 [02:00<37:29,  3.16s/post]Enriching posts:   5%|4         | 36/746 [02:02<35:30,  3.00s/post]Enriching posts:   5%|4         | 37/746 [02:05<35:07,  2.97s/post]Enriching posts:   5%|5         | 38/746 [02:08<33:38,  2.85s/post]Enriching posts:   5%|5         | 39/746 [02:11<35:56,  3.05s/post]Enriching posts:   5%|5         | 40/746 [02:14<35:50,  3.05s/post]Enriching posts:   5%|5         | 41/746 [02:18<37:18,  3.17s/post]Enriching posts:   6%|5         | 42/746 [02:21<37:19,  3.18s/post]Enriching posts:   6%|5         | 43/746 [02:25<38:26,  3.28s/post]Enriching posts:   6%|5         | 44/746 [02:28<38:53,  3.32s/post]Enriching posts:   6%|6         | 45/746 [02:31<39:00,  3.34s/post]Enriching posts:   6%|6         | 46/746 [02:35<38:16,  3.28s/post]Enriching posts:   6%|6         | 47/746 [02:37<36:08,  3.10s/post]Enriching posts:   6%|6         | 48/746 [02:40<34:10,  2.94s/post]Enriching posts:   7%|6         | 49/746 [02:43<34:18,  2.95s/post]Enriching posts:   7%|6         | 50/746 [02:46<35:27,  3.06s/post]Enriching posts:   7%|6         | 51/746 [02:49<35:34,  3.07s/post]Enriching posts:   7%|6         | 52/746 [02:52<34:34,  2.99s/post]Enriching posts:   7%|7         | 53/746 [02:57<39:55,  3.46s/post]Enriching posts:   7%|7         | 54/746 [03:00<39:51,  3.46s/post]Enriching posts:   7%|7         | 55/746 [03:03<37:05,  3.22s/post]Enriching posts:   8%|7         | 56/746 [03:05<35:47,  3.11s/post]Enriching posts:   8%|7         | 57/746 [03:08<33:57,  2.96s/post]Enriching posts:   8%|7         | 58/746 [03:11<32:18,  2.82s/post]Enriching posts:   8%|7         | 59/746 [03:13<32:00,  2.80s/post]Enriching posts:   8%|8         | 60/746 [03:16<31:52,  2.79s/post]Enriching posts:   8%|8         | 61/746 [03:19<32:11,  2.82s/post]Enriching posts:   8%|8         | 62/746 [03:22<32:00,  2.81s/post]Enriching posts:   8%|8         | 63/746 [03:25<32:20,  2.84s/post]Enriching posts:   9%|8         | 64/746 [03:28<35:08,  3.09s/post]Enriching posts:   9%|8         | 65/746 [03:31<32:27,  2.86s/post]Enriching posts:   9%|8         | 66/746 [03:34<34:41,  3.06s/post]Enriching posts:   9%|8         | 67/746 [03:37<33:38,  2.97s/post]Enriching posts:   9%|9         | 68/746 [03:40<32:28,  2.87s/post]Enriching posts:   9%|9         | 69/746 [03:42<31:26,  2.79s/post]Enriching posts:   9%|9         | 70/746 [03:45<31:54,  2.83s/post]Enriching posts:  10%|9         | 71/746 [03:48<30:44,  2.73s/post]Enriching posts:  10%|9         | 72/746 [03:51<32:39,  2.91s/post]Enriching posts:  10%|9         | 73/746 [03:54<32:07,  2.86s/post]Enriching posts:  10%|9         | 74/746 [03:56<31:34,  2.82s/post]Enriching posts:  10%|#         | 75/746 [03:59<31:12,  2.79s/post]Enriching posts:  10%|#         | 76/746 [04:02<30:52,  2.76s/post]Enriching posts:  10%|#         | 77/746 [04:05<31:20,  2.81s/post]Enriching posts:  10%|#         | 78/746 [04:09<34:23,  3.09s/post]Enriching posts:  11%|#         | 79/746 [04:12<35:08,  3.16s/post]Enriching posts:  11%|#         | 80/746 [04:16<36:49,  3.32s/post]Enriching posts:  11%|#         | 81/746 [04:18<34:56,  3.15s/post]Enriching posts:  11%|#         | 82/746 [04:21<34:14,  3.09s/post]Enriching posts:  11%|#1        | 83/746 [04:25<37:32,  3.40s/post]Enriching posts:  11%|#1        | 84/746 [04:28<36:13,  3.28s/post]Enriching posts:  11%|#1        | 85/746 [04:32<36:49,  3.34s/post]Enriching posts:  12%|#1        | 86/746 [04:34<34:06,  3.10s/post]Enriching posts:  12%|#1        | 87/746 [04:37<34:02,  3.10s/post]Enriching posts:  12%|#1        | 88/746 [04:40<33:00,  3.01s/post]Enriching posts:  12%|#1        | 89/746 [04:43<33:02,  3.02s/post]Enriching posts:  12%|#2        | 90/746 [04:47<36:25,  3.33s/post]Enriching posts:  12%|#2        | 91/746 [04:51<36:37,  3.35s/post]Enriching posts:  12%|#2        | 92/746 [04:54<35:24,  3.25s/post]Enriching posts:  12%|#2        | 93/746 [04:57<34:11,  3.14s/post]Enriching posts:  13%|#2        | 94/746 [05:00<34:38,  3.19s/post]Enriching posts:  13%|#2        | 95/746 [05:03<32:28,  2.99s/post]Enriching posts:  13%|#2        | 96/746 [05:05<32:10,  2.97s/post]Enriching posts:  13%|#3        | 97/746 [05:09<34:46,  3.22s/post]Enriching posts:  13%|#3        | 98/746 [05:12<33:27,  3.10s/post]Enriching posts:  13%|#3        | 99/746 [05:15<31:58,  2.97s/post]Enriching posts:  13%|#3        | 100/746 [05:18<31:26,  2.92s/post]Enriching posts:  14%|#3        | 101/746 [05:21<32:26,  3.02s/post]Proxy http://158.160.215.167:8123 moved to temporary after RetryError (stats={'good': 4, 'cooldown': 1, 'dead': 0})
+Failed to fetch post details: HTTPSConnectionPool(host='www.reddit.com', port=443): Max retries exceeded with url: /r/github/comments/1rn39ws/what_have_been_your_experiences_using_github/.json (Caused by ResponseError('too many 429 error responses'))
+Enriching posts:  14%|#3        | 102/746 [06:25<3:48:28, 21.29s/post]Enriching posts:  14%|#3        | 103/746 [07:12<5:11:40, 29.08s/post]Enriching posts:  14%|#3        | 104/746 [07:14<3:45:06, 21.04s/post]Enriching posts:  14%|#4        | 105/746 [07:17<2:47:08, 15.64s/post]Enriching posts:  14%|#4        | 106/746 [07:20<2:04:13, 11.65s/post]Enriching posts:  14%|#4        | 107/746 [07:22<1:34:33,  8.88s/post]Enriching posts:  14%|#4        | 108/746 [07:25<1:14:10,  6.98s/post]Enriching posts:  15%|#4        | 109/746 [07:27<1:00:24,  5.69s/post]Enriching posts:  15%|#4        | 110/746 [07:30<51:11,  4.83s/post]  Enriching posts:  15%|#4        | 111/746 [07:34<49:45,  4.70s/post]Enriching posts:  15%|#5        | 112/746 [07:39<48:46,  4.62s/post]Enriching posts:  15%|#5        | 113/746 [07:43<46:16,  4.39s/post]Enriching posts:  15%|#5        | 114/746 [07:47<45:39,  4.34s/post]Enriching posts:  15%|#5        | 115/746 [07:53<51:09,  4.86s/post]Enriching posts:  16%|#5        | 116/746 [07:57<48:20,  4.60s/post]Enriching posts:  16%|#5        | 117/746 [08:01<47:19,  4.51s/post]Enriching posts:  16%|#5        | 118/746 [08:05<44:49,  4.28s/post]Enriching posts:  16%|#5        | 119/746 [08:10<46:22,  4.44s/post]Enriching posts:  16%|#6        | 120/746 [08:12<40:14,  3.86s/post]Enriching posts:  16%|#6        | 121/746 [08:16<38:42,  3.72s/post]Enriching posts:  16%|#6        | 122/746 [08:21<42:25,  4.08s/post]Enriching posts:  16%|#6        | 123/746 [08:25<43:59,  4.24s/post]Enriching posts:  17%|#6        | 124/746 [08:30<46:24,  4.48s/post]Enriching posts:  17%|#6        | 125/746 [08:35<45:57,  4.44s/post]Enriching posts:  17%|#6        | 126/746 [08:42<54:21,  5.26s/post]Enriching posts:  17%|#7        | 127/746 [08:46<49:26,  4.79s/post]Enriching posts:  17%|#7        | 128/746 [08:51<51:45,  5.03s/post]Enriching posts:  17%|#7        | 129/746 [08:56<52:25,  5.10s/post]Enriching posts:  17%|#7        | 130/746 [09:01<50:55,  4.96s/post]Enriching posts:  18%|#7        | 131/746 [09:04<43:07,  4.21s/post]Enriching posts:  18%|#7        | 132/746 [09:09<48:15,  4.72s/post]Enriching posts:  18%|#7        | 133/746 [09:15<50:59,  4.99s/post]Enriching posts:  18%|#7        | 134/746 [09:20<50:02,  4.91s/post]Enriching posts:  18%|#8        | 135/746 [09:25<50:32,  4.96s/post]Enriching posts:  18%|#8        | 136/746 [09:30<51:48,  5.10s/post]Enriching posts:  18%|#8        | 137/746 [09:34<47:45,  4.70s/post]Enriching posts:  18%|#8        | 138/746 [09:38<44:39,  4.41s/post]Enriching posts:  19%|#8        | 139/746 [09:42<44:14,  4.37s/post]Enriching posts:  19%|#8        | 140/746 [09:45<39:53,  3.95s/post]Enriching posts:  19%|#8        | 141/746 [09:52<48:54,  4.85s/post]Enriching posts:  19%|#9        | 142/746 [09:56<46:06,  4.58s/post]Enriching posts:  19%|#9        | 143/746 [10:00<44:02,  4.38s/post]Enriching posts:  19%|#9        | 144/746 [10:04<42:38,  4.25s/post]Enriching posts:  19%|#9        | 145/746 [10:08<41:27,  4.14s/post]Enriching posts:  20%|#9        | 146/746 [10:11<39:26,  3.94s/post]Enriching posts:  20%|#9        | 147/746 [10:16<40:58,  4.10s/post]Enriching posts:  20%|#9        | 148/746 [10:19<39:29,  3.96s/post]Enriching posts:  20%|#9        | 149/746 [1:05:44<165:51:40, 1000.17s/post]Enriching posts:  20%|##        | 150/746 [2:09:57<307:18:06, 1856.19s/post]Enriching posts:  20%|##        | 151/746 [2:44:44<318:12:28, 1925.29s/post]Enriching posts:  20%|##        | 152/746 [2:44:47<222:29:49, 1348.47s/post]Enriching posts:  21%|##        | 153/746 [2:44:51<155:42:28, 945.28s/post] Enriching posts:  21%|##        | 154/746 [2:44:54<108:56:12, 662.45s/post]Enriching posts:  21%|##        | 155/746 [2:44:58<76:21:31, 465.13s/post] Enriching posts:  21%|##        | 156/746 [2:45:02<53:32:42, 326.72s/post]Enriching posts:  21%|##1       | 157/746 [2:45:05<37:33:00, 229.51s/post]Enriching posts:  21%|##1       | 158/746 [2:45:08<26:23:15, 161.56s/post]Enriching posts:  21%|##1       | 159/746 [2:45:10<18:33:58, 113.86s/post]Enriching posts:  21%|##1       | 160/746 [2:45:13<13:06:10, 80.50s/post] Enriching posts:  22%|##1       | 161/746 [2:45:16<9:18:55, 57.33s/post] Enriching posts:  22%|##1       | 162/746 [2:45:19<6:38:15, 40.92s/post]Enriching posts:  22%|##1       | 163/746 [2:45:22<4:46:13, 29.46s/post]Enriching posts:  22%|##1       | 164/746 [2:45:25<3:28:43, 21.52s/post]Enriching posts:  22%|##2       | 165/746 [2:45:27<2:32:36, 15.76s/post]Enriching posts:  22%|##2       | 166/746 [2:45:30<1:56:32, 12.06s/post]Enriching posts:  22%|##2       | 167/746 [2:45:33<1:28:55,  9.22s/post]Enriching posts:  23%|##2       | 168/746 [2:45:36<1:09:42,  7.24s/post]Enriching posts:  23%|##2       | 169/746 [2:45:39<59:42,  6.21s/post]  Enriching posts:  23%|##2       | 170/746 [2:45:43<52:35,  5.48s/post]Enriching posts:  23%|##2       | 171/746 [2:45:46<44:22,  4.63s/post]Enriching posts:  23%|##3       | 172/746 [2:45:48<37:58,  3.97s/post]Enriching posts:  23%|##3       | 173/746 [2:45:52<37:08,  3.89s/post]Enriching posts:  23%|##3       | 174/746 [2:45:55<35:40,  3.74s/post]Enriching posts:  23%|##3       | 175/746 [2:45:58<31:51,  3.35s/post]Enriching posts:  24%|##3       | 176/746 [2:46:00<29:19,  3.09s/post]Enriching posts:  24%|##3       | 177/746 [2:46:02<27:02,  2.85s/post]Enriching posts:  24%|##3       | 178/746 [2:46:05<26:40,  2.82s/post]Enriching posts:  24%|##3       | 179/746 [2:46:07<24:45,  2.62s/post]Enriching posts:  24%|##4       | 180/746 [2:46:10<24:48,  2.63s/post]Enriching posts:  24%|##4       | 181/746 [2:46:13<24:57,  2.65s/post]Enriching posts:  24%|##4       | 182/746 [2:46:16<25:15,  2.69s/post]Enriching posts:  25%|##4       | 183/746 [2:46:18<25:33,  2.72s/post]Enriching posts:  25%|##4       | 184/746 [2:46:22<26:53,  2.87s/post]Enriching posts:  25%|##4       | 185/746 [2:46:24<25:04,  2.68s/post]Enriching posts:  25%|##4       | 186/746 [2:46:26<24:18,  2.61s/post]Enriching posts:  25%|##5       | 187/746 [2:46:28<22:59,  2.47s/post]Enriching posts:  25%|##5       | 188/746 [2:46:31<23:06,  2.48s/post]Enriching posts:  25%|##5       | 189/746 [2:46:34<25:57,  2.80s/post]Enriching posts:  25%|##5       | 190/746 [2:46:37<25:12,  2.72s/post]Enriching posts:  26%|##5       | 191/746 [2:46:40<25:27,  2.75s/post]Enriching posts:  26%|##5       | 192/746 [2:46:42<25:02,  2.71s/post]Enriching posts:  26%|##5       | 193/746 [2:46:45<24:30,  2.66s/post]Enriching posts:  26%|##6       | 194/746 [2:46:49<27:09,  2.95s/post]Enriching posts:  26%|##6       | 195/746 [2:46:51<25:59,  2.83s/post]Enriching posts:  26%|##6       | 196/746 [2:46:53<24:30,  2.67s/post]Enriching posts:  26%|##6       | 197/746 [2:46:56<25:27,  2.78s/post]Enriching posts:  27%|##6       | 198/746 [2:46:59<23:56,  2.62s/post]Enriching posts:  27%|##6       | 199/746 [2:47:01<23:34,  2.59s/post]Enriching posts:  27%|##6       | 200/746 [2:47:04<23:12,  2.55s/post]Enriching posts:  27%|##6       | 201/746 [2:47:06<21:57,  2.42s/post]Enriching posts:  27%|##7       | 202/746 [2:47:08<21:18,  2.35s/post]Enriching posts:  27%|##7       | 203/746 [2:47:11<21:53,  2.42s/post]Enriching posts:  27%|##7       | 204/746 [2:47:13<22:25,  2.48s/post]Enriching posts:  27%|##7       | 205/746 [2:47:16<24:35,  2.73s/post]Enriching posts:  28%|##7       | 206/746 [2:47:20<25:30,  2.84s/post]Enriching posts:  28%|##7       | 207/746 [2:47:23<26:37,  2.96s/post]Enriching posts:  28%|##7       | 208/746 [2:47:27<29:34,  3.30s/post]Enriching posts:  28%|##8       | 209/746 [2:47:30<28:00,  3.13s/post]Enriching posts:  28%|##8       | 210/746 [2:47:33<27:56,  3.13s/post]Enriching posts:  28%|##8       | 211/746 [2:47:36<27:21,  3.07s/post]Enriching posts:  28%|##8       | 212/746 [2:47:39<27:30,  3.09s/post]Enriching posts:  29%|##8       | 213/746 [2:47:43<29:08,  3.28s/post]Enriching posts:  29%|##8       | 214/746 [2:47:46<28:29,  3.21s/post]Enriching posts:  29%|##8       | 215/746 [2:47:49<27:42,  3.13s/post]Enriching posts:  29%|##8       | 216/746 [2:47:52<27:57,  3.16s/post]Enriching posts:  29%|##9       | 217/746 [2:47:55<26:49,  3.04s/post]Enriching posts:  29%|##9       | 218/746 [2:47:57<25:32,  2.90s/post]Enriching posts:  29%|##9       | 219/746 [2:48:00<26:26,  3.01s/post]Enriching posts:  29%|##9       | 220/746 [2:48:03<24:23,  2.78s/post]Enriching posts:  30%|##9       | 221/746 [2:48:05<22:56,  2.62s/post]Enriching posts:  30%|##9       | 222/746 [2:48:08<23:02,  2.64s/post]Enriching posts:  30%|##9       | 223/746 [2:48:10<22:55,  2.63s/post]Enriching posts:  30%|###       | 224/746 [2:48:13<22:36,  2.60s/post]Enriching posts:  30%|###       | 225/746 [2:48:15<22:55,  2.64s/post]Enriching posts:  30%|###       | 226/746 [2:48:18<23:55,  2.76s/post]Enriching posts:  30%|###       | 227/746 [2:48:21<22:31,  2.60s/post]Enriching posts:  31%|###       | 228/746 [2:48:23<22:50,  2.65s/post]Enriching posts:  31%|###       | 229/746 [2:48:26<22:51,  2.65s/post]Enriching posts:  31%|###       | 230/746 [2:48:29<23:14,  2.70s/post]Enriching posts:  31%|###       | 231/746 [2:48:31<22:05,  2.57s/post]Enriching posts:  31%|###1      | 232/746 [2:48:34<21:58,  2.57s/post]Enriching posts:  31%|###1      | 233/746 [2:48:36<21:08,  2.47s/post]Enriching posts:  31%|###1      | 234/746 [2:48:39<21:24,  2.51s/post]Enriching posts:  32%|###1      | 235/746 [2:48:41<21:25,  2.51s/post]Enriching posts:  32%|###1      | 236/746 [2:48:43<20:26,  2.41s/post]Enriching posts:  32%|###1      | 237/746 [2:48:45<19:48,  2.33s/post]Enriching posts:  32%|###1      | 238/746 [2:48:47<19:00,  2.24s/post]Enriching posts:  32%|###2      | 239/746 [2:48:51<20:54,  2.48s/post]Enriching posts:  32%|###2      | 240/746 [2:48:53<20:10,  2.39s/post]Enriching posts:  32%|###2      | 241/746 [2:48:55<19:47,  2.35s/post]Enriching posts:  32%|###2      | 242/746 [2:48:59<23:25,  2.79s/post]Enriching posts:  33%|###2      | 243/746 [2:49:01<22:54,  2.73s/post]Enriching posts:  33%|###2      | 244/746 [2:49:04<21:46,  2.60s/post]Enriching posts:  33%|###2      | 245/746 [2:49:06<21:35,  2.59s/post]Enriching posts:  33%|###2      | 246/746 [2:49:08<20:15,  2.43s/post]Enriching posts:  33%|###3      | 247/746 [2:49:11<22:04,  2.65s/post]Enriching posts:  33%|###3      | 248/746 [2:49:14<20:45,  2.50s/post]Enriching posts:  33%|###3      | 249/746 [2:49:16<19:49,  2.39s/post]Enriching posts:  34%|###3      | 250/746 [2:49:18<19:21,  2.34s/post]Enriching posts:  34%|###3      | 251/746 [2:49:20<18:45,  2.27s/post]Enriching posts:  34%|###3      | 252/746 [2:49:23<19:19,  2.35s/post]Enriching posts:  34%|###3      | 253/746 [2:49:25<19:03,  2.32s/post]Enriching posts:  34%|###4      | 254/746 [2:49:28<21:28,  2.62s/post]Enriching posts:  34%|###4      | 255/746 [2:49:31<21:54,  2.68s/post]Enriching posts:  34%|###4      | 256/746 [2:49:33<20:36,  2.52s/post]Enriching posts:  34%|###4      | 257/746 [2:49:35<19:34,  2.40s/post]Enriching posts:  35%|###4      | 258/746 [2:49:38<19:46,  2.43s/post]Enriching posts:  35%|###4      | 259/746 [2:49:40<18:58,  2.34s/post]Enriching posts:  35%|###4      | 260/746 [2:49:43<20:59,  2.59s/post]Enriching posts:  35%|###4      | 261/746 [2:49:45<20:09,  2.49s/post]Enriching posts:  35%|###5      | 262/746 [2:49:48<20:07,  2.50s/post]Enriching posts:  35%|###5      | 263/746 [2:49:50<19:38,  2.44s/post]Enriching posts:  35%|###5      | 264/746 [2:49:52<18:44,  2.33s/post]Enriching posts:  36%|###5      | 265/746 [2:49:54<18:06,  2.26s/post]Enriching posts:  36%|###5      | 266/746 [2:49:56<17:37,  2.20s/post]Enriching posts:  36%|###5      | 267/746 [2:49:59<17:28,  2.19s/post]Enriching posts:  36%|###5      | 268/746 [2:50:01<17:20,  2.18s/post]Enriching posts:  36%|###6      | 269/746 [2:50:03<18:13,  2.29s/post]Enriching posts:  36%|###6      | 270/746 [2:50:06<18:40,  2.35s/post]Enriching posts:  36%|###6      | 271/746 [2:50:09<20:51,  2.64s/post]Enriching posts:  36%|###6      | 272/746 [2:50:11<19:33,  2.48s/post]Enriching posts:  37%|###6      | 273/746 [2:50:13<18:57,  2.41s/post]Enriching posts:  37%|###6      | 274/746 [2:50:16<18:19,  2.33s/post]Enriching posts:  37%|###6      | 275/746 [2:50:18<17:51,  2.28s/post]Enriching posts:  37%|###6      | 276/746 [2:50:20<17:32,  2.24s/post]Enriching posts:  37%|###7      | 277/746 [2:50:22<17:17,  2.21s/post]Enriching posts:  37%|###7      | 278/746 [2:50:24<17:05,  2.19s/post]Enriching posts:  37%|###7      | 279/746 [2:50:26<16:50,  2.16s/post]Enriching posts:  38%|###7      | 280/746 [2:50:29<17:11,  2.21s/post]Enriching posts:  38%|###7      | 281/746 [2:50:32<20:01,  2.58s/post]Enriching posts:  38%|###7      | 282/746 [2:50:34<18:59,  2.46s/post]Enriching posts:  38%|###7      | 283/746 [2:50:37<19:33,  2.53s/post]Enriching posts:  38%|###8      | 284/746 [2:50:39<18:46,  2.44s/post]Enriching posts:  38%|###8      | 285/746 [2:50:41<17:57,  2.34s/post]Enriching posts:  38%|###8      | 286/746 [2:50:43<17:22,  2.27s/post]Enriching posts:  38%|###8      | 287/746 [2:50:45<17:02,  2.23s/post]Enriching posts:  39%|###8      | 288/746 [2:50:48<17:04,  2.24s/post]Enriching posts:  39%|###8      | 289/746 [2:50:54<26:18,  3.45s/post]Enriching posts:  39%|###8      | 290/746 [2:50:56<23:20,  3.07s/post]Enriching posts:  39%|###9      | 291/746 [2:50:58<20:57,  2.76s/post]Enriching posts:  39%|###9      | 292/746 [2:51:01<20:33,  2.72s/post]Enriching posts:  39%|###9      | 293/746 [2:51:05<23:53,  3.16s/post]Enriching posts:  39%|###9      | 294/746 [2:51:08<22:52,  3.04s/post]Enriching posts:  40%|###9      | 295/746 [2:51:10<21:59,  2.93s/post]Enriching posts:  40%|###9      | 296/746 [2:51:13<20:11,  2.69s/post]Enriching posts:  40%|###9      | 297/746 [2:51:15<18:35,  2.48s/post]Enriching posts:  40%|###9      | 298/746 [2:51:22<29:23,  3.94s/post]Enriching posts:  40%|####      | 299/746 [2:51:26<29:52,  4.01s/post]Enriching posts:  40%|####      | 300/746 [2:51:30<29:13,  3.93s/post]Proxy http://171.249.163.170:1452 moved to temporary after RetryError (stats={'good': 4, 'cooldown': 1, 'dead': 0})
+Failed to fetch post details: HTTPSConnectionPool(host='www.reddit.com', port=443): Max retries exceeded with url: /r/ClaudeAI/comments/1r6cn6t/what_5_months_of_nonstop_claude_code_taught_me/.json (Caused by ResponseError('too many 429 error responses'))
+Enriching posts:  40%|####      | 301/746 [2:52:34<2:42:46, 21.95s/post]Proxy http://94.176.3.42:7443 moved to temporary after ProxyError (stats={'good': 3, 'cooldown': 2, 'dead': 0})
+Failed to fetch post details: HTTPSConnectionPool(host='www.reddit.com', port=443): Max retries exceeded with url: /r/ClaudeAI/comments/1rwmj25/i_stopped_using_claudeai_entirely_i_run_my_entire/.json (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x123801090>: Failed to establish a new connection: [Errno 61] Connection refused')))
+Enriching posts:  40%|####      | 302/746 [2:53:37<4:13:54, 34.31s/post]Proxy http://94.176.3.109:7443 moved to temporary after ProxyError (stats={'good': 2, 'cooldown': 3, 'dead': 0})
+Failed to fetch post details: HTTPSConnectionPool(host='www.reddit.com', port=443): Max retries exceeded with url: /r/ClaudeAI/comments/1r0n1qz/i_just_delivered_on_a_30000_contract_thanks_to/.json (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x121b3f050>: Failed to establish a new connection: [Errno 61] Connection refused')))
+Enriching posts:  41%|####      | 303/746 [2:54:40<5:17:19, 42.98s/post]Proxy http://113.11.111.145:30226 moved to temporary after RetryError (stats={'good': 1, 'cooldown': 4, 'dead': 0})
+Failed to fetch post details: HTTPSConnectionPool(host='www.reddit.com', port=443): Max retries exceeded with url: /r/ClaudeAI/comments/1qcan9z/my_top_10_claude_code_tips_from_11_months_of/.json (Caused by ResponseError('too many 429 error responses'))
+Enriching posts:  41%|####      | 304/746 [2:55:56<6:29:05, 52.82s/post]Proxy http://158.160.215.167:8123 moved to temporary after RetryError (stats={'good': 0, 'cooldown': 5, 'dead': 0})
+Failed to fetch post details: HTTPSConnectionPool(host='www.reddit.com', port=443): Max retries exceeded with url: /r/ClaudeAI/comments/1qyrnti/tell_me_how_im_under_utilizing_claudeclaude_code/.json (Caused by ResponseError('too many 429 error responses'))
+Enriching posts:  41%|####      | 305/746 [2:57:01<6:54:47, 56.43s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  41%|####1     | 306/746 [2:57:02<4:53:01, 39.96s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  41%|####1     | 307/746 [2:57:04<3:27:57, 28.42s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  41%|####1     | 308/746 [2:57:05<2:28:32, 20.35s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  41%|####1     | 309/746 [2:57:07<1:47:02, 14.70s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  42%|####1     | 310/746 [2:57:08<1:18:01, 10.74s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  42%|####1     | 311/746 [2:57:10<57:46,  7.97s/post]  Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  42%|####1     | 312/746 [2:57:11<43:37,  6.03s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  42%|####1     | 313/746 [2:57:13<33:43,  4.67s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  42%|####2     | 314/746 [2:57:14<26:49,  3.72s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  42%|####2     | 315/746 [2:57:16<21:58,  3.06s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  42%|####2     | 316/746 [2:57:17<18:35,  2.60s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  42%|####2     | 317/746 [2:57:19<16:13,  2.27s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  43%|####2     | 318/746 [2:57:20<14:33,  2.04s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  43%|####2     | 319/746 [2:57:22<13:23,  1.88s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  43%|####2     | 320/746 [2:57:23<12:33,  1.77s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  43%|####3     | 321/746 [2:57:25<11:58,  1.69s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  43%|####3     | 322/746 [2:57:26<11:34,  1.64s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  43%|####3     | 323/746 [2:57:28<11:15,  1.60s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  43%|####3     | 324/746 [2:57:29<11:02,  1.57s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  44%|####3     | 325/746 [2:57:31<10:52,  1.55s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  44%|####3     | 326/746 [2:57:33<10:45,  1.54s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  44%|####3     | 327/746 [2:57:34<10:39,  1.53s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  44%|####3     | 328/746 [2:57:36<10:34,  1.52s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  44%|####4     | 329/746 [2:57:37<10:31,  1.51s/post]Enriching posts:  44%|####4     | 330/746 [2:57:44<22:04,  3.18s/post]Enriching posts:  44%|####4     | 331/746 [2:57:48<22:57,  3.32s/post]Enriching posts:  45%|####4     | 332/746 [2:57:51<22:55,  3.32s/post]Enriching posts:  45%|####4     | 333/746 [2:57:54<22:40,  3.30s/post]Enriching posts:  45%|####4     | 334/746 [2:57:57<22:17,  3.25s/post]Enriching posts:  45%|####4     | 335/746 [2:58:00<21:15,  3.10s/post]Enriching posts:  45%|####5     | 336/746 [2:58:03<21:36,  3.16s/post]Enriching posts:  45%|####5     | 337/746 [2:58:07<22:38,  3.32s/post]Enriching posts:  45%|####5     | 338/746 [2:58:11<22:44,  3.35s/post]Enriching posts:  45%|####5     | 339/746 [2:58:13<21:22,  3.15s/post]Enriching posts:  46%|####5     | 340/746 [2:58:17<21:33,  3.18s/post]Enriching posts:  46%|####5     | 341/746 [2:58:20<21:41,  3.21s/post]Enriching posts:  46%|####5     | 342/746 [2:58:24<22:33,  3.35s/post]Enriching posts:  46%|####5     | 343/746 [2:58:26<21:47,  3.24s/post]Enriching posts:  46%|####6     | 344/746 [2:58:29<20:51,  3.11s/post]Enriching posts:  46%|####6     | 345/746 [2:58:33<22:14,  3.33s/post]Enriching posts:  46%|####6     | 346/746 [2:58:36<22:13,  3.33s/post]Enriching posts:  47%|####6     | 347/746 [2:58:39<21:25,  3.22s/post]Enriching posts:  47%|####6     | 348/746 [2:58:43<22:21,  3.37s/post]Enriching posts:  47%|####6     | 349/746 [2:58:46<21:56,  3.32s/post]Enriching posts:  47%|####6     | 350/746 [2:58:49<21:13,  3.21s/post]Enriching posts:  47%|####7     | 351/746 [2:58:52<19:58,  3.03s/post]Enriching posts:  47%|####7     | 352/746 [2:58:55<20:40,  3.15s/post]Enriching posts:  47%|####7     | 353/746 [2:58:58<20:32,  3.14s/post]Enriching posts:  47%|####7     | 354/746 [2:59:02<20:23,  3.12s/post]Enriching posts:  48%|####7     | 355/746 [2:59:05<20:40,  3.17s/post]Enriching posts:  48%|####7     | 356/746 [2:59:08<21:03,  3.24s/post]Enriching posts:  48%|####7     | 357/746 [2:59:12<21:07,  3.26s/post]Enriching posts:  48%|####7     | 358/746 [2:59:15<20:55,  3.24s/post]Enriching posts:  48%|####8     | 359/746 [2:59:18<20:13,  3.14s/post]Enriching posts:  48%|####8     | 360/746 [2:59:20<19:36,  3.05s/post]Enriching posts:  48%|####8     | 361/746 [2:59:24<20:10,  3.14s/post]Enriching posts:  49%|####8     | 362/746 [2:59:27<20:47,  3.25s/post]Enriching posts:  49%|####8     | 363/746 [2:59:30<20:24,  3.20s/post]Enriching posts:  49%|####8     | 364/746 [2:59:33<20:01,  3.15s/post]Enriching posts:  49%|####8     | 365/746 [2:59:37<19:50,  3.12s/post]Enriching posts:  49%|####9     | 366/746 [2:59:39<19:28,  3.07s/post]Enriching posts:  49%|####9     | 367/746 [2:59:43<19:36,  3.10s/post]Enriching posts:  49%|####9     | 368/746 [2:59:45<18:33,  2.95s/post]Enriching posts:  49%|####9     | 369/746 [2:59:49<19:20,  3.08s/post]Enriching posts:  50%|####9     | 370/746 [2:59:52<19:45,  3.15s/post]Enriching posts:  50%|####9     | 371/746 [2:59:55<18:55,  3.03s/post]Enriching posts:  50%|####9     | 372/746 [2:59:58<19:37,  3.15s/post]Enriching posts:  50%|#####     | 373/746 [3:00:01<19:40,  3.17s/post]Enriching posts:  50%|#####     | 374/746 [3:00:04<19:11,  3.10s/post]Enriching posts:  50%|#####     | 375/746 [3:00:07<18:26,  2.98s/post]Enriching posts:  50%|#####     | 376/746 [3:00:11<19:43,  3.20s/post]Enriching posts:  51%|#####     | 377/746 [3:00:14<20:01,  3.26s/post]Enriching posts:  51%|#####     | 378/746 [3:00:17<19:37,  3.20s/post]Enriching posts:  51%|#####     | 379/746 [3:00:21<20:18,  3.32s/post]Enriching posts:  51%|#####     | 380/746 [3:00:24<20:05,  3.29s/post]Enriching posts:  51%|#####1    | 381/746 [3:00:28<20:48,  3.42s/post]Enriching posts:  51%|#####1    | 382/746 [3:00:31<20:15,  3.34s/post]Enriching posts:  51%|#####1    | 383/746 [3:00:34<20:01,  3.31s/post]Enriching posts:  51%|#####1    | 384/746 [3:00:38<20:20,  3.37s/post]Enriching posts:  52%|#####1    | 385/746 [3:00:41<20:37,  3.43s/post]Enriching posts:  52%|#####1    | 386/746 [3:00:45<21:04,  3.51s/post]Enriching posts:  52%|#####1    | 387/746 [3:00:48<20:36,  3.44s/post]Enriching posts:  52%|#####2    | 388/746 [3:00:51<19:18,  3.24s/post]Enriching posts:  52%|#####2    | 389/746 [3:00:54<19:18,  3.25s/post]Enriching posts:  52%|#####2    | 390/746 [3:00:57<18:53,  3.19s/post]Enriching posts:  52%|#####2    | 391/746 [3:01:00<18:18,  3.10s/post]Enriching posts:  53%|#####2    | 392/746 [3:01:03<18:21,  3.11s/post]Enriching posts:  53%|#####2    | 393/746 [3:01:05<16:35,  2.82s/post]Enriching posts:  53%|#####2    | 394/746 [3:01:07<15:08,  2.58s/post]Enriching posts:  53%|#####2    | 395/746 [3:01:09<14:13,  2.43s/post]Enriching posts:  53%|#####3    | 396/746 [3:01:12<13:41,  2.35s/post]Enriching posts:  53%|#####3    | 397/746 [3:01:14<13:19,  2.29s/post]Enriching posts:  53%|#####3    | 398/746 [3:01:16<13:10,  2.27s/post]Enriching posts:  53%|#####3    | 399/746 [3:01:18<12:59,  2.25s/post]Enriching posts:  54%|#####3    | 400/746 [3:01:20<12:43,  2.21s/post]Enriching posts:  54%|#####3    | 401/746 [3:01:23<12:49,  2.23s/post]Enriching posts:  54%|#####3    | 402/746 [3:01:25<13:37,  2.38s/post]Enriching posts:  54%|#####4    | 403/746 [3:01:29<15:08,  2.65s/post]Enriching posts:  54%|#####4    | 404/746 [3:01:31<14:24,  2.53s/post]Enriching posts:  54%|#####4    | 405/746 [3:01:33<14:31,  2.55s/post]Enriching posts:  54%|#####4    | 406/746 [3:01:37<15:38,  2.76s/post]Enriching posts:  55%|#####4    | 407/746 [3:01:39<15:13,  2.69s/post]Enriching posts:  55%|#####4    | 408/746 [3:01:42<15:01,  2.67s/post]Enriching posts:  55%|#####4    | 409/746 [3:01:44<14:52,  2.65s/post]Enriching posts:  55%|#####4    | 410/746 [3:01:47<14:02,  2.51s/post]Enriching posts:  55%|#####5    | 411/746 [3:01:49<14:07,  2.53s/post]Enriching posts:  55%|#####5    | 412/746 [3:01:51<13:35,  2.44s/post]Enriching posts:  55%|#####5    | 413/746 [3:01:54<13:23,  2.41s/post]Enriching posts:  55%|#####5    | 414/746 [3:01:57<14:24,  2.60s/post]Enriching posts:  56%|#####5    | 415/746 [3:01:59<14:23,  2.61s/post]Enriching posts:  56%|#####5    | 416/746 [3:02:02<14:10,  2.58s/post]Enriching posts:  56%|#####5    | 417/746 [3:02:05<14:04,  2.57s/post]Enriching posts:  56%|#####6    | 418/746 [3:02:07<14:13,  2.60s/post]Enriching posts:  56%|#####6    | 419/746 [3:02:09<13:27,  2.47s/post]Enriching posts:  56%|#####6    | 420/746 [3:02:12<12:56,  2.38s/post]Enriching posts:  56%|#####6    | 421/746 [3:02:14<12:40,  2.34s/post]Enriching posts:  57%|#####6    | 422/746 [3:02:17<13:19,  2.47s/post]Enriching posts:  57%|#####6    | 423/746 [3:02:19<12:54,  2.40s/post]Enriching posts:  57%|#####6    | 424/746 [3:02:21<12:30,  2.33s/post]Enriching posts:  57%|#####6    | 425/746 [3:02:23<12:36,  2.36s/post]Enriching posts:  57%|#####7    | 426/746 [3:02:25<12:06,  2.27s/post]Enriching posts:  57%|#####7    | 427/746 [3:02:28<11:53,  2.24s/post]Enriching posts:  57%|#####7    | 428/746 [3:02:31<14:25,  2.72s/post]Enriching posts:  58%|#####7    | 429/746 [3:02:33<13:18,  2.52s/post]Proxy http://171.249.163.170:1452 moved to temporary after RetryError (stats={'good': 3, 'cooldown': 2, 'dead': 0})
+Failed to fetch post details: HTTPSConnectionPool(host='www.reddit.com', port=443): Max retries exceeded with url: /r/vibecoding/comments/1qwem4x/there_was_a_problem_getting_a_response_gemini/.json (Caused by ResponseError('too many 429 error responses'))
+Enriching posts:  58%|#####7    | 430/746 [3:03:38<1:50:42, 21.02s/post]Proxy http://94.176.3.42:7443 moved to temporary after ProxyError (stats={'good': 2, 'cooldown': 3, 'dead': 0})
+Failed to fetch post details: HTTPSConnectionPool(host='www.reddit.com', port=443): Max retries exceeded with url: /r/homeassistant/comments/1qpnq0h/vibe_coding_for_home_assistant/.json (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x123dbe510>: Failed to establish a new connection: [Errno 61] Connection refused')))
+Enriching posts:  58%|#####7    | 431/746 [3:04:41<2:56:54, 33.70s/post]Proxy http://94.176.3.109:7443 moved to temporary after ProxyError (stats={'good': 1, 'cooldown': 4, 'dead': 0})
+Failed to fetch post details: HTTPSConnectionPool(host='www.reddit.com', port=443): Max retries exceeded with url: /r/Bard/comments/1ply9ah/warning_using_gemini_code_assist_and_gemini_cli/.json (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x123d45e50>: Failed to establish a new connection: [Errno 61] Connection refused')))
+Enriching posts:  58%|#####7    | 432/746 [3:05:44<3:42:47, 42.57s/post]Proxy http://113.11.111.145:30226 moved to temporary after ProxyError (stats={'good': 0, 'cooldown': 5, 'dead': 0})
+Failed to fetch post details: HTTPSConnectionPool(host='www.reddit.com', port=443): Max retries exceeded with url: /r/Bard/comments/1npiv2o/google_ai_pro_and_ultra_subscribers_now_have/.json (Caused by ProxyError('Unable to connect to proxy', ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x123dbfb50>, 'Connection to 113.11.111.145 timed out. (connect timeout=16)')))
+Enriching posts:  58%|#####8    | 433/746 [3:08:22<6:42:03, 77.07s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  58%|#####8    | 434/746 [3:08:23<4:42:53, 54.40s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  58%|#####8    | 435/746 [3:08:25<3:19:43, 38.53s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  58%|#####8    | 436/746 [3:08:26<2:21:41, 27.43s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  59%|#####8    | 437/746 [3:08:28<1:41:12, 19.65s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  59%|#####8    | 438/746 [3:08:29<1:12:56, 14.21s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  59%|#####8    | 439/746 [3:08:31<53:12, 10.40s/post]  Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  59%|#####8    | 440/746 [3:08:32<39:25,  7.73s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  59%|#####9    | 441/746 [3:08:34<29:48,  5.86s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  59%|#####9    | 442/746 [3:08:35<23:05,  4.56s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  59%|#####9    | 443/746 [3:08:37<18:24,  3.64s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  60%|#####9    | 444/746 [3:08:38<15:07,  3.00s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  60%|#####9    | 445/746 [3:08:40<12:48,  2.55s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  60%|#####9    | 446/746 [3:08:41<11:12,  2.24s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  60%|#####9    | 447/746 [3:08:43<10:04,  2.02s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  60%|######    | 448/746 [3:08:44<09:16,  1.87s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  60%|######    | 449/746 [3:08:46<08:42,  1.76s/post]Enriching posts:  60%|######    | 450/746 [3:08:50<12:31,  2.54s/post]Enriching posts:  60%|######    | 451/746 [3:08:52<11:54,  2.42s/post]Enriching posts:  61%|######    | 452/746 [3:08:55<11:28,  2.34s/post]Enriching posts:  61%|######    | 453/746 [3:08:57<10:53,  2.23s/post]Enriching posts:  61%|######    | 454/746 [3:08:59<10:29,  2.16s/post]Enriching posts:  61%|######    | 455/746 [3:09:01<10:38,  2.19s/post]Enriching posts:  61%|######1   | 456/746 [3:09:03<10:15,  2.12s/post]Enriching posts:  61%|######1   | 457/746 [3:09:05<10:15,  2.13s/post]Enriching posts:  61%|######1   | 458/746 [3:09:07<10:01,  2.09s/post]Enriching posts:  62%|######1   | 459/746 [3:09:09<10:00,  2.09s/post]Enriching posts:  62%|######1   | 460/746 [3:09:11<09:49,  2.06s/post]Enriching posts:  62%|######1   | 461/746 [3:09:14<10:53,  2.29s/post]Enriching posts:  62%|######1   | 462/746 [3:09:16<10:23,  2.19s/post]Enriching posts:  62%|######2   | 463/746 [3:09:18<10:01,  2.13s/post]Enriching posts:  62%|######2   | 464/746 [3:09:20<09:57,  2.12s/post]Enriching posts:  62%|######2   | 465/746 [3:09:22<09:40,  2.07s/post]Enriching posts:  62%|######2   | 466/746 [3:09:24<09:32,  2.05s/post]Enriching posts:  63%|######2   | 467/746 [3:09:26<09:24,  2.02s/post]Enriching posts:  63%|######2   | 468/746 [3:09:28<09:18,  2.01s/post]Enriching posts:  63%|######2   | 469/746 [3:09:31<10:44,  2.33s/post]Enriching posts:  63%|######3   | 470/746 [3:09:33<10:14,  2.22s/post]Enriching posts:  63%|######3   | 471/746 [3:09:35<10:02,  2.19s/post]Enriching posts:  63%|######3   | 472/746 [3:09:37<09:48,  2.15s/post]Enriching posts:  63%|######3   | 473/746 [3:09:39<09:38,  2.12s/post]Enriching posts:  64%|######3   | 474/746 [3:09:41<09:25,  2.08s/post]Enriching posts:  64%|######3   | 475/746 [3:09:43<09:13,  2.04s/post]Enriching posts:  64%|######3   | 476/746 [3:09:45<09:07,  2.03s/post]Enriching posts:  64%|######3   | 477/746 [3:09:47<09:07,  2.03s/post]Enriching posts:  64%|######4   | 478/746 [3:09:50<09:53,  2.21s/post]Enriching posts:  64%|######4   | 479/746 [3:09:52<09:33,  2.15s/post]Enriching posts:  64%|######4   | 480/746 [3:09:54<09:21,  2.11s/post]Enriching posts:  64%|######4   | 481/746 [3:09:56<09:14,  2.09s/post]Enriching posts:  65%|######4   | 482/746 [3:09:58<09:08,  2.08s/post]Enriching posts:  65%|######4   | 483/746 [3:10:00<09:04,  2.07s/post]Enriching posts:  65%|######4   | 484/746 [3:10:03<10:21,  2.37s/post]Enriching posts:  65%|######5   | 485/746 [3:10:05<09:47,  2.25s/post]Enriching posts:  65%|######5   | 486/746 [3:10:07<09:20,  2.16s/post]Enriching posts:  65%|######5   | 487/746 [3:10:09<09:01,  2.09s/post]Enriching posts:  65%|######5   | 488/746 [3:10:11<09:27,  2.20s/post]Enriching posts:  66%|######5   | 489/746 [3:10:13<09:12,  2.15s/post]Enriching posts:  66%|######5   | 490/746 [3:10:15<09:01,  2.11s/post]Enriching posts:  66%|######5   | 491/746 [3:10:17<08:46,  2.06s/post]Enriching posts:  66%|######5   | 492/746 [3:10:20<09:07,  2.16s/post]Enriching posts:  66%|######6   | 493/746 [3:10:22<09:29,  2.25s/post]Enriching posts:  66%|######6   | 494/746 [3:10:24<09:33,  2.28s/post]Enriching posts:  66%|######6   | 495/746 [3:10:28<10:44,  2.57s/post]Enriching posts:  66%|######6   | 496/746 [3:10:30<10:01,  2.41s/post]Enriching posts:  67%|######6   | 497/746 [3:10:32<09:59,  2.41s/post]Enriching posts:  67%|######6   | 498/746 [3:10:34<09:32,  2.31s/post]Enriching posts:  67%|######6   | 499/746 [3:10:36<09:32,  2.32s/post]Enriching posts:  67%|######7   | 500/746 [3:10:39<09:32,  2.33s/post]Enriching posts:  67%|######7   | 501/746 [3:10:41<09:09,  2.24s/post]Enriching posts:  67%|######7   | 502/746 [3:10:43<08:45,  2.15s/post]Enriching posts:  67%|######7   | 503/746 [3:10:45<08:32,  2.11s/post]Enriching posts:  68%|######7   | 504/746 [3:10:47<08:29,  2.10s/post]Enriching posts:  68%|######7   | 505/746 [3:10:49<08:35,  2.14s/post]Enriching posts:  68%|######7   | 506/746 [3:10:51<08:21,  2.09s/post]Enriching posts:  68%|######7   | 507/746 [3:10:53<08:16,  2.08s/post]Enriching posts:  68%|######8   | 508/746 [3:10:55<08:19,  2.10s/post]Enriching posts:  68%|######8   | 509/746 [3:10:57<08:07,  2.06s/post]Enriching posts:  68%|######8   | 510/746 [3:10:59<07:58,  2.03s/post]Enriching posts:  68%|######8   | 511/746 [3:11:01<07:50,  2.00s/post]Enriching posts:  69%|######8   | 512/746 [3:11:03<07:47,  2.00s/post]Enriching posts:  69%|######8   | 513/746 [3:11:05<07:44,  1.99s/post]Enriching posts:  69%|######8   | 514/746 [3:11:07<08:02,  2.08s/post]Enriching posts:  69%|######9   | 515/746 [3:11:09<07:54,  2.05s/post]Enriching posts:  69%|######9   | 516/746 [3:11:11<07:44,  2.02s/post]Enriching posts:  69%|######9   | 517/746 [3:11:13<07:39,  2.01s/post]Enriching posts:  69%|######9   | 518/746 [3:11:16<07:54,  2.08s/post]Enriching posts:  70%|######9   | 519/746 [3:11:18<07:43,  2.04s/post]Enriching posts:  70%|######9   | 520/746 [3:11:20<07:41,  2.04s/post]Enriching posts:  70%|######9   | 521/746 [3:11:22<07:39,  2.04s/post]Enriching posts:  70%|######9   | 522/746 [3:11:25<09:18,  2.50s/post]Enriching posts:  70%|#######   | 523/746 [3:11:27<08:42,  2.34s/post]Enriching posts:  70%|#######   | 524/746 [3:11:29<08:20,  2.25s/post]Enriching posts:  70%|#######   | 525/746 [3:11:31<08:01,  2.18s/post]Enriching posts:  71%|#######   | 526/746 [3:11:33<07:42,  2.10s/post]Enriching posts:  71%|#######   | 527/746 [3:11:35<07:34,  2.07s/post]Enriching posts:  71%|#######   | 528/746 [3:11:37<07:24,  2.04s/post]Enriching posts:  71%|#######   | 529/746 [3:11:39<07:16,  2.01s/post]Enriching posts:  71%|#######1  | 530/746 [3:11:41<07:16,  2.02s/post]Enriching posts:  71%|#######1  | 531/746 [3:11:43<07:08,  1.99s/post]Enriching posts:  71%|#######1  | 532/746 [3:11:45<07:03,  1.98s/post]Enriching posts:  71%|#######1  | 533/746 [3:11:47<06:57,  1.96s/post]Enriching posts:  72%|#######1  | 534/746 [3:11:49<07:14,  2.05s/post]Enriching posts:  72%|#######1  | 535/746 [3:11:51<07:06,  2.02s/post]Enriching posts:  72%|#######1  | 536/746 [3:11:53<07:18,  2.09s/post]Enriching posts:  72%|#######1  | 537/746 [3:11:56<07:28,  2.15s/post]Enriching posts:  72%|#######2  | 538/746 [3:11:58<07:12,  2.08s/post]Enriching posts:  72%|#######2  | 539/746 [3:12:00<07:03,  2.05s/post]Enriching posts:  72%|#######2  | 540/746 [3:12:02<07:08,  2.08s/post]Enriching posts:  73%|#######2  | 541/746 [3:12:04<07:04,  2.07s/post]Enriching posts:  73%|#######2  | 542/746 [3:12:06<06:54,  2.03s/post]Enriching posts:  73%|#######2  | 543/746 [3:12:08<06:47,  2.01s/post]Enriching posts:  73%|#######2  | 544/746 [3:12:10<06:43,  2.00s/post]Enriching posts:  73%|#######3  | 545/746 [3:12:12<06:36,  1.97s/post]Enriching posts:  73%|#######3  | 546/746 [3:12:13<06:34,  1.97s/post]Enriching posts:  73%|#######3  | 547/746 [3:12:15<06:33,  1.98s/post]Enriching posts:  73%|#######3  | 548/746 [3:12:17<06:29,  1.97s/post]Enriching posts:  74%|#######3  | 549/746 [3:12:19<06:28,  1.97s/post]Proxy http://158.160.215.167:8123 moved to temporary after RetryError (stats={'good': 1, 'cooldown': 4, 'dead': 0})
+Failed to fetch post details: HTTPSConnectionPool(host='www.reddit.com', port=443): Max retries exceeded with url: /r/BlackboxAI_/comments/1mvbt7v/do_you_prefer_using_the_website_coding_agent_or/.json (Caused by ResponseError('too many 429 error responses'))
+Enriching posts:  74%|#######3  | 550/746 [3:13:23<1:06:54, 20.48s/post]Proxy http://171.249.163.170:1452 moved to temporary after RetryError (stats={'good': 0, 'cooldown': 5, 'dead': 0})
+Failed to fetch post details: HTTPSConnectionPool(host='www.reddit.com', port=443): Max retries exceeded with url: /r/ChatGPT/comments/1nhosvj/whats_your_take_on_the_best_al_coding_agents/.json (Caused by ResponseError('too many 429 error responses'))
+Enriching posts:  74%|#######3  | 551/746 [3:14:39<2:00:56, 37.21s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  74%|#######3  | 552/746 [3:14:41<1:25:40, 26.50s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  74%|#######4  | 553/746 [3:14:42<1:01:07, 19.00s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  74%|#######4  | 554/746 [3:14:44<44:00, 13.75s/post]  Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  74%|#######4  | 555/746 [3:14:45<32:04, 10.08s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  75%|#######4  | 556/746 [3:14:47<23:46,  7.51s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  75%|#######4  | 557/746 [3:14:48<17:58,  5.71s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  75%|#######4  | 558/746 [3:14:50<13:55,  4.44s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  75%|#######4  | 559/746 [3:14:51<11:06,  3.56s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  75%|#######5  | 560/746 [3:14:53<09:07,  2.94s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  75%|#######5  | 561/746 [3:14:54<07:44,  2.51s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  75%|#######5  | 562/746 [3:14:56<06:46,  2.21s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  75%|#######5  | 563/746 [3:14:57<06:05,  2.00s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  76%|#######5  | 564/746 [3:14:59<05:36,  1.85s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  76%|#######5  | 565/746 [3:15:00<05:15,  1.75s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  76%|#######5  | 566/746 [3:15:02<05:01,  1.67s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  76%|#######6  | 567/746 [3:15:03<04:50,  1.62s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  76%|#######6  | 568/746 [3:15:05<04:42,  1.59s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  76%|#######6  | 569/746 [3:15:06<04:36,  1.56s/post]Proxy http://94.176.3.42:7443 moved to temporary after ProxyError (stats={'good': 0, 'cooldown': 5, 'dead': 0})
+Failed to fetch post details: HTTPSConnectionPool(host='www.reddit.com', port=443): Max retries exceeded with url: /r/singularity/comments/1ixd2gk/anthropics_claude_code_is_accelerating_software/.json (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x123e9b5d0>: Failed to establish a new connection: [Errno 61] Connection refused')))
+Enriching posts:  76%|#######6  | 570/746 [3:16:09<58:40, 20.00s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  77%|#######6  | 571/746 [3:16:11<42:09, 14.45s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  77%|#######6  | 572/746 [3:16:12<30:39, 10.57s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  77%|#######6  | 573/746 [3:16:14<22:38,  7.85s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  77%|#######6  | 574/746 [3:16:15<17:02,  5.95s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  77%|#######7  | 575/746 [3:16:17<13:08,  4.61s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  77%|#######7  | 576/746 [3:16:18<10:25,  3.68s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  77%|#######7  | 577/746 [3:16:20<08:31,  3.03s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  77%|#######7  | 578/746 [3:16:21<07:11,  2.57s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  78%|#######7  | 579/746 [3:16:23<06:15,  2.25s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  78%|#######7  | 580/746 [3:16:24<05:36,  2.03s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  78%|#######7  | 581/746 [3:16:26<05:08,  1.87s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  78%|#######8  | 582/746 [3:16:27<04:48,  1.76s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  78%|#######8  | 583/746 [3:16:29<04:34,  1.68s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  78%|#######8  | 584/746 [3:16:30<04:24,  1.63s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  78%|#######8  | 585/746 [3:16:32<04:16,  1.59s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  79%|#######8  | 586/746 [3:16:33<04:10,  1.57s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  79%|#######8  | 587/746 [3:16:35<04:06,  1.55s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  79%|#######8  | 588/746 [3:16:37<04:02,  1.54s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  79%|#######8  | 589/746 [3:16:38<03:59,  1.53s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  79%|#######9  | 590/746 [3:16:40<03:57,  1.52s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  79%|#######9  | 591/746 [3:16:41<03:54,  1.52s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  79%|#######9  | 592/746 [3:16:43<03:52,  1.51s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  79%|#######9  | 593/746 [3:16:44<03:51,  1.51s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  80%|#######9  | 594/746 [3:16:46<03:49,  1.51s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  80%|#######9  | 595/746 [3:16:47<03:47,  1.51s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  80%|#######9  | 596/746 [3:16:49<03:45,  1.51s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  80%|########  | 597/746 [3:16:50<03:44,  1.51s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  80%|########  | 598/746 [3:16:52<03:42,  1.51s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  80%|########  | 599/746 [3:16:53<03:41,  1.50s/post]Proxy http://94.176.3.109:7443 moved to temporary after ProxyError (stats={'good': 0, 'cooldown': 5, 'dead': 0})
+Failed to fetch post details: HTTPSConnectionPool(host='www.reddit.com', port=443): Max retries exceeded with url: /r/AI_Agents/comments/1icx1x0/what_is_currently_the_best_nocode_ai_agent_builder/.json (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x123ed9490>: Failed to establish a new connection: [Errno 61] Connection refused')))
+Enriching posts:  80%|########  | 600/746 [3:17:56<48:40, 20.00s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  81%|########  | 601/746 [3:17:58<34:55, 14.45s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  81%|########  | 602/746 [3:17:59<25:21, 10.57s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  81%|########  | 603/746 [3:18:01<18:42,  7.85s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  81%|########  | 604/746 [3:18:02<14:04,  5.95s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  81%|########1 | 605/746 [3:18:04<10:50,  4.61s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  81%|########1 | 606/746 [3:18:05<08:35,  3.68s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  81%|########1 | 607/746 [3:18:07<07:00,  3.03s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  82%|########1 | 608/746 [3:18:08<05:54,  2.57s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  82%|########1 | 609/746 [3:18:10<05:08,  2.25s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  82%|########1 | 610/746 [3:18:11<04:35,  2.03s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  82%|########1 | 611/746 [3:18:13<04:12,  1.87s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  82%|########2 | 612/746 [3:18:14<03:55,  1.76s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  82%|########2 | 613/746 [3:18:16<03:43,  1.68s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  82%|########2 | 614/746 [3:18:17<03:35,  1.63s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  82%|########2 | 615/746 [3:18:19<03:28,  1.59s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  83%|########2 | 616/746 [3:18:20<03:23,  1.57s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  83%|########2 | 617/746 [3:18:22<03:19,  1.55s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  83%|########2 | 618/746 [3:18:23<03:16,  1.53s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  83%|########2 | 619/746 [3:18:25<03:13,  1.53s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  83%|########3 | 620/746 [3:18:26<03:11,  1.52s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  83%|########3 | 621/746 [3:18:28<03:09,  1.52s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  83%|########3 | 622/746 [3:18:29<03:07,  1.51s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  84%|########3 | 623/746 [3:18:31<03:05,  1.51s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  84%|########3 | 624/746 [3:18:32<03:04,  1.51s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  84%|########3 | 625/746 [3:18:34<03:02,  1.51s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  84%|########3 | 626/746 [3:18:35<03:00,  1.51s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  84%|########4 | 627/746 [3:18:37<02:59,  1.51s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  84%|########4 | 628/746 [3:18:38<02:57,  1.51s/post]Failed to fetch post details: Proxy pool exhausted
+Enriching posts:  84%|########4 | 629/746 [3:18:40<02:56,  1.51s/post]Proxy http://113.11.111.145:30226 moved to temporary after ProxyError (stats={'good': 1, 'cooldown': 4, 'dead': 0})
+Failed to fetch post details: HTTPSConnectionPool(host='www.reddit.com', port=443): Max retries exceeded with url: /r/ChatGPTPro/comments/1rwzt3b/what_are_the_best_ai_tools_for_business_owners/.json (Caused by ProxyError('Unable to connect to proxy', ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x123eca950>, 'Connection to 113.11.111.145 timed out. (connect timeout=16)')))
+Enriching posts:  84%|########4 | 630/746 [3:21:22<1:35:51, 49.58s/post]Enriching posts:  85%|########4 | 631/746 [3:21:27<1:09:21, 36.19s/post]Enriching posts:  85%|########4 | 632/746 [3:21:29<49:37, 26.12s/post]  Enriching posts:  85%|########4 | 633/746 [3:21:31<35:43, 18.97s/post]Enriching posts:  85%|########4 | 634/746 [3:21:34<26:26, 14.17s/post]Enriching posts:  85%|########5 | 635/746 [3:21:37<19:44, 10.67s/post]Enriching posts:  85%|########5 | 636/746 [3:21:39<15:03,  8.21s/post]Enriching posts:  85%|########5 | 637/746 [3:21:42<11:56,  6.58s/post]Enriching posts:  86%|########5 | 638/746 [3:21:44<09:24,  5.22s/post]Enriching posts:  86%|########5 | 639/746 [3:21:46<07:37,  4.28s/post]Enriching posts:  86%|########5 | 640/746 [3:21:48<06:26,  3.64s/post]Enriching posts:  86%|########5 | 641/746 [3:21:51<05:43,  3.27s/post]Enriching posts:  86%|########6 | 642/746 [3:21:53<05:14,  3.02s/post]Enriching posts:  86%|########6 | 643/746 [3:21:56<04:58,  2.90s/post]Enriching posts:  86%|########6 | 644/746 [3:21:58<04:36,  2.71s/post]Enriching posts:  86%|########6 | 645/746 [3:22:01<04:24,  2.62s/post]Enriching posts:  87%|########6 | 646/746 [3:22:03<04:14,  2.54s/post]Enriching posts:  87%|########6 | 647/746 [3:22:05<04:10,  2.53s/post]Enriching posts:  87%|########6 | 648/746 [3:22:08<04:05,  2.51s/post]Enriching posts:  87%|########6 | 649/746 [3:22:10<04:01,  2.49s/post]Enriching posts:  87%|########7 | 650/746 [3:22:13<04:01,  2.52s/post]Enriching posts:  87%|########7 | 651/746 [3:22:16<04:06,  2.59s/post]Enriching posts:  87%|########7 | 652/746 [3:22:18<03:50,  2.46s/post]Enriching posts:  88%|########7 | 653/746 [3:22:20<03:40,  2.37s/post]Enriching posts:  88%|########7 | 654/746 [3:22:23<03:48,  2.49s/post]Enriching posts:  88%|########7 | 655/746 [3:22:25<03:37,  2.39s/post]Enriching posts:  88%|########7 | 656/746 [3:22:28<03:41,  2.46s/post]Enriching posts:  88%|########8 | 657/746 [3:22:31<04:05,  2.75s/post]Enriching posts:  88%|########8 | 658/746 [3:22:33<03:53,  2.65s/post]Enriching posts:  88%|########8 | 659/746 [3:22:36<03:46,  2.60s/post]Enriching posts:  88%|########8 | 660/746 [3:22:38<03:28,  2.43s/post]Enriching posts:  89%|########8 | 661/746 [3:22:40<03:19,  2.35s/post]Enriching posts:  89%|########8 | 662/746 [3:22:43<03:22,  2.41s/post]Enriching posts:  89%|########8 | 663/746 [3:22:45<03:20,  2.41s/post]Enriching posts:  89%|########9 | 664/746 [3:22:48<03:42,  2.71s/post]Enriching posts:  89%|########9 | 665/746 [3:22:51<03:38,  2.70s/post]Enriching posts:  89%|########9 | 666/746 [3:22:54<03:37,  2.72s/post]Enriching posts:  89%|########9 | 667/746 [3:22:57<03:35,  2.73s/post]Enriching posts:  90%|########9 | 668/746 [3:22:59<03:31,  2.71s/post]Enriching posts:  90%|########9 | 669/746 [3:23:02<03:37,  2.82s/post]Enriching posts:  90%|########9 | 670/746 [3:23:05<03:26,  2.72s/post]Enriching posts:  90%|########9 | 671/746 [3:23:07<03:10,  2.54s/post]Enriching posts:  90%|######### | 672/746 [3:23:11<03:33,  2.88s/post]Enriching posts:  90%|######### | 673/746 [3:23:15<03:52,  3.19s/post]Enriching posts:  90%|######### | 674/746 [3:23:17<03:40,  3.06s/post]Enriching posts:  90%|######### | 675/746 [3:23:21<03:40,  3.10s/post]Enriching posts:  91%|######### | 676/746 [3:23:25<04:10,  3.58s/post]Enriching posts:  91%|######### | 677/746 [3:23:29<04:09,  3.61s/post]Enriching posts:  91%|######### | 678/746 [3:23:33<04:10,  3.69s/post]Enriching posts:  91%|#########1| 679/746 [3:23:37<04:15,  3.82s/post]Enriching posts:  91%|#########1| 680/746 [3:23:42<04:33,  4.14s/post]Enriching posts:  91%|#########1| 681/746 [3:23:44<03:55,  3.63s/post]Enriching posts:  91%|#########1| 682/746 [3:23:47<03:31,  3.31s/post]Enriching posts:  92%|#########1| 683/746 [3:23:49<03:08,  2.99s/post]Enriching posts:  92%|#########1| 684/746 [3:23:52<03:02,  2.94s/post]Enriching posts:  92%|#########1| 685/746 [3:23:55<02:56,  2.89s/post]Enriching posts:  92%|#########1| 686/746 [3:23:57<02:49,  2.83s/post]Enriching posts:  92%|#########2| 687/746 [3:24:00<02:36,  2.66s/post]Enriching posts:  92%|#########2| 688/746 [3:24:02<02:37,  2.71s/post]Enriching posts:  92%|#########2| 689/746 [3:24:05<02:30,  2.63s/post]Enriching posts:  92%|#########2| 690/746 [3:24:08<02:29,  2.68s/post]Enriching posts:  93%|#########2| 691/746 [3:24:10<02:29,  2.72s/post]Enriching posts:  93%|#########2| 692/746 [3:24:13<02:23,  2.65s/post]Enriching posts:  93%|#########2| 693/746 [3:24:16<02:26,  2.77s/post]Enriching posts:  93%|#########3| 694/746 [3:24:18<02:18,  2.67s/post]Enriching posts:  93%|#########3| 695/746 [3:24:22<02:25,  2.86s/post]Enriching posts:  93%|#########3| 696/746 [3:24:24<02:20,  2.81s/post]Enriching posts:  93%|#########3| 697/746 [3:24:27<02:13,  2.73s/post]Enriching posts:  94%|#########3| 698/746 [3:24:30<02:13,  2.78s/post]Enriching posts:  94%|#########3| 699/746 [3:24:32<02:04,  2.64s/post]Enriching posts:  94%|#########3| 700/746 [3:24:35<02:01,  2.63s/post]Enriching posts:  94%|#########3| 701/746 [3:24:37<01:57,  2.61s/post]Enriching posts:  94%|#########4| 702/746 [3:24:40<01:52,  2.55s/post]Enriching posts:  94%|#########4| 703/746 [3:24:44<02:15,  3.15s/post]Enriching posts:  94%|#########4| 704/746 [3:24:47<02:05,  3.00s/post]Enriching posts:  95%|#########4| 705/746 [3:24:49<01:55,  2.81s/post]Enriching posts:  95%|#########4| 706/746 [3:24:52<01:48,  2.71s/post]Enriching posts:  95%|#########4| 707/746 [3:24:55<01:46,  2.72s/post]Enriching posts:  95%|#########4| 708/746 [3:24:58<01:54,  3.01s/post]Enriching posts:  95%|#########5| 709/746 [3:25:01<01:47,  2.90s/post]Enriching posts:  95%|#########5| 710/746 [3:25:04<01:41,  2.83s/post]Enriching posts:  95%|#########5| 711/746 [3:25:06<01:36,  2.75s/post]Enriching posts:  95%|#########5| 712/746 [3:25:08<01:27,  2.57s/post]Enriching posts:  96%|#########5| 713/746 [3:25:11<01:24,  2.57s/post]Enriching posts:  96%|#########5| 714/746 [3:25:14<01:28,  2.77s/post]Enriching posts:  96%|#########5| 715/746 [3:25:17<01:28,  2.87s/post]Enriching posts:  96%|#########5| 716/746 [3:25:20<01:23,  2.77s/post]Enriching posts:  96%|#########6| 717/746 [3:25:22<01:18,  2.71s/post]Enriching posts:  96%|#########6| 718/746 [3:25:26<01:20,  2.87s/post]Enriching posts:  96%|#########6| 719/746 [3:25:29<01:21,  3.04s/post]Enriching posts:  97%|#########6| 720/746 [3:25:31<01:12,  2.77s/post]Enriching posts:  97%|#########6| 721/746 [3:25:33<01:03,  2.55s/post]Enriching posts:  97%|#########6| 722/746 [3:25:36<01:04,  2.68s/post]Enriching posts:  97%|#########6| 723/746 [3:25:39<01:00,  2.65s/post]Enriching posts:  97%|#########7| 724/746 [3:25:41<00:56,  2.58s/post]Enriching posts:  97%|#########7| 725/746 [3:25:44<00:54,  2.58s/post]Enriching posts:  97%|#########7| 726/746 [3:25:46<00:50,  2.51s/post]Enriching posts:  97%|#########7| 727/746 [3:25:49<00:52,  2.74s/post]Enriching posts:  98%|#########7| 728/746 [3:25:52<00:47,  2.63s/post]Enriching posts:  98%|#########7| 729/746 [3:25:55<00:46,  2.71s/post]Enriching posts:  98%|#########7| 730/746 [3:25:57<00:40,  2.55s/post]Proxy http://158.160.215.167:8123 moved to temporary after RetryError (stats={'good': 1, 'cooldown': 4, 'dead': 0})
+Failed to fetch post details: HTTPSConnectionPool(host='www.reddit.com', port=443): Max retries exceeded with url: /r/iOSProgramming/comments/1rz6h9y/how_i_got_an_ai_coding_agent_to_actually_respect/.json (Caused by ResponseError('too many 429 error responses'))
+Enriching posts:  98%|#########7| 731/746 [3:27:01<05:15, 21.03s/post]Enriching posts:  98%|#########8| 732/746 [3:27:14<04:23, 18.79s/post]Enriching posts:  98%|#########8| 733/746 [3:27:17<03:00, 13.87s/post]Enriching posts:  98%|#########8| 734/746 [3:27:20<02:06, 10.52s/post]Enriching posts:  99%|#########8| 735/746 [3:27:33<02:04, 11.28s/post]Enriching posts:  99%|#########8| 736/746 [3:27:35<01:26,  8.63s/post]Enriching posts:  99%|#########8| 737/746 [3:27:37<01:00,  6.68s/post]Enriching posts:  99%|#########8| 738/746 [3:27:40<00:43,  5.48s/post]Enriching posts:  99%|#########9| 739/746 [3:27:42<00:31,  4.46s/post]Enriching posts:  99%|#########9| 740/746 [3:27:45<00:23,  3.94s/post]Enriching posts:  99%|#########9| 741/746 [3:27:47<00:17,  3.49s/post]Enriching posts:  99%|#########9| 742/746 [3:27:50<00:12,  3.22s/post]Enriching posts: 100%|#########9| 743/746 [3:27:53<00:09,  3.22s/post]Enriching posts: 100%|#########9| 744/746 [3:27:55<00:05,  2.96s/post]Enriching posts: 100%|#########9| 745/746 [3:27:58<00:02,  2.87s/post]Enriching posts: 100%|##########| 746/746 [3:28:00<00:00,  2.69s/post]Enriching posts: 100%|##########| 746/746 [3:28:00<00:00, 16.73s/post]
+✓ Enriched 746 posts saved to data/ai_coding_agents_1/enriched_results.json
+  total_comments: 53842
+  Total_records: 55334
+  Total_words: 2406806
+  Total_types: 47449
+
+============================================================
+✓ Full scrape + enrichment complete!
+============================================================
+
+STEP 4: Cleaning text + corpus analysis
+============================================================
+✓ Post-processing complete
+  Source file: data/ai_coding_agents_1/enriched_results.json
+  Cleaned CSV: data/ai_coding_agents_1/results_no_emoji.csv
+  Analysis JSON: data/ai_coding_agents_1/corpus_analysis.json
+  Corpus stats -> records=55334, words=2412338, types=47504
+============================================================
+
+Log saved to: data/ai_coding_agents_1/console_log_20260326_120043.txt
+Completed at: 2026-03-26 15:50:58
+

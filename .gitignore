@@ -1,5 +1,8 @@
-# Ignore scraped datasets committed under redditscrapper
-redditscrapper/data/
+# Ignore local Gemini API key file
+gemini_analysis/gemini.env
+
+# macOS Finder metadata
+.DS_Store
 
 /venv
 /data

@@ -1,0 +1,17 @@
+ui, user interface
+broker, brokerage, trading firm
+buy, purchase, acquire
+sell, offload, liquidate
+trading, investing, buying and selling
+account, profile, user account
+platform, system, dashboard, application
+bonds, fixed income, debt securities
+funds, mutual funds, etfs
+performance, returns, gains, profits
+losses, deficits, negative returns
+api, application programming interface, integration
+market, exchange, trading venue
+order, transaction, trade
+chart, graph, price movement
+risk, volatility, exposure
+support, customer service, helpdesk

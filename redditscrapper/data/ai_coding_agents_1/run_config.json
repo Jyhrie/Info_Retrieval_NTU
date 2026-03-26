@@ -1,0 +1,33 @@
+{
+  "timestamp": "2026-03-26 12:00:43",
+  "first_query": "ai coding agents",
+  "run_folder": "data/ai_coding_agents_1",
+  "queries": [
+    "ai coding agents",
+    "github copilot",
+    "openai codex",
+    "claude code",
+    "gemini code assist",
+    "coding agents weakness",
+    "coding agents strength",
+    "best ai coding agents",
+    "ai agents review"
+  ],
+  "limit_per_query": 100,
+  "batch_size": 100,
+  "request_delay_seconds": 0.5,
+  "async_mode": true,
+  "query_concurrency": 1,
+  "proxy_file": "/Users/nathanielyew/Documents/NTUY4S2/SC4021/Info_Retrieval_NTU/redditscrapper/proxy_manager/proxies.txt",
+  "timeout_seconds": 16,
+  "max_retries": 1,
+  "retry_backoff_seconds": 1.0,
+  "max_proxy_refreshes": 3,
+  "enable_enrichment": true,
+  "enable_postprocessing": true,
+  "enrichment_delay_seconds": 1.5,
+  "enriched_output_filename": "enriched_results.json",
+  "cleaned_output_filename": "results_no_emoji.csv",
+  "analysis_output_filename": "corpus_analysis.json",
+  "analysis_top_words": 20
+}

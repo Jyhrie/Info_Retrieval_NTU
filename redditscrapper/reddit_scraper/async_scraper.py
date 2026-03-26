@@ -39,8 +39,17 @@ class AsyncScraper:
         batch_size = max(1, min(batch_size, 100))
         proxy_refresh_count = 0
         after = None
+        page_num = 0
+        prev_total = 0
 
-        pbar = tqdm(total=limit, desc=f"'{query}'", unit="post", disable=not verbose)
+        pbar = tqdm(total=limit, desc=f"'{query}'", unit="post") if verbose else None
+
+        def emit(message: str) -> None:
+            if pbar is not None:
+                pbar.write(message)
+            else:
+                print(message)
+
         try:
             while remaining > 0:
                 page_size = min(remaining, batch_size)
@@ -57,8 +66,16 @@ class AsyncScraper:
                             continue
                         if "Proxy pool exhausted" in str(e):
                             if proxy_file and proxy_refresh_count < max_proxy_refreshes:
-                                pbar.write(f"🔄 Proxy pool exhausted - refreshing (attempt {proxy_refresh_count + 1}/{max_proxy_refreshes})...")
-                                if refresh_proxies(proxy_file, target=5, fetch=10):
+                                emit(f"🔄 Proxy pool exhausted - refreshing (attempt {proxy_refresh_count + 1}/{max_proxy_refreshes})...")
+                                # refresh_proxies may internally create an event loop (proxybroker),
+                                # so run it off the active asyncio loop.
+                                refreshed = await asyncio.to_thread(
+                                    refresh_proxies,
+                                    proxy_file,
+                                    5,
+                                    10,
+                                )
+                                if refreshed:
                                     proxy_refresh_count += 1
                                     self.client = AsyncRedditClient(
                                         proxy_file=str(proxy_file),
@@ -75,6 +92,7 @@ class AsyncScraper:
                     break
 
                 after = after_token
+                page_num += 1
                 if not page or not after_token:
                     if page:
                         new_posts = 0
@@ -84,7 +102,15 @@ class AsyncScraper:
                                 seen_ids.add(post_id)
                                 results.append(post)
                                 new_posts += 1
-                        pbar.update(new_posts)
+                        if pbar is not None:
+                            pbar.update(new_posts)
+                        current_total = len(results)
+                        emit(
+                            f"[{query}] page {page_num}: +{new_posts} new | collected {current_total}/{limit}"
+                        )
+                        if current_total == prev_total and page_num > 1:
+                            emit(f"[{query}] no new unique posts on this page (possible overlap/pagination tail)")
+                        prev_total = current_total
                     break
 
                 new_posts = 0
@@ -95,11 +121,20 @@ class AsyncScraper:
                         results.append(post)
                         new_posts += 1
 
-                pbar.update(new_posts)
+                if pbar is not None:
+                    pbar.update(new_posts)
                 remaining -= new_posts
+                current_total = len(results)
+                emit(
+                    f"[{query}] page {page_num}: +{new_posts} new | collected {current_total}/{limit}"
+                )
+                if current_total == prev_total and page_num > 1:
+                    emit(f"[{query}] no new unique posts on this page (possible overlap/pagination tail)")
+                prev_total = current_total
                 await asyncio.sleep(delay)
         finally:
-            pbar.close()
+            if pbar is not None:
+                pbar.close()
 
         return results
 
@@ -113,6 +148,11 @@ class AsyncScraper:
         # query_stats: {query: {"total": int, "unique": int}}
         query_stats: Dict[str, dict] = {}
         sem = asyncio.Semaphore(max(1, query_concurrency))
+        forwarded_kwargs = dict(kwargs)
+        base_verbose = bool(forwarded_kwargs.pop("verbose", True))
+        per_query_verbose = base_verbose and max(1, query_concurrency) == 1
+        if base_verbose and max(1, query_concurrency) > 1:
+            print("Async multi-query mode: using plain text progress logs (tqdm bars disabled for readability).")
 
         # To track unique IDs per query and globally
         per_query_ids = {}
@@ -128,7 +168,8 @@ class AsyncScraper:
                     query=query,
                     limit=limit_per_query,
                     seen_ids=None,
-                    **kwargs,
+                    verbose=per_query_verbose,
+                    **forwarded_kwargs,
                 )
                 # Track all IDs for this query
                 ids = set()

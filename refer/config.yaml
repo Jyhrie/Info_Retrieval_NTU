@@ -1,0 +1,33 @@
+reddit:
+  client_id: 'YPyzyCmOF8RqJuMiJih5Fg'
+  client_secret: 'sPdIj2wQOjXiQUUYytV5bUjpzFPB3A'
+  user_agent: 'SC4021 Information Retreival'
+
+scraping:
+  subreddits:
+    - 'tigerbrokers_official'
+    - 'webull'
+    - 'TigerBrokers'
+    - 'singaporefi'
+    - 'ibkr'
+    - 'moomoo_official'
+    - 'Etoro'
+    - 'RobinHood'
+    - 'plus500'
+    - 'Fidelity'
+    - 'thinkorswim'
+    - 'InteractiveBrokers'
+    - 'TradeStation'
+    - 'CharlesSchwab'
+    - 'vanguard'
+    - 'merrilledge'
+    - 'etrade'
+    - 'tdameritrade'
+    - 'Trading212'
+    - 'RevolutTrading'
+    - 'FreetradeApp'
+    - 'Wealthsimple'
+    
+
+    
+  posts_per_subreddit: 4000

@@ -1,0 +1,7 @@
+ipykernel==6.29.5
+numpy==2.2.3
+nltk==3.9.1
+pandas==2.2.3
+scikit-learn==1.6.1
+transformers==4.49.0
+pysolr==3.10.0

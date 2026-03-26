@@ -119,6 +119,51 @@ If you run `python run.py` with no arguments, you'll see a menu:
 
 ---
 
+## 7. Post-Processing and Strict Cleaning
+
+After scraping, you can run strict cleanup and deduplication on the flattened CSV output.
+
+Normal input for post-processing is `enriched_results.json` (preferred). You can also pass `results.json`, but it contains less text context.
+
+```bash
+python reddit_scraper/postprocess.py --input data/ai_coding_agents_1/enriched_results.json
+```
+
+### 7.1. Strict clean `results_no_emoji.csv`
+
+Default output file is `<input_stem>_strict_dedup.csv` in the same folder.
+
+```bash
+python strict_clean_csv.py --input data/ai_coding_agents_1/results_no_emoji.csv
+```
+
+### 7.2. Write to a custom output file (example: `refined_results.csv`)
+
+```bash
+python strict_clean_csv.py \
+  --input data/ai_coding_agents_1/results_no_emoji.csv \
+  --output data/ai_coding_agents_1/refined_results.csv
+```
+
+### 7.3. Optional flags
+
+- `--no-dedupe`: keep duplicates
+- `--include-empty`: keep rows where cleaned strict text becomes empty
+
+---
+
+## 8. Export Indexing-Ready CSV from Enriched JSON
+
+Use this when you want to flatten `enriched_results.json` (no nesting) into one row per post/comment.
+
+```bash
+python export_indexing_csv.py --input data/ai_coding_agents_1/enriched_results.json
+```
+
+Default output: `data/ai_coding_agents_1/indexing_ready.csv`
+
+---
+
 ## 9. Summary Table
 
 | File/Module                  | Purpose/Behavior                                                                 |

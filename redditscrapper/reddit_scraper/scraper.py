@@ -93,6 +93,8 @@ class Scraper:
         
         after = None
         empty_page_streak = 0
+        page_num = 0
+        prev_total = 0
         
         pbar = tqdm(total=limit, desc=f"'{query}'", unit="post", disable=not verbose)
         
@@ -140,6 +142,7 @@ class Scraper:
                     break
                 
                 after = after_token
+                page_num += 1
                 
                 # Stop conditions
                 if not after_token:
@@ -166,6 +169,15 @@ class Scraper:
                 pbar.update(new_posts)
                 remaining -= new_posts
                 consecutive_errors = 0
+
+                # Live progress log for console/file: query currently running and collection status.
+                current_total = len(results)
+                pbar.write(
+                    f"[{query}] page {page_num}: +{new_posts} new | collected {current_total}/{limit}"
+                )
+                if current_total == prev_total and page_num > 1:
+                    pbar.write(f"[{query}] no new unique posts on this page (possible overlap/pagination tail)")
+                prev_total = current_total
                 
                 if new_posts == 0:
                     consecutive_errors += 1

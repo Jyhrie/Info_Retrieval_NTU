@@ -1,0 +1,61 @@
+{
+    "model_config": {
+        "model_type": "BiGRU",
+        "args": {
+            "dim_input": 300,
+            "dim_hidden": 256,
+            "num_layers": 1,
+            "dim_output": 3,
+            "embedding_strategy": "word2vec",
+            "pretrained_path": "word2vec-google-news-300",
+            "embedding_frozen": false,
+            "context_window": 5,
+            "oov_handing": "average_context"
+        }
+    },
+    "tokenizer_config": {
+        "tokenizer_type": "nltk",
+        "args": {
+            "dataset": "johntoro/Reddit-Stock-Sentiment"
+        }
+    },
+    "trainer_args": {
+        "task": "classification",
+        "training_batch_size": 32,
+        "validation_batch_size": 32,
+        "learning_rate": 0.0001,
+        "epoch": 60,
+        "save_model": true
+    },
+    "metric_config": {
+        "metrics": [
+            {
+                "name": "accuracy",
+                "args": {}
+            },
+            {
+                "name": "f1",
+                "args": {}
+            },
+            {
+                "name": "precision",
+                "args": {}
+            },
+            {
+                "name": "recall",
+                "args": {}
+            }
+        ]
+    },
+    "data_config": {
+        "name": "johntoro/Reddit-Stock-Sentiment",
+        "is_huggingface": true,
+        "type": "classification"
+    },
+    "analysis_config": {
+        "output_dir": "experiments/n_layers/bigru_layer=1",
+        "record_metrics": true,
+        "record_gradients": true,
+        "save_interval": 1000
+    }
+}

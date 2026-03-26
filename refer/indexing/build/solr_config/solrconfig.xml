@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+    <luceneMatchVersion>9.8</luceneMatchVersion>
+
+    <!-- 🌐 CORS CONFIGURATION -->
+    <initParams path="/*">
+        <lst name="defaults">
+            <str name="cors.enabled">true</str>
+            <str name="cors.allow-origin">*</str> <!-- Or your frontend URL -->
+            <str name="cors.allow-methods">GET,POST,OPTIONS</str>
+            <str name="cors.allow-headers">*</str>
+        </lst>
+    </initParams>
+    
+    <schemaFactory class="ManagedIndexSchemaFactory">
+        <bool name="mutable">true</bool>
+        <str name="managedSchemaResourceName">managed-schema</str>
+    </schemaFactory>
+
+    <!--Request handler-->
+    <requestHandler name="/select" class="solr.SearchHandler">
+        <lst name="defaults">
+            <str name="echoParams">explicit</str>
+            <int name="rows">5</int>
+            <str name="df">comment_content</str> <!--default field to search-->
+        </lst>
+    </requestHandler>
+
+    <requestHandler name="/update" class="solr.UpdateRequestHandler"/>
+
+    <requestHandler name="/update/json" class="solr.UpdateRequestHandler">
+        <lst name="defaults">
+        <str name="stream.contentType">application/json</str>
+        </lst>
+    </requestHandler>
+
+    <!-- Faceting support -->
+    <requestHandler name="/browse" class="solr.SearchHandler">
+        <lst name="defaults">
+        <str name="q">*:*</str>
+        <str name="facet">true</str>
+        <str name="facet.field">keywords</str>
+        <str name="rows">5</str>
+        </lst>
+    </requestHandler>
+
+    <!-- Indexing and merging -->
+    <directoryFactory name="DirectoryFactory" class="solr.StandardDirectoryFactory"/>
+    <updateHandler class="solr.DirectUpdateHandler2"/>
+    <indexConfig>
+        <mergePolicyFactory class="org.apache.solr.index.TieredMergePolicyFactory"/>
+    </indexConfig>
+</config>
