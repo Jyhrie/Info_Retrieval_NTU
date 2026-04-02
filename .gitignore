@@ -1,6 +1,9 @@
 # Ignore local Gemini API key file
 gemini_analysis/gemini.env
 
+# Ignore the entire Gemini analysis workspace
+gemini_analysis/
+
 # macOS Finder metadata
 .DS_Store
 

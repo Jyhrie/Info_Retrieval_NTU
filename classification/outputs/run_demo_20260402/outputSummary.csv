@@ -1,0 +1,15 @@
+section,metric,value,rank,text_clean,count,mean_confidence
+totals,total_rows,1000,,,,
+totals,positive_total,272,,,,
+totals,negative_total,376,,,,
+totals,neutral_total,352,,,,
+top_positive_repeated,text_clean,,1.0,Thank you!,2.0,0.9381
+top_positive_repeated,text_clean,,2.0,!gif,2.0,0.5058
+top_positive_repeated,text_clean,,3.0,"I’ve been really enjoying Codex recently so I’m excited for this update, the new plan mode is also really cool",1.0,0.9907
+top_positive_repeated,text_clean,,4.0,"Awesome @[patrick4urcloud]( make this burn, ha ha! Glad to contribute to a wonderful tool like this! Will release mine soon :p",1.0,0.9907
+top_positive_repeated,text_clean,,5.0,YEAH MY FIRST SUBSCRIBER!! haha thank you very much,1.0,0.9882
+top_negative_repeated,text_clean,,1.0,"Sorry, your submission has been removed due to inadequate account karma. I am a bot, and this action was performed automatically. Please contact the moderators of this subreddit if you have any questions or concerns.",6.0,0.8056
+top_negative_repeated,text_clean,,2.0,"I must say Gemini Code assist is the absolute garbage extension. I couldn't believe this came from Google. Oh man, I had to downgrade to 2.56.0 as sign-in wasn't working & then to 2.55 for this issue. Even after this, it's dead slow & doesn't have any context in agent mode. If Google is serious, they should pay money to it's users for using this piece of crap!!",1.0,0.9509
+top_negative_repeated,text_clean,,3.0,Seems like a bot thread. Half this shit seems non-sensical.,1.0,0.9484
+top_negative_repeated,text_clean,,4.0,"B: oh god, this code is bad",1.0,0.9478
+top_negative_repeated,text_clean,,5.0,i just bought it again a few days ago and it is TRASH!!! Oh did you forget to get the paid version... poor you,1.0,0.9476
