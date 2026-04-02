@@ -15,12 +15,23 @@ from common import (
 )
 from rules import derive_metadata
 
+NIL_MARKERS = {"[removed]", "[deleted]"}
+
+
+def is_nil_post(text):
+    return (text or "").strip().lower() in NIL_MARKERS
+
 
 def build_rows(csv_path, mode, limit=None):
     rows = []
     yielded = 0
+    skipped_nil = 0
 
     for row_index, row in load_csv_rows(csv_path):
+        if is_nil_post(row.get("text_clean")):
+            skipped_nil += 1
+            continue
+
         record = build_base_document(row_index, row)
 
         if mode == "indexed":
@@ -35,7 +46,7 @@ def build_rows(csv_path, mode, limit=None):
         if limit is not None and yielded >= limit:
             break
 
-    return rows
+    return rows, skipped_nil
 
 
 def parse_args():
@@ -62,19 +73,20 @@ def main():
     else:
         out_path = DEFAULT_BASELINE_PATH.resolve()
 
-    rows = build_rows(csv_path, args.mode, args.limit)
+    rows, skipped_nil = build_rows(csv_path, args.mode, args.limit)
     if args.mode == "indexed":
         write_csv(out_path, rows, BASE_FIELDS + DERIVED_FIELDS)
     else:
         write_csv(out_path, rows, BASE_FIELDS)
 
-    expected = len(rows) if args.limit is not None else count_nonempty_rows(csv_path)
+    expected = len(rows) if args.limit is not None else count_nonempty_rows(csv_path) - skipped_nil
 
     print("Build complete")
     print(f"- mode={args.mode}")
     print(f"- csv={csv_path}")
     print(f"- out={out_path}")
     print(f"- expected_nonempty_rows={expected}")
+    print(f"- nil_rows_skipped={skipped_nil}")
     print(f"- rows_written={len(rows)}")
     return 0
 
