@@ -14,6 +14,7 @@ BASE_FIELDS = [
     "post_id",
     "record_type",
     "text_part",
+    "date",
     "text_clean",
 ]
 
@@ -39,6 +40,13 @@ def load_csv_rows(csv_path):
                 "post_id": (row.get("post_id") or "").strip(),
                 "record_type": (row.get("record_type") or "").strip(),
                 "text_part": (row.get("text_part") or "").strip(),
+                "date": (
+                    row.get("date")
+                    or row.get("created_utc")
+                    or row.get("created_at")
+                    or row.get("timestamp")
+                    or ""
+                ).strip(),
                 "text_clean": text_clean,
             }
 
@@ -58,6 +66,7 @@ def build_base_document(row_index, row):
         "post_id": row["post_id"],
         "record_type": row["record_type"],
         "text_part": row["text_part"],
+        "date": row.get("date", ""),
         "text_clean": row["text_clean"],
     }
 

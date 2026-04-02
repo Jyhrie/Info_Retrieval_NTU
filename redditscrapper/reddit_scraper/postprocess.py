@@ -68,48 +68,141 @@ def _load_posts(input_file: Path) -> list[dict[str, Any]]:
     return []
 
 
+def _load_records_from_csv(input_file: Path) -> list[dict[str, str]]:
+    """Load flat records from CSV input (for indexed/refined/evaluation datasets)."""
+    records: list[dict[str, str]] = []
+
+    with open(input_file, "r", encoding="utf-8", newline="") as f:
+        reader = csv.DictReader(f)
+        fieldnames = reader.fieldnames or []
+
+        if "text_clean" not in fieldnames:
+            raise ValueError("CSV input must contain a 'text_clean' column")
+
+        for row_idx, row in enumerate(reader, start=1):
+            text_clean = str(row.get("text_clean", "") or "").strip()
+            source_id = str(row.get("source_id", "") or "").strip()
+            date_val = str(
+                row.get("date")
+                or row.get("created_utc")
+                or row.get("created_at")
+                or row.get("timestamp")
+                or ""
+            ).strip()
+            if not source_id:
+                id_fallback = str(row.get("id", "") or "").strip()
+                source_id = id_fallback if id_fallback else f"row:{row_idx}"
+
+            records.append(
+                {
+                    "source_id": source_id,
+                    "record_type": str(row.get("record_type", "") or "").strip(),
+                    "text_part": str(row.get("text_part", "") or "").strip(),
+                    "post_id": str(row.get("post_id", "") or "").strip(),
+                    "date": date_val,
+                    # For CSV mode, raw text is not available, so we mirror text_clean.
+                    "text": text_clean,
+                    "text_clean": text_clean,
+                }
+            )
+
+    # Backfill missing dates using post-level rows with the same post_id.
+    # Preference order: post_title -> post_body -> any row with date under same post_id.
+    post_date_by_post_id: dict[str, str] = {}
+
+    for rec in records:
+        post_id = str(rec.get("post_id", "") or "").strip()
+        rec_date = str(rec.get("date", "") or "").strip()
+        if not post_id or not rec_date:
+            continue
+
+        if rec.get("record_type") == "post" and rec.get("text_part") == "post_title":
+            post_date_by_post_id[post_id] = rec_date
+
+    for rec in records:
+        post_id = str(rec.get("post_id", "") or "").strip()
+        rec_date = str(rec.get("date", "") or "").strip()
+        if not post_id or not rec_date or post_id in post_date_by_post_id:
+            continue
+
+        if rec.get("record_type") == "post" and rec.get("text_part") == "post_body":
+            post_date_by_post_id[post_id] = rec_date
+
+    for rec in records:
+        post_id = str(rec.get("post_id", "") or "").strip()
+        rec_date = str(rec.get("date", "") or "").strip()
+        if not post_id or not rec_date or post_id in post_date_by_post_id:
+            continue
+        post_date_by_post_id[post_id] = rec_date
+
+    for rec in records:
+        if str(rec.get("date", "") or "").strip():
+            continue
+        post_id = str(rec.get("post_id", "") or "").strip()
+        if post_id and post_id in post_date_by_post_id:
+            rec["date"] = post_date_by_post_id[post_id]
+
+    return records
+
+
 def _extract_records(posts: list[dict[str, Any]]) -> list[dict[str, str]]:
     """Extract textual records from posts and nested comments."""
     records: list[dict[str, str]] = []
 
-    def walk_comments(comments: list[dict[str, Any]], post_id: str) -> None:
-        for c in comments or []:
+    def walk_comments(
+        comments: list[dict[str, Any]],
+        post_id: str,
+        post_date: str = "",
+        path_prefix: str = "",
+    ) -> None:
+        for idx, c in enumerate(comments or []):
             body = str(c.get("body", "") or "")
+            comment_id = str(c.get("id", "") or "")
+            comment_date = str(c.get("created_utc") or c.get("date") or post_date or "")
+            path_id = f"{path_prefix}{idx}"
+            source_id = f"comment:{comment_id}" if comment_id else f"comment:{post_id}:{path_id}"
             records.append(
                 {
+                    "source_id": source_id,
                     "record_type": "comment",
                     "text_part": "comment_body",
                     "post_id": post_id,
+                    "date": comment_date,
                     "text": body,
                 }
             )
-            walk_comments(c.get("replies", []) or [], post_id)
+            walk_comments(c.get("replies", []) or [], post_id, post_date, path_prefix=f"{path_id}.")
 
     for post in posts:
         post_id = str(post.get("id", "") or "")
         title = str(post.get("title", "") or "")
         body = str(post.get("body", "") or "")
         description = str(post.get("description", "") or "")
+        post_date = str(post.get("created_utc") or post.get("date") or "")
 
         records.append(
             {
+                "source_id": f"post:{post_id}:title",
                 "record_type": "post",
                 "text_part": "post_title",
                 "post_id": post_id,
+                "date": post_date,
                 "text": title,
             }
         )
 
         records.append(
             {
+                "source_id": f"post:{post_id}:body",
                 "record_type": "post",
                 "text_part": "post_body",
                 "post_id": post_id,
+                "date": post_date,
                 "text": body if body else description,
             }
         )
 
-        walk_comments(post.get("comments", []) or [], post_id)
+        walk_comments(post.get("comments", []) or [], post_id, post_date)
 
     return records
 
@@ -152,9 +245,11 @@ def _write_evaluation_sample_csv(
         writer = csv.DictWriter(
             f,
             fieldnames=[
+                "source_id",
                 "record_type",
                 "text_part",
                 "post_id",
+                "date",
                 "text_clean",
                 "neutral",
                 "positive",
@@ -165,9 +260,11 @@ def _write_evaluation_sample_csv(
         for row in sampled:
             writer.writerow(
                 {
+                    "source_id": row.get("source_id", ""),
                     "record_type": row.get("record_type", ""),
                     "text_part": row.get("text_part", ""),
                     "post_id": row.get("post_id", ""),
+                    "date": row.get("date", ""),
                     "text_clean": row.get("text_clean", ""),
                     "neutral": "",
                     "positive": "",
@@ -184,19 +281,48 @@ def _write_refined_dataset_csv(cleaned_records: list[dict[str, str]], refined_cs
     with open(refined_csv_file, "w", encoding="utf-8", newline="") as f:
         writer = csv.DictWriter(
             f,
-            fieldnames=["record_type", "text_part", "post_id", "text_clean"],
+            fieldnames=["source_id", "record_type", "text_part", "post_id", "date", "text_clean"],
         )
         writer.writeheader()
         for row in cleaned_records:
             writer.writerow(
                 {
+                    "source_id": row.get("source_id", ""),
                     "record_type": row.get("record_type", ""),
                     "text_part": row.get("text_part", ""),
                     "post_id": row.get("post_id", ""),
+                    "date": row.get("date", ""),
                     "text_clean": row.get("text_clean", ""),
                 }
             )
     return len(cleaned_records)
+
+
+def _build_cleaned_records(input_file: Path) -> list[dict[str, str]]:
+    """Build normalized records from JSON/CSV input while preserving metadata."""
+    cleaned_records: list[dict[str, str]] = []
+
+    if input_file.suffix.lower() == ".csv":
+        csv_records = _load_records_from_csv(input_file)
+        for rec in csv_records:
+            cleaned_records.append(
+                {
+                    **rec,
+                    "text_clean": str(rec.get("text_clean", "") or "").strip(),
+                }
+            )
+    else:
+        posts = _load_posts(input_file)
+        raw_records = _extract_records(posts)
+        for rec in raw_records:
+            cleaned_records.append(
+                {
+                    **rec,
+                    "text_clean": normalize_text(rec["text"]),
+                }
+            )
+
+    return cleaned_records
 
 
 def process_scraped_output(
@@ -209,24 +335,14 @@ def process_scraped_output(
     eval_sample_size: int = 1000,
     eval_seed: int = 8888,
 ) -> dict[str, Any]:
-    """Generate cleaned CSV and corpus analysis JSON from scraped output."""
-    posts = _load_posts(input_file)
-    raw_records = _extract_records(posts)
-
-    cleaned_records: list[dict[str, str]] = []
-    for rec in raw_records:
-        cleaned_records.append(
-            {
-                **rec,
-                "text_clean": normalize_text(rec["text"]),
-            }
-        )
+    """Generate cleaned CSV and corpus analysis JSON from scraped JSON or CSV input."""
+    cleaned_records = _build_cleaned_records(input_file)
 
     cleaned_csv_file.parent.mkdir(parents=True, exist_ok=True)
     with open(cleaned_csv_file, "w", encoding="utf-8", newline="") as f:
         writer = csv.DictWriter(
             f,
-            fieldnames=["record_type", "text_part", "post_id", "text", "text_clean"],
+            fieldnames=["source_id", "record_type", "text_part", "post_id", "date", "text", "text_clean"],
         )
         writer.writeheader()
         writer.writerows(cleaned_records)
@@ -265,7 +381,7 @@ def main() -> None:
     parser.add_argument(
         "--input",
         required=True,
-        help="Path to input JSON (results.json or enriched_results.json)",
+        help="Path to input JSON (results.json/enriched_results.json) or CSV (indexed/refined/evaluation)",
     )
     parser.add_argument(
         "--cleaned-csv",
@@ -305,6 +421,11 @@ def main() -> None:
         default=20,
         help="Top N words to include in analysis output",
     )
+    parser.add_argument(
+        "--only-refined",
+        action="store_true",
+        help="Generate only refined_dataset.csv and skip other outputs",
+    )
     args = parser.parse_args()
 
     input_file = Path(args.input)
@@ -315,6 +436,14 @@ def main() -> None:
     refined_csv = Path(args.refined_csv) if args.refined_csv else (input_file.parent / "refined_dataset.csv")
     analysis_json = Path(args.analysis_json) if args.analysis_json else (input_file.parent / "corpus_analysis.json")
     eval_csv = Path(args.eval_csv) if args.eval_csv else (input_file.parent / "evaluation_dataset_1000.csv")
+
+    if args.only_refined:
+        cleaned_records = _build_cleaned_records(input_file)
+        refined_rows = _write_refined_dataset_csv(cleaned_records=cleaned_records, refined_csv_file=refined_csv)
+        print("✓ Post-processing complete (only refined mode)")
+        print(f"  Input: {input_file}")
+        print(f"  Refined CSV: {refined_csv} ({refined_rows} rows)")
+        return
 
     result = process_scraped_output(
         input_file=input_file,
