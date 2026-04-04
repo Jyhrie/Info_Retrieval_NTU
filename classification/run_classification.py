@@ -32,6 +32,7 @@ import sys
 import time
 from datetime import datetime
 from pathlib import Path
+from nltk.corpus import stopwords
 
 import pandas as pd
 
@@ -41,60 +42,61 @@ NEUTRAL_CONF_THRESHOLD = 0.60
 NEUTRAL_MARGIN_THRESHOLD = 0.10
 
 WORD_RE = re.compile(r"[a-zA-Z][a-zA-Z0-9_']+")
-STOPWORDS = {
-    "the",
-    "a",
-    "an",
-    "and",
-    "or",
-    "to",
-    "of",
-    "for",
-    "in",
-    "on",
-    "at",
-    "is",
-    "it",
-    "this",
-    "that",
-    "with",
-    "as",
-    "are",
-    "be",
-    "was",
-    "were",
-    "i",
-    "you",
-    "we",
-    "they",
-    "my",
-    "your",
-    "our",
-    "their",
-    "from",
-    "have",
-    "has",
-    "had",
-    "but",
-    "not",
-    "so",
-    "if",
-    "just",
-    "can",
-    "will",
-    "would",
-    "should",
-    "do",
-    "does",
-    "did",
-    "about",
-    "what",
-    "how",
-    "when",
-    "where",
-    "who",
-    "why",
-}
+STOPWORDS = set(stopwords.words('english'))
+# STOPWORDS = {
+#     "the",
+#     "a",
+#     "an",
+#     "and",
+#     "or",
+#     "to",
+#     "of",
+#     "for",
+#     "in",
+#     "on",
+#     "at",
+#     "is",
+#     "it",
+#     "this",
+#     "that",
+#     "with",
+#     "as",
+#     "are",
+#     "be",
+#     "was",
+#     "were",
+#     "i",
+#     "you",
+#     "we",
+#     "they",
+#     "my",
+#     "your",
+#     "our",
+#     "their",
+#     "from",
+#     "have",
+#     "has",
+#     "had",
+#     "but",
+#     "not",
+#     "so",
+#     "if",
+#     "just",
+#     "can",
+#     "will",
+#     "would",
+#     "should",
+#     "do",
+#     "does",
+#     "did",
+#     "about",
+#     "what",
+#     "how",
+#     "when",
+#     "where",
+#     "who",
+#     "why",
+# }
 
 
 def _normalize_hf_label(raw_label: str) -> str:
@@ -516,3 +518,7 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+#TODO: add NER, then my solr can pull all named entities
+
