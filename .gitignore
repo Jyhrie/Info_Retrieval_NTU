@@ -14,3 +14,4 @@ gemini_analysis/
 
 # Ignore reference project copy
 refer/
+myenv
