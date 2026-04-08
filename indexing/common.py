@@ -26,6 +26,14 @@ DERIVED_FIELDS = [
     "trust",
     "comparison",
 ]
+#fields added by merge_sentiment.py
+SENTIMENT_FIELDS = [
+    "final_class",   #overall sentiment label
+    "rank_score",    #confidence score
+    "polarity",      #1 for positive, -1 for negative, 0 for neutral
+    "subjectivity",  #float between 0 and 1
+    "sarcasm",       
+]
 
 #helper functions for indexes.
 
