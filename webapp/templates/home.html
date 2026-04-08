@@ -1,39 +1,76 @@
-{% load crispy_forms_tags %}
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My Site</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="d-flex vh-100">
-
-        <!-- Left Sidebar -->
-        <div class="bg-primary text-white p-3" style="width: 200px;">
-            <h5>List</h5>
-            <!-- Add list items here -->
-        </div>
-
-        <!-- Main Content -->
-        <div class="flex-grow-1 d-flex align-items-center justify-content-center">
-            <div class="text-center w-50">
-
-                <h1 class="display-4 fw-bold mb-4">Info Retrieval</h1>
-
-                <form method="POST">
-                    {% csrf_token %}
-                    <div class="mb-3">
-                        {{ form|crispy }}
-                    </div>
-                    <button type="submit" class="btn btn-primary px-4">
-                        Submit
-                    </button>
-                </form>
-
+{% block content %}
+<div class="d-flex align-items-center justify-content-center" style="height: 80vh;">
+    <div class="text-center" style="width: 580px; max-width: 100%;">
+        <h1 class="mb-2" style="font-size: 36px; font-weight: 700; color: #1e2228;">
+            Opinion Search Engine
+        <h2 class="mb-3" style="font-size: 24px; font-weight: 500; color: #4d9fff;">
+            AI Coding Agents
+        </h1>
+        <p class="text-muted mb-4" style="font-size: 16px;">
+            Explore what developers say about AI coding agents &mdash; Claude, Copilot, Cursor, Codex and more.
+        </p>
+        <form method="GET" action="{% url 'search' %}">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-white border-right-0 text-muted">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </div>
+                <input id="heroSearch" type="text" name="q"
+                       class="form-control form-control-lg border-left-0"
+                       style="font-size: 16px;">
+                <div class="input-group-append">
+                    <button class="btn btn-primary px-4" type="submit" style="font-weight: 600;">Search</button>
+                </div>
             </div>
-        </div>
-
+        </form>
+        <small class="text-muted">53,485 Reddit opinions indexed</small>
     </div>
-</body>
-</html>
+</div>
+
+<script>
+(function () {
+    const input = document.getElementById('heroSearch');
+    const suggestions = [
+        'cursor vs copilot',
+        'Is Claude good for debugging?',
+        'best AI coding agent 2025',
+        'Copilot hallucination',
+        'switching from Copilot to Cursor',
+        'Windsurf vs Cline',
+        'coding AI for Java',
+    ];
+    const prefix = '';
+    let si = 0, ci = 0, deleting = false;
+
+    function tick() {
+        const target = prefix + suggestions[si];
+        if (!deleting) {
+            ci++;
+            input.placeholder = target.slice(0, ci);
+            if (ci === target.length) {
+                deleting = true;
+                setTimeout(tick, 1800);
+                return;
+            }
+            setTimeout(tick, 55);
+        } else {
+            ci--;
+            input.placeholder = target.slice(0, ci);
+            if (ci === prefix.length) {
+                deleting = false;
+                si = (si + 1) % suggestions.length;
+                setTimeout(tick, 300);
+                return;
+            }
+            setTimeout(tick, 30);
+        }
+    }
+
+    //Start after a short delay
+    setTimeout(tick, 600);
+})();
+</script>
+{% endblock %}

@@ -10,7 +10,7 @@
 
     <style>
         body {
-            background-color: #f4f7f6;
+            background-color: #f0f2f5;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
         }
@@ -21,79 +21,82 @@
             align-items: stretch;
         }
 
-        /* Sidebar Styling */
+        /* Sidebar */
         #sidebar {
-            min-width: 280px;
-            max-width: 280px;
-            background: #212529;
+            min-width: 220px;
+            max-width: 220px;
+            background: #1e2228;
             color: #fff;
-            transition: all 0.3s cubic-bezier(0.945, 0.020, 0.270, 0.665);
-            position: relative;
+            transition: all 0.25s ease;
             min-height: 100vh;
-            box-shadow: 3px 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
         }
 
         #sidebar.active {
-            margin-left: -280px;
-        }
-
-        /* Sidebar Toggle Button (Pinned to Edge) */
-        #sidebarCollapse {
-            position: absolute;
-            right: -40px;
-            top: 20px;
-            width: 40px;
-            height: 40px;
-            background: #212529;
-            border: none;
-            color: #fff;
-            border-radius: 0 5px 5px 0;
-            cursor: pointer;
-            z-index: 1000;
-            outline: none;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            margin-left: -220px;
         }
 
         .sidebar-header {
-            padding: 30px 20px;
-            background: #1a1d20;
-            border-bottom: 1px solid #343a40;
+            padding: 20px 16px 16px;
+            background: #16191d;
+            border-bottom: 1px solid #2c3038;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        /* Sidebar Navigation Links */
-        .nav-link {
-            padding: 12px 20px;
+        .sidebar-header h5 {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 700;
+            color: #4d9fff;
+        }
+
+        #sidebarCollapse {
+            background: none;
+            border: none;
             color: #adb5bd;
-            transition: 0.2s;
+            cursor: pointer;
+            padding: 4px 6px;
             border-radius: 4px;
-            margin: 4px 10px;
+            line-height: 1;
+        }
+
+        #sidebarCollapse:hover { color: #fff; }
+
+        .nav-link {
+            padding: 10px 16px;
+            color: #adb5bd;
+            font-size: 14px;
+            transition: 0.15s;
+            border-radius: 4px;
+            margin: 2px 8px;
         }
 
         .nav-link:hover {
             color: #fff;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255,255,255,0.06);
         }
 
         .nav-link.active {
             color: #fff;
-            background-color: #007bff !important;
-            font-weight: bold;
+            background-color: #0069d9 !important;
+            font-weight: 600;
         }
 
-        /* Content Area */
+        .sidebar-footer {
+            padding: 16px;
+            border-top: 1px solid #2c3038;
+            margin-top: auto;
+        }
+
+        /* Content */
         #content {
             width: 100%;
-            padding: 40px;
+            padding: 32px 36px;
             min-height: 100vh;
-            transition: all 0.3s;
-        }
-
-        /* Custom Sentiment Dots (Reusable Utility) */
-        .sentiment-dot {
-            height: 12px;
-            width: 12px;
-            border-radius: 50%;
-            display: inline-block;
+            transition: all 0.25s;
         }
     </style>
 </head>
@@ -101,37 +104,35 @@
 
 <div id="wrapper">
     <nav id="sidebar">
-        <button type="button" id="sidebarCollapse">
-            <i class="fas fa-bars"></i>
-        </button>
-
         <div class="sidebar-header">
-            <h4 class="mb-0 text-primary font-weight-bold">SC4021 IR Project</h4>
-            <small class="text-muted"></small>
+            <h5>SC4021 IR</h5>
+            <button type="button" id="sidebarCollapse" title="Toggle sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
 
-        <ul class="nav flex-column mt-4">
+        <ul class="nav flex-column mt-3">
             <li class="nav-item">
                 <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">
-                    <i class="fas fa-home mr-3"></i> Dashboard
+                    <i class="fas fa-home mr-2"></i> Dashboard
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {% if 'search' in request.path %}active{% endif %}" href="/search/">
-                    <i class="fas fa-search mr-3"></i> Search Index
+                    <i class="fas fa-search mr-2"></i> Search Index
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="fas fa-chart-line mr-3"></i> Analytics
+                    <i class="fas fa-chart-line mr-2"></i> Analytics
                 </a>
             </li>
         </ul>
 
-        <div class="position-absolute w-100 p-4" style="bottom: 0; background: #1a1d20;">
-            <small class="text-uppercase text-muted d-block mb-2">Dataset Info</small>
-            <span class="badge badge-primary px-3 py-2">14,715 Records</span>
-            <div class="text-success small mt-2">
+        <div class="sidebar-footer" style="margin-top:auto; padding:12px 16px; border-top:1px solid #2c3038;">
+            <small class="text-uppercase text-muted d-block mb-1" style="font-size:11px;">Dataset</small>
+            <span class="badge badge-primary">53,485 Records</span>
+            <div class="text-success small mt-1">
                 <i class="fas fa-check-circle mr-1"></i> Solr Connected
             </div>
         </div>
@@ -150,16 +151,7 @@
 <script>
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {
-            // Toggle sidebar visibility
             $('#sidebar').toggleClass('active');
-            
-            // Swap icon based on state
-            const icon = $(this).find('i');
-            if ($('#sidebar').hasClass('active')) {
-                icon.removeClass('fa-bars').addClass('fa-chevron-right');
-            } else {
-                icon.removeClass('fa-chevron-right').addClass('fa-bars');
-            }
         });
     });
 </script>
