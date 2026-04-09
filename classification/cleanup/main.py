@@ -12,6 +12,8 @@ from nltk.corpus import stopwords
 import pandas as pd
 from cardiff_classifier import CardiffClassifier 
 BATCH_SIZE = 32
+NEUTRAL_CONF_THRESHOLD = 0.60
+NEUTRAL_MARGIN_THRESHOLD = 0.10
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run Cardiff-only reference classification on input.csv")
@@ -30,6 +32,19 @@ def parse_args() -> argparse.Namespace:
         "--output-csv",
         default="",
         help="Optional legacy extra copy path for outputClassification.csv",
+    )
+    parser.add_argument("--batch-size", type=int, default=32, help="HuggingFace batch size")
+    parser.add_argument(
+        "--neutral-conf-threshold",
+        type=float,
+        default=NEUTRAL_CONF_THRESHOLD,
+        help="Keep Neutral when top1_prob >= this threshold (default: 0.60)",
+    )
+    parser.add_argument(
+        "--neutral-margin-threshold",
+        type=float,
+        default=NEUTRAL_MARGIN_THRESHOLD,
+        help="Keep ambiguous Neutral when margin < this threshold (default: 0.10)",
     )
     return parser.parse_args()
 

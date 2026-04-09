@@ -34,8 +34,11 @@ import warnings
 from datetime import datetime
 from pathlib import Path
 from nltk.corpus import stopwords
+import re
+from nltk.stem import WordNetLemmatizer
 
 import pandas as pd
+import torch
 
 
 CARDIFF_MODEL_ID = "cardiffnlp/twitter-roberta-base-sentiment-latest"
@@ -112,6 +115,7 @@ def _load_stopwords() -> set[str]:
 
 
 STOPWORDS = _load_stopwords()
+lemmatizer = WordNetLemmatizer()
 
 
 def _resolve_existing_input_path(path_value: str, script_dir: Path) -> Path:
@@ -294,6 +298,8 @@ class CardiffOnlyClassifier:
             ) from exc
 
     def _load_hf(self):
+        device_id = 0 if torch.cuda.is_available() else -1
+        
         try:
             model = self._hf_pipeline(
                 "sentiment-analysis",
@@ -301,6 +307,7 @@ class CardiffOnlyClassifier:
                 tokenizer=CARDIFF_MODEL_ID,
                 truncation=True,
                 max_length=512,
+                device=device_id
             )
             print(f"Loaded Cardiff model: {CARDIFF_MODEL_ID}")
             return model
@@ -358,6 +365,29 @@ class CardiffOnlyClassifier:
             return "NEU", "neutral_keep_ambiguous"
 
         return top2_label, "neutral_suppressed_low_conf"
+    
+    @staticmethod
+    def _prepare_for_index(text: str) -> str:
+
+        
+        # Initialize (Static variables or caching this outside is faster for 55k rows)
+        stop_words = set(stopwords.words('english'))
+        
+        if not text or not isinstance(text, str):
+            return ""
+            
+        # 1. Lowercase and remove punctuation/special characters
+        text = re.sub(r'[^\w\s]', '', text.lower())
+        
+        # 2. Tokenize and Lemmatize
+        words = text.split()
+        
+        # 3. Filter stopwords and lemmatize to base form (verbs and nouns)
+        lemmas = [
+            lemmatizer.lemmatize(w, pos='v') 
+            for w in words if w not in stop_words
+        ]
+        return " ".join(lemmas)
 
     def classify_dataframe(
         self,
@@ -367,6 +397,8 @@ class CardiffOnlyClassifier:
     ) -> pd.DataFrame:
         dfr = df.copy()
         dfr["text_clean"] = dfr.get("text_clean", "").fillna("").astype(str)
+        print("[progress] Lemmatizing and removing stopwords for indexing...")
+        dfr["text_index"] = dfr["text_clean"].apply(self._prepare_for_index)
 
         if "date" not in dfr.columns:
             dfr["date"] = pd.Timestamp.now().date().isoformat()
@@ -451,6 +483,7 @@ class CardiffOnlyClassifier:
         out["sarcasm"] = "no"
         out["category"] = out.apply(_build_category_value, axis=1)
 
+
         preferred = [
             "source_id",
             "id",
@@ -459,6 +492,7 @@ class CardiffOnlyClassifier:
             "text_part",
             "date",
             "text_clean",
+            "text_index",
             "source",
             "sentiment",
             "confidence",

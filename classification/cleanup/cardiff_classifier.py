@@ -87,7 +87,7 @@ class CardiffClassifier:
 
         return top2_label, "neutral_suppressed_low_conf"
     
-def classify_dataframe(
+    def classify_dataframe(
         self,
         df: pd.DataFrame,
         neutral_conf_threshold: float = NEUTRAL_CONF_THRESHOLD,

@@ -33,7 +33,7 @@ from common import (
 
 DEFAULT_INDEXED_PATH = OUTPUT_DIR / "indexed.csv"
 DEFAULT_SENTIMENT_PATH = (
-    PROJECT_ROOT / "redditscrapper" / "data" / "ai_coding_agents_1" / "outputClassification.csv"
+    "outputClassification.csv"
 )
 DEFAULT_OUT_PATH = OUTPUT_DIR / "solr_ready.csv"
 
@@ -62,6 +62,7 @@ def _load_sentiment_lookup(sentiment_path: Path) -> dict:
                 "confidence": (row.get("confidence") or "").strip(),
                 "subjectivity": (row.get("subjectivity") or "").strip(),
                 "sarcasm": (row.get("sarcasm") or "").strip(),
+                "text_index": (row.get("text_index") or "").strip(),
             }
     return lookup
 
@@ -85,6 +86,7 @@ def _sentiment_row(match: dict | None) -> dict:
         "polarity": polarity,
         "subjectivity": match["subjectivity"],
         "sarcasm": match["sarcasm"],
+        "text_index": match["text_index"],
     }
 
 

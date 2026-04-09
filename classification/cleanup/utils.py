@@ -1,4 +1,7 @@
 import pandas as pd
+import regex as re
+
+WORD_RE = re.compile(r"[a-zA-Z][a-zA-Z0-9_']+")
 
 def _normalize_hf_label(raw_label: str) -> str:
     label = str(raw_label or "").strip().upper()
@@ -102,3 +105,23 @@ def _top_repeated_opinions(df: pd.DataFrame, sentiment_value: str, top_n: int = 
     grouped.insert(0, "rank", grouped.index + 1)
     grouped["mean_confidence"] = grouped["mean_confidence"].round(4)
     return grouped[["rank", "topic_key", "text_clean", "mean_confidence"]]
+
+def _topic_key(text: str, top_k: int = 3) -> str:
+    # Build a compact topic key from the first few meaningful words.
+    # This lets similar comments cluster together even when full text differs.
+    tokens = [
+        t.lower()
+        for t in WORD_RE.findall(str(text or ""))
+        if len(t) >= 3 and t.lower() not in STOPWORDS
+    ]
+    if not tokens:
+        return "misc"
+
+    # Keep stable order by first appearance while removing duplicates.
+    seen = []
+    for tok in tokens:
+        if tok not in seen:
+            seen.append(tok)
+        if len(seen) >= top_k:
+            break
+    return "|".join(seen) if seen else "misc"
