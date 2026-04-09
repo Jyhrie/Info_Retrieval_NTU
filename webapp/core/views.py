@@ -3,34 +3,39 @@ from django.shortcuts import render
 from .forms import TextForm
 import pysolr
 from datetime import datetime, timezone
+from nltk.corpus import stopwords
+
+
+STOPWORDS = set(stopwords.words('english'))
 
 def home(request):
     form = TextForm()
     return render(request, 'home.html', {'form': form})
 
-
 def search(request):
-    #1. Get Parameters from the Horizontal Search Bar
+    # 1. Get Parameters from the Horizontal Search Bar
     query = request.GET.get('q', '').strip()
-    #Default to wildcard if empty to show all 14,715 records
     solr_query = f"text_clean:{query}~4" if query else "*:*"
     
-    #2. Pagination Logic (10 results per box)
+    # 2. Pagination Logic
     page = int(request.GET.get('page', 1))
     rows_per_page = 10
     start_index = (page - 1) * rows_per_page
 
-    #3. Setup Solr Parameters
+    # 3. Setup Solr Parameters
+    # Added 'text_clean' to facet.field to get word frequencies
     solr_params = {
         'facet': 'on',
-        'facet.field': 'final_class',
+        'facet.field': ['final_class_str', 'text_clean_tokens'],
+        'facet.limit': 200,  # Get enough words to filter down
         'rows': rows_per_page,
         'start': start_index,
         'sort': request.GET.get('sort', 'rank_score desc'),
         'fq': []
     }
+    print("new facets")
 
-    #4. Apply Advanced Filters (Horizontal Accordion)
+    # 4. Apply Advanced Filters
     start_date = request.GET.get('start_date')
     end_date = request.GET.get('end_date')
     if start_date or end_date:
@@ -52,11 +57,11 @@ def search(request):
     if record_type:
         solr_params['fq'].append(f"record_type:{record_type}")
 
-    #5.Solr Search
+    # 5. Solr Search
     solr = pysolr.Solr(settings.SOLR_URL, timeout=10)
     search_results = solr.search(solr_query, **solr_params)
 
-    #Normalize Solr docs: unwrap single-element lists to plain scalars
+    # Helper Functions
     def unwrap(val):
         if isinstance(val, list):
             return val[0] if val else ""
@@ -76,22 +81,33 @@ def search(request):
 
     docs = [normalize(doc) for doc in search_results.docs]
 
-    #6.Calculate Sentiment Distribution for Analytics Modal
     stats = {}
     total_found = search_results.hits
+    final_class_facets = search_results.facets.get('facet_fields', {}).get('final_class_str', [])
+    print(len(final_class_facets))
     if total_found > 0:
-        facets = search_results.facets.get('facet_fields', {}).get('final_class', [])
-        for i in range(0, len(facets), 2):
-            label, count = facets[i], facets[i+1]
-            stats[label] = round((count / total_found) * 100, 2)
+        for i in range(0, len(final_class_facets), 2):
+            label, count = final_class_facets[i], final_class_facets[i+1]
+            stats[label] = count
 
-    # 7. Pagination
+    raw_text_facets = search_results.facets.get('facet_fields', {}).get('text_clean_tokens', [])
+    cloud_data = []
+    
+    for i in range(0, len(raw_text_facets), 2):
+        word, count = raw_text_facets[i].lower(), raw_text_facets[i+1]
+        # Filter: ignore stopwords, short words, and pure numbers
+        if word not in STOPWORDS and len(word) > 2 and not word.isdigit():
+            cloud_data.append([word, count])
+
+    # 8. Pagination
     total_pages = (total_found // rows_per_page) + (1 if total_found % rows_per_page > 0 else 0)
+    print(stats)
 
     context = {
         'results': docs,
         'query': query,
         'stats': stats,
+        'cloud_data': cloud_data[:50],  # Pass top 50 filtered words
         'qtime': search_results.qtime,
         'total_hits': total_found,
         'page': page,
