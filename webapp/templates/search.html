@@ -5,6 +5,8 @@
 
     <!-- Search bar -->
     <form id="searchForm" method="GET" class="mb-3">
+        <input type="hidden" name="polarity" value="{{ request.GET.polarity }}">
+        <input type="hidden" name="record_type" value="{{ request.GET.record_type }}">
         <div class="input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text bg-white border-right-0 text-muted">
@@ -23,27 +25,29 @@
         <!-- Filter row -->
         <div class="d-flex flex-wrap align-items-center mt-2" style="gap: 8px;">
             <small class="text-muted mr-1">Sentiment:</small>
-            <a href="?q={{ query }}&polarity=1&record_type={{ request.GET.record_type }}&sort={{ request.GET.sort }}"
-               class="btn btn-sm {% if request.GET.polarity == '1' %}btn-success{% else %}btn-outline-success{% endif %}">
+            <a href="?q={{ query }}&polarity=1&record_type={{ request.GET.record_type }}&sort={{ request.GET.sort }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}"
+            class="btn btn-sm {% if request.GET.polarity == '1' %}btn-success{% else %}btn-outline-success{% endif %}">
                 Positive
             </a>
-            <a href="?q={{ query }}&polarity=-1&record_type={{ request.GET.record_type }}&sort={{ request.GET.sort }}"
-               class="btn btn-sm {% if request.GET.polarity == '-1' %}btn-danger{% else %}btn-outline-danger{% endif %}">
+
+            <a href="?q={{ query }}&polarity=-1&record_type={{ request.GET.record_type }}&sort={{ request.GET.sort }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}"
+            class="btn btn-sm {% if request.GET.polarity == '-1' %}btn-danger{% else %}btn-outline-danger{% endif %}">
                 Negative
             </a>
 
             <span class="text-muted mx-1">|</span>
             <small class="text-muted mr-1">Type:</small>
-            <a href="?q={{ query }}&polarity={{ request.GET.polarity }}&record_type=post&sort={{ request.GET.sort }}"
-               class="btn btn-sm {% if request.GET.record_type == 'post' %}btn-primary{% else %}btn-outline-primary{% endif %}">
+            <a href="?q={{ query }}&polarity={{ request.GET.polarity }}&record_type=post&sort={{ request.GET.sort }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}"
+            class="btn btn-sm {% if request.GET.record_type == 'post' %}btn-primary{% else %}btn-outline-primary{% endif %}">
                 Post
             </a>
-            <a href="?q={{ query }}&polarity={{ request.GET.polarity }}&record_type=comment&sort={{ request.GET.sort }}"
-               class="btn btn-sm {% if request.GET.record_type == 'comment' %}btn-primary{% else %}btn-outline-primary{% endif %}">
+
+            <a href="?q={{ query }}&polarity={{ request.GET.polarity }}&record_type=comment&sort={{ request.GET.sort }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}"
+            class="btn btn-sm {% if request.GET.record_type == 'comment' %}btn-primary{% else %}btn-outline-primary{% endif %}">
                 Comment
             </a>
 
-            {% if request.GET.polarity or request.GET.record_type %}
+            {% if request.GET.polarity or request.GET.record_type or request.GET.start_date or request.GET.end_date %}
             <a href="?q={{ query }}&sort={{ request.GET.sort }}" class="btn btn-sm btn-outline-secondary">
                 Clear filters
             </a>
