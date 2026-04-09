@@ -3,10 +3,10 @@ import re
 
 TOOL_PATTERNS = {
     "cursor": (r"\bcursor\b",),
-    "claude_code": (r"\bclaude code\b", r"\bclaude\b"),
+    "claude_code": (r"\bclaude code\b", r"\bclaude\.ai/code\b", r"\banthropic.*code\b"),
     "codex": (r"\bopenai codex\b", r"\bcodex\b"),
     "copilot": (r"\bgithub copilot\b", r"\bcopilot\b"),
-    "gemini": (r"\bgemini code assist\b", r"\bgemini\b"),
+    "gemini": (r"\bgemini code assist\b", r"\bgemini.*codi", r"\bgoogle.*gemini\b"),
     "replit": (r"\breplit\b", r"\brepl\.it\b"),
     "aider": (r"\baider\b",),
     "windsurf": (r"\bwindsurf\b", r"\bcodeium\b"),
@@ -50,7 +50,6 @@ FACET_PATTERNS = {
             r"\bergonomic",
             r"\bautocomplete\b",
             r"\binterface\b",
-            r"\bui\b",
             r"\bux\b",
         ),
         "integrations": (
@@ -79,7 +78,6 @@ FACET_PATTERNS = {
             r"\bdebugging\b",
             r"\bbug\b",
             r"\berror\b",
-            r"\bfix\b",
             r"\btrace\b",
             r"\brepro\b",
         ),

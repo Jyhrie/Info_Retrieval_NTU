@@ -8,6 +8,7 @@ gemini_analysis/
 .DS_Store
 
 /venv
+/myenv
 /data
 **/__pycache__/
 **/*.pyc
