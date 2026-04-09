@@ -30,6 +30,7 @@ import argparse
 import re
 import sys
 import time
+import warnings
 from datetime import datetime
 from pathlib import Path
 from nltk.corpus import stopwords
@@ -42,61 +43,110 @@ NEUTRAL_CONF_THRESHOLD = 0.60
 NEUTRAL_MARGIN_THRESHOLD = 0.10
 
 WORD_RE = re.compile(r"[a-zA-Z][a-zA-Z0-9_']+")
-STOPWORDS = set(stopwords.words('english'))
-# STOPWORDS = {
-#     "the",
-#     "a",
-#     "an",
-#     "and",
-#     "or",
-#     "to",
-#     "of",
-#     "for",
-#     "in",
-#     "on",
-#     "at",
-#     "is",
-#     "it",
-#     "this",
-#     "that",
-#     "with",
-#     "as",
-#     "are",
-#     "be",
-#     "was",
-#     "were",
-#     "i",
-#     "you",
-#     "we",
-#     "they",
-#     "my",
-#     "your",
-#     "our",
-#     "their",
-#     "from",
-#     "have",
-#     "has",
-#     "had",
-#     "but",
-#     "not",
-#     "so",
-#     "if",
-#     "just",
-#     "can",
-#     "will",
-#     "would",
-#     "should",
-#     "do",
-#     "does",
-#     "did",
-#     "about",
-#     "what",
-#     "how",
-#     "when",
-#     "where",
-#     "who",
-#     "why",
-# }
+FALLBACK_STOPWORDS = {
+    "the",
+    "a",
+    "an",
+    "and",
+    "or",
+    "to",
+    "of",
+    "for",
+    "in",
+    "on",
+    "at",
+    "is",
+    "it",
+    "this",
+    "that",
+    "with",
+    "as",
+    "are",
+    "be",
+    "was",
+    "were",
+    "i",
+    "you",
+    "we",
+    "they",
+    "my",
+    "your",
+    "our",
+    "their",
+    "from",
+    "have",
+    "has",
+    "had",
+    "but",
+    "not",
+    "so",
+    "if",
+    "just",
+    "can",
+    "will",
+    "would",
+    "should",
+    "do",
+    "does",
+    "did",
+    "about",
+    "what",
+    "how",
+    "when",
+    "where",
+    "who",
+    "why",
+}
+
+
+def _load_stopwords() -> set[str]:
+    try:
+        return set(stopwords.words("english"))
+    except LookupError:
+        warnings.warn(
+            "NLTK stopwords corpus is missing; using a built-in fallback stopword list.",
+            RuntimeWarning,
+            stacklevel=2,
+        )
+        return set(FALLBACK_STOPWORDS)
+
+
+STOPWORDS = _load_stopwords()
+
+
+def _resolve_existing_input_path(path_value: str, script_dir: Path) -> Path:
+    """Resolve an input path from CWD first, then script dir for compatibility."""
+    raw = Path(path_value)
+    if raw.is_absolute():
+        return raw.resolve()
+
+    cwd_candidate = (Path.cwd() / raw).resolve()
+    if cwd_candidate.exists():
+        return cwd_candidate
+
+    return (script_dir / raw).resolve()
+
+
+def _resolve_output_path(path_value: str, script_dir: Path, *, prefer_script_for_simple: bool = False) -> Path:
+    """Resolve output paths to support both repo-root and script-relative usage."""
+    raw = Path(path_value)
+    if raw.is_absolute():
+        return raw.resolve()
+
+    cwd_candidate = (Path.cwd() / raw).resolve()
+    script_candidate = (script_dir / raw).resolve()
+
+    if prefer_script_for_simple and len(raw.parts) == 1:
+        return script_candidate
+
+    cwd_parent_exists = cwd_candidate.parent.exists()
+    script_parent_exists = script_candidate.parent.exists()
+    if cwd_parent_exists and not script_parent_exists:
+        return cwd_candidate
+    if script_parent_exists and not cwd_parent_exists:
+        return script_candidate
+
+    return cwd_candidate
 
 
 def _normalize_hf_label(raw_label: str) -> str:
@@ -461,9 +511,7 @@ def main() -> int:
     args = parse_args()
     here = Path(__file__).resolve().parent
 
-    input_csv = Path(args.input_csv)
-    if not input_csv.is_absolute():
-        input_csv = (here / input_csv).resolve()
+    input_csv = _resolve_existing_input_path(args.input_csv, script_dir=here)
 
     if not input_csv.exists():
         print(f"Input file not found: {input_csv}")
@@ -485,9 +533,11 @@ def main() -> int:
     elapsed = time.time() - t0
 
     run_id = str(args.run_id).strip() or datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_root = Path(args.output_root)
-    if not output_root.is_absolute():
-        output_root = (here / output_root).resolve()
+    output_root = _resolve_output_path(
+        args.output_root,
+        script_dir=here,
+        prefer_script_for_simple=True,
+    )
     run_dir = output_root / f"run_{run_id}"
     run_dir.mkdir(parents=True, exist_ok=True)
 
@@ -498,9 +548,7 @@ def main() -> int:
     summary_df.to_csv(output_summary_csv, index=False)
 
     if str(args.output_csv).strip():
-        legacy_copy = Path(args.output_csv)
-        if not legacy_copy.is_absolute():
-            legacy_copy = (here / legacy_copy).resolve()
+        legacy_copy = _resolve_output_path(args.output_csv, script_dir=here)
         legacy_copy.parent.mkdir(parents=True, exist_ok=True)
         out_df.to_csv(legacy_copy, index=False)
         print(f"Legacy extra copy written: {legacy_copy}")
