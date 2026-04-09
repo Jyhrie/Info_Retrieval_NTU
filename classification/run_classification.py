@@ -520,5 +520,5 @@ if __name__ == "__main__":
     sys.exit(main())
 
 
-#TODO: add NER, then my solr can pull all named entities
+
 
