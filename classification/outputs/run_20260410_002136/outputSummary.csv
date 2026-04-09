@@ -1,0 +1,15 @@
+section,metric,value,rank,topic_key,text_clean,mean_confidence
+totals,total_rows,55334,,,,
+totals,positive_total,14887,,,,
+totals,negative_total,19415,,,,
+totals,neutral_total,21032,,,,
+top_positive_repeated,text_clean,,1.0,misc,,0.4506
+top_positive_repeated,text_clean,,2.0,interested,I’m very interested!,0.62
+top_positive_repeated,text_clean,,3.0,gif,!gif,0.5058
+top_positive_repeated,text_clean,,4.0,thank,Thank you,0.8989
+top_positive_repeated,text_clean,,5.0,thanks,Thanks!,0.8115
+top_negative_repeated,text_clean,,1.0,sorry|submission|removed,"Sorry, your submission has been removed due to inadequate account karma. I am a bot, and this action was performed automatically. Please contact the moderators of this subreddit if you have any questions or concerns.",0.8056
+top_negative_repeated,text_clean,,2.0,misc,Oh no,0.583
+top_negative_repeated,text_clean,,3.0,fuck,Why the fuck,0.6903
+top_negative_repeated,text_clean,,4.0,post|mass|deleted,This post was mass deleted and anonymized with [Redact]( shocking license wipe jellyfish lush distinct slim political cobweb cautious,0.6745
+top_negative_repeated,text_clean,,5.0,generated|automatically|comments,"TL;DR generated automatically after 200 comments. Alright, let's break this down. The consensus in here is heavily skeptical, with a side of spicy drama. The main criticisms are that the app's landing page has the exact same generic ""AI-generated SaaS"" look as every other project right now (with one user posting a detailed breakdown of how it copies Reflect.app), which immediately killed its credibility for many. More importantly, the app is broken for most Mac users right out of the gate due to a signing issue (a community member had to post the fix, not OP). The requirement to manually set up Google Cloud OAuth credentials is also seen as a massive barrier to entry. OP, who clarified he's a Senior SWE with 15 years of experience, has been in the comments fighting for his life. His defensive and sarcastic replies (some admittedly written with Claude's help) have rubbed many the wrong way, leading to the top-voted comment: ""Too much tech knowledge needed; OP won't answer."" It's not all a dogpile, though. There's genuine interest in the concept, with lots of feature requests for IMAP and Office 365 support, and a vocal minority defending OP's work.",0.6231
