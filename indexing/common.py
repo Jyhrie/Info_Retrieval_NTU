@@ -16,6 +16,7 @@ BASE_FIELDS = [
     "text_part",
     "date",
     "text_clean",
+    "text_index",
 ]
 
 #fields that only v2 has (additional indexed)

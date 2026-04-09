@@ -4,9 +4,12 @@ from .forms import TextForm
 import pysolr
 from datetime import datetime, timezone
 from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+import re
 
 
 STOPWORDS = set(stopwords.words('english'))
+lemmatizer = WordNetLemmatizer()
 
 def home(request):
     form = TextForm()
@@ -15,7 +18,21 @@ def home(request):
 def search(request):
     # 1. Get Parameters from the Horizontal Search Bar
     query = request.GET.get('q', '').strip()
-    solr_query = f"text_clean:{query}~4" if query else "*:*"
+    if query:
+        clean_query = re.sub(r'[^a-zA-Z\s]', '', query.lower())
+        words = query.split()
+        meaningful_words = [
+            lemmatizer.lemmatize(w, pos='v') 
+            for w in words 
+            if w not in STOPWORDS and len(w) > 2
+        ]
+
+        if not meaningful_words:
+            meaningful_words = words
+
+        solr_query = " AND ".join([f"text_index:{word}~2" for word in meaningful_words])
+    else:
+        solr_query = "*:*"
     
     # 2. Pagination Logic
     page = int(request.GET.get('page', 1))
@@ -27,7 +44,7 @@ def search(request):
     solr_params = {
         'facet': 'on',
         'facet.field': ['final_class_str', 'text_clean_tokens'],
-        'facet.limit': 200,  # Get enough words to filter down
+        'facet.limit': 100,  # Get enough words to filter down
         'rows': rows_per_page,
         'start': start_index,
         'sort': request.GET.get('sort', 'rank_score desc'),
