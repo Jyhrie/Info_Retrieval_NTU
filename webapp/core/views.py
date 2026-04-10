@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import re
+from collections import Counter
 
 
 STOPWORDS = set(stopwords.words('english'))
@@ -43,7 +44,7 @@ def search(request):
     # Added 'text_clean' to facet.field to get word frequencies
     solr_params = {
         'facet': 'on',
-        'facet.field': ['final_class_str', 'text_clean_tokens'],
+        'facet.field': ['final_class_str'],
         'facet.limit': 100,  # Get enough words to filter down
         'rows': rows_per_page,
         'start': start_index,
@@ -107,14 +108,17 @@ def search(request):
             label, count = final_class_facets[i], final_class_facets[i+1]
             stats[label] = count
 
-    raw_text_facets = search_results.facets.get('facet_fields', {}).get('text_clean_tokens', [])
-    cloud_data = []
-    
-    for i in range(0, len(raw_text_facets), 2):
-        word, count = raw_text_facets[i].lower(), raw_text_facets[i+1]
-        # Filter: ignore stopwords, short words, and pure numbers
-        if word not in STOPWORDS and len(word) > 2 and not word.isdigit():
-            cloud_data.append([word, count])
+    word_counter = Counter()
+    if total_found > 0:
+        cloud_results = solr.search(solr_query, fl='text_clean', rows=total_found, fq=solr_params['fq'])
+        for doc in cloud_results.docs:
+            text = doc.get('text_clean', '')
+            if isinstance(text, list):
+                text = ' '.join(text)
+            for word in re.findall(r'[a-z]+', text.lower()):
+                if word not in STOPWORDS and len(word) > 2 and not word.isdigit():
+                    word_counter[word] += 1
+    cloud_data = [[word, count] for word, count in word_counter.most_common(50)]
 
     # 8. Pagination
     total_pages = (total_found // rows_per_page) + (1 if total_found % rows_per_page > 0 else 0)
