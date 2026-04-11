@@ -39,19 +39,19 @@
         <input type="hidden" name="record_type" value="{{ request.GET.record_type }}">
         <input type="hidden" name="sort" id="sort_combined" value="{{ request.GET.sort|default:'rank_score desc' }}">
 
-        <!-- Filter Row 1: Sentiment + Type -->
         <div class="d-flex flex-wrap align-items-center mt-2" style="gap: 8px;">
             <small class="text-muted mr-1">Sentiment:</small>
-            <a href="?q={{ query }}&polarity=1&record_type={{ request.GET.record_type }}&sort={{ request.GET.sort }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}"
-               class="btn btn-sm {% if request.GET.polarity == '1' %}btn-success{% else %}btn-outline-success{% endif %}">
+            <a href="?q={{ query }}&polarity=1&record_type={{ request.GET.record_type }}&sort={{ request.GET.sort }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}&tool={{ request.GET.tool }}&reason={{ request.GET.reason }}&workflow={{ request.GET.workflow }}&trust={{ request.GET.trust }}"
+            class="btn btn-sm {% if request.GET.polarity == '1' %}btn-success{% else %}btn-outline-success{% endif %}">
                 Positive
             </a>
-            <a href="?q={{ query }}&polarity=-1&record_type={{ request.GET.record_type }}&sort={{ request.GET.sort }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}"
-               class="btn btn-sm {% if request.GET.polarity == '-1' %}btn-danger{% else %}btn-outline-danger{% endif %}">
+            <a href="?q={{ query }}&polarity=-1&record_type={{ request.GET.record_type }}&sort={{ request.GET.sort }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}&tool={{ request.GET.tool }}&reason={{ request.GET.reason }}&workflow={{ request.GET.workflow }}&trust={{ request.GET.trust }}"
+            class="btn btn-sm {% if request.GET.polarity == '-1' %}btn-danger{% else %}btn-outline-danger{% endif %}">
                 Negative
             </a>
 
             <span class="text-muted mx-1">|</span>
+
             <small class="text-muted mr-1">Type:</small>
             <a href="?q={{ query }}&polarity={{ request.GET.polarity }}&record_type=post&sort={{ request.GET.sort }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}"
                class="btn btn-sm {% if request.GET.record_type == 'post' %}btn-primary{% else %}btn-outline-primary{% endif %}">
@@ -62,32 +62,92 @@
                 Comment
             </a>
 
-            {% if request.GET.polarity or request.GET.record_type or request.GET.start_date or request.GET.end_date %}
-            <a href="?q={{ query }}&sort={{ request.GET.sort }}" class="btn btn-sm btn-outline-secondary">
-                Clear filters
-            </a>
-            {% endif %}
-        </div>
+            <span class="text-muted mx-1">|</span>
+            
+            <button class="btn btn-sm btn-light border shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#advancedFilters" aria-expanded="false">
+                <i class="fas fa-sliders-h mr-1"></i> Advanced Filters
+                {% if request.GET.tool or request.GET.reason or request.GET.workflow or request.GET.trust or request.GET.start_date %}
+                    <span class="badge badge-primary ml-1">Active</span>
+                {% endif %}
+            </button>
 
-        <!-- Filter Row 2: Date + Sort -->
-        <div class="d-flex flex-wrap align-items-center mt-2" style="gap: 8px;">
-            <small class="text-muted mr-1">Date:</small>
-            <input type="date" name="start_date" id="start_date" value="{{ request.GET.start_date }}"
-                   class="form-control form-control-sm" style="width: 140px;" title="Start date">
-            <span class="text-muted small">to</span>
-            <input type="date" name="end_date" id="end_date" value="{{ request.GET.end_date }}"
-                   class="form-control form-control-sm" style="width: 140px;" title="End date">
+            {% if request.GET.polarity or request.GET.record_type or request.GET.tool or request.GET.reason or request.GET.workflow or request.GET.trust or request.GET.start_date %}
+            <a href="?q={{ query }}&sort={{ request.GET.sort }}" class="btn btn-sm btn-link text-muted">Clear all</a>
+            {% endif %}
 
             <div class="ml-auto d-flex align-items-center" style="gap: 6px;">
-                <small class="text-muted mr-1">Sort by:</small>
-                <select id="sort_field" class="form-control form-control-sm" style="width: 120px;">
+                <small class="text-muted mr-1">Sort:</small>
+                <select id="sort_field" class="form-control form-control-sm" style="width: 110px;">
                     <option value="rank_score" {% if 'polarity' not in request.GET.sort|default:'' %}selected{% endif %}>Confidence</option>
                     <option value="polarity" {% if 'polarity' in request.GET.sort|default:'' %}selected{% endif %}>Positivity</option>
                 </select>
-                <select id="sort_dir" class="form-control form-control-sm" style="width: 120px;">
-                    <option value="desc" {% if 'asc' not in request.GET.sort|default:'' %}selected{% endif %}>High &rarr; Low</option>
-                    <option value="asc" {% if 'asc' in request.GET.sort|default:'' %}selected{% endif %}>Low &rarr; High</option>
+                <select id="sort_dir" class="form-control form-control-sm" style="width: 110px;">
+                    <option value="desc" {% if 'asc' not in request.GET.sort|default:'' %}selected{% endif %}>High-Low</option>
+                    <option value="asc" {% if 'asc' in request.GET.sort|default:'' %}selected{% endif %}>Low-High</option>
                 </select>
+            </div>
+        </div>
+
+        <div class="{% if request.GET.tool or request.GET.reason or request.GET.workflow or request.GET.trust or request.GET.start_date %}show{% else %}collapse{% endif %}" id="advancedFilters">
+            <div class="card card-body mt-3 bg-light border-0 shadow-sm p-3">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row g-2">
+                            <div class="col-md-3">
+                                <label class="small text-muted mb-1 d-block">Tool</label>
+                                <select name="tool" class="form-control form-control-sm filter-dropdown">
+                                    <option value="">All Tools</option>
+                                    {% for r in all_tools %}
+                                        <option value="{{ r }}" {% if request.GET.tool == r %}selected{% endif %}>
+                                            {{ r }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="small text-muted mb-1 d-block">Reason</label>
+                                <select name="reason" class="form-control form-control-sm filter-dropdown">
+                                    <option value="">Any Reason</option>
+                                    {% for r in all_reasons %}
+                                        <option value="{{ r }}" {% if request.GET.reason == r %}selected{% endif %}>
+                                            {{ r }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="small text-muted mb-1 d-block">Workflow</label>
+                                <select name="workflow" class="form-control form-control-sm filter-dropdown">
+                                    <option value="">Any State</option>
+                                    {% for r in all_workflows %}
+                                        <option value="{{ r }}" {% if request.GET.workflow == r %}selected{% endif %}>
+                                            {{ r }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="small text-muted mb-1 d-block">Trust</label>
+                                <select name="trust" class="form-control form-control-sm filter-dropdown">
+                                    <option value="">All Levels</option>
+                                    {% for r in all_trust_levels %}
+                                        <option value="{{ r }}" {% if request.GET.trust == r %}selected{% endif %}>
+                                            {{ r }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 border-left">
+                        <label class="small text-muted mb-1 d-block">Date Range</label>
+                        <div class="d-flex align-items-center" style="gap: 5px;">
+                            <input type="date" name="start_date" id="start_date" value="{{ request.GET.start_date }}" class="form-control form-control-sm">
+                            <span class="text-muted small">to</span>
+                            <input type="date" name="end_date" id="end_date" value="{{ request.GET.end_date }}" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </form>

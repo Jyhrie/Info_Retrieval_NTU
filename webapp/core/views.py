@@ -12,16 +12,27 @@ from collections import Counter
 STOPWORDS = set(stopwords.words('english'))
 lemmatizer = WordNetLemmatizer()
 
+DDL_OPTIONS = {
+    'tool': [
+        'cursor', 'claude_code', 'codex', 'copilot', 'gemini', 
+        'replit', 'aider', 'windsurf', 'cline', 'opencode'
+    ],
+    'reason': ['speed', 'code_quality', 'correctness', 'ux', 'integrations'],
+    'workflow': ['prototyping', 'debugging', 'refactoring', 'testing'],
+    'trust': ['production', 'reliability', 'hallucination', 'privacy'],
+}
+
 def home(request):
     form = TextForm()
     return render(request, 'home.html', {'form': form})
 
 def search(request):
-    # 1. Get Parameters from the Horizontal Search Bar
+    solr = pysolr.Solr(settings.SOLR_URL, timeout=10)
+
     query = request.GET.get('q', '').strip()
     if query:
         clean_query = re.sub(r'[^a-zA-Z\s]', '', query.lower())
-        words = query.split()
+        words = clean_query.split()
         meaningful_words = [
             lemmatizer.lemmatize(w, pos='v') 
             for w in words 
@@ -31,7 +42,7 @@ def search(request):
         if not meaningful_words:
             meaningful_words = words
 
-        solr_query = " AND ".join([f"text_index:{word}~2" for word in meaningful_words])
+        solr_query = " AND ".join([f"text_index:{word}~1" for word in meaningful_words])
     else:
         solr_query = "*:*"
     
@@ -40,18 +51,17 @@ def search(request):
     rows_per_page = 10
     start_index = (page - 1) * rows_per_page
 
-    # 3. Setup Solr Parameters
-    # Added 'text_clean' to facet.field to get word frequencies
     solr_params = {
         'facet': 'on',
-        'facet.field': ['final_class_str'],
-        'facet.limit': 100,  # Get enough words to filter down
+        'facet.field': ['final_class_str', 'text_clean_tokens'],
+        'facet.limit': rows_per_page,
+        'f.text_clean_tokens.facet.limit': 100,
+        'f.text_clean_tokens.facet.mincount': 5,
         'rows': rows_per_page,
         'start': start_index,
         'sort': request.GET.get('sort', 'rank_score desc'),
         'fq': []
     }
-    print("new facets")
 
     # 4. Apply Advanced Filters
     start_date = request.GET.get('start_date')
@@ -75,8 +85,11 @@ def search(request):
     if record_type:
         solr_params['fq'].append(f"record_type:{record_type}")
 
-    # 5. Solr Search
-    solr = pysolr.Solr(settings.SOLR_URL, timeout=10)
+    for field in ['tool', 'reason', 'workflow', 'trust']:
+        val = request.GET.get(field)
+        if val:
+            solr_params['fq'].append(f'{field}:"{val}"')
+
     search_results = solr.search(solr_query, **solr_params)
 
     # Helper Functions
@@ -102,27 +115,34 @@ def search(request):
     stats = {}
     total_found = search_results.hits
     final_class_facets = search_results.facets.get('facet_fields', {}).get('final_class_str', [])
-    print(len(final_class_facets))
     if total_found > 0:
         for i in range(0, len(final_class_facets), 2):
             label, count = final_class_facets[i], final_class_facets[i+1]
             stats[label] = count
 
-    word_counter = Counter()
-    if total_found > 0:
-        cloud_results = solr.search(solr_query, fl='text_clean', rows=total_found, fq=solr_params['fq'])
-        for doc in cloud_results.docs:
-            text = doc.get('text_clean', '')
-            if isinstance(text, list):
-                text = ' '.join(text)
-            for word in re.findall(r'[a-z]+', text.lower()):
-                if word not in STOPWORDS and len(word) > 2 and not word.isdigit():
-                    word_counter[word] += 1
-    cloud_data = [[word, count] for word, count in word_counter.most_common(50)]
+    raw_text_facets = search_results.facets.get('facet_fields', {}).get('text_clean_tokens', [])
+    cloud_data = []
+    
+    for i in range(0, len(raw_text_facets), 2):
+        word, count = raw_text_facets[i].lower(), raw_text_facets[i+1]
+        # Filter: ignore stopwords, short words, and pure numbers
+        if word not in STOPWORDS and len(word) > 2 and not word.isdigit():
+            cloud_data.append([word, count])
+
+    # word_counter = Counter()
+    # if total_found > 0:
+    #     cloud_results = solr.search(solr_query, fl='text_clean', rows=total_found, fq=solr_params['fq'])
+    #     for doc in cloud_results.docs:
+    #         text = doc.get('text_clean', '')
+    #         if isinstance(text, list):
+    #             text = ' '.join(text)
+    #         for word in re.findall(r'[a-z]+', text.lower()):
+    #             if word not in STOPWORDS and len(word) > 2 and not word.isdigit():
+    #                 word_counter[word] += 1
+    # cloud_data = [[word, count] for word, count in word_counter.most_common(50)]
 
     # 8. Pagination
     total_pages = (total_found // rows_per_page) + (1 if total_found % rows_per_page > 0 else 0)
-    print(stats)
 
     context = {
         'results': docs,
@@ -137,5 +157,9 @@ def search(request):
         'has_prev': page > 1,
         'next_page': page + 1,
         'prev_page': page - 1,
+        'all_tools': DDL_OPTIONS['tool'],
+        'all_reasons': DDL_OPTIONS['reason'],
+        'all_workflows': DDL_OPTIONS['workflow'],
+        'all_trust_levels': DDL_OPTIONS['trust'],
     }
     return render(request, 'search.html', context)
