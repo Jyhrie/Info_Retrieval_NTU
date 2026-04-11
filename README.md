@@ -1,4 +1,4 @@
-# Info_Retrieval_NTU
+# SC4021 - Information Retrieval Project
 ## Project Overview
 * Introduction
 * Crawling
