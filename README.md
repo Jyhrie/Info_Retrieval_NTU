@@ -18,6 +18,12 @@ During the enrichment phase, we expanded these initial posts by retrieving their
 to start solr
 
 ## Index and Querying
+The final stage of the pipeline invovles ingesting the enriched and classified data into a Solr search index. Using merge_sentiment.py, the system performs a relational join between the structured reddit data, and classification outputs. Categorical metadata, such as tools, reasons and workflows are also serialized into pipe separated strings.
+
+For the user interface, we developed a simple django web application for the user to perform queries on. The web application interfaces to the Solr serach index via the pysolr library. When a user enters a search term, their query is first split, then stopwords are removed, then lemmatized before targeting the text_index field, applying logical AND operator between every token, along with a ~1 fuzzy search factor to account for minor character variations. 
+
+For sidebar filters, the application passes paramters to pysolr using filter queries. These filters include date range, categorical metadata, sentiment, comment body or post and prediction confidence.
+Results are returned as a ranked list based on a combination of TF-IDF relevance on the text_index and the rank_score.
 
 ## Classification
 For our classification, we developed a sentiment classification pipeline to process our Reddit corpus, focusing on balancing high accuracy with structural interpretability. The workflow began with extensive data preprocessing to minimize noise, including the removal of URLs, Reddit-specific mentions, and markdown formatting, while preserving emotional punctuation like exclamation marks and question marks. We employed a hybrid methodology utilizing SenticNet as a lightweight subjectivity gate to filter opinionated content before applying transformer-based models like Cardiff RoBERTa and RoBERTa-MNLI. Our benchmarking on a manually labeled 1,000-record ground truth dataset revealed that the Cardiff-only configuration was the superior performer, achieving a macro-F1 score of 0.7808 and an accuracy of 0.7780. To confirm the system’s real-world reliability, we conducted a random accuracy test on the remaining 53,485 records, which demonstrated stable behavior and practical efficiency beyond the initial evaluation set.
