@@ -102,30 +102,3 @@ These improvements included a:
 * Guarded sarcasm enhancement
 * WSD and NER contextual enrichment
 Incremental testing against the Cardiff-only baseline showed that while these decision rules slightly decreased predictive performance—with accuracy dropping from 0.7780 to 0.7490—they significantly enhanced system interpretability and control. We also explored contextual enrichment through Word Sense Disambiguation (WSD) and Named Entity Recognition (NER); however, these provided limited aggregate gains in this specific dataset, with NER resulting in a minor accuracy decline of 0.004. Ultimately, the study confirmed that the baseline Cardiff model remained exceptionally robust, while our innovations established a clear roadmap for handling more entity-sensitive sentiment patterns in the future
-
-## Solr instructions
-to start solr
-```bash
-docker compose up --build 
-```
-
-get container name/id
-```bash
-docker ps 
-```
-
-create solr core
-```bash
-docker exec -it <container_id> solr create_core -c info_retrieval
-```
-
-copy file into docker container
-```bash
-docker cp your_file.csv <container_id>:/data/your_file.csv
-
-```
-
-upload file into solr core
-```bash
-docker exec -it <container_id> bin/solr post -c info_retrieval /data/your_file.csv
-```
