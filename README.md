@@ -26,7 +26,7 @@ python redditscraper/run.py
 
 A menu will pop up, click 2 and run
 
-data will be output in data/enriched_results.json
+data will be output in data/refined_dataset.csv
 
 ## Index and Querying
 The final stage of the pipeline invovles ingesting the enriched and classified data into a Solr search index. Using merge_sentiment.py, the system performs a relational join between the structured reddit data, and classification outputs. Categorical metadata, such as tools, reasons and workflows are also serialized into pipe separated strings.
@@ -36,6 +36,7 @@ For the user interface, we developed a simple django web application for the use
 For sidebar filters, the application passes paramters to pysolr using filter queries. These filters include date range, categorical metadata, sentiment, comment body or post and prediction confidence.
 Results are returned as a ranked list based on a combination of TF-IDF relevance on the text_index and the rank_score.
 
+### Runtime
 To run the solr search index, download and install docker, and run
 ```bash
 docker compose up --build 
@@ -74,12 +75,15 @@ and to navigate to the webapp, go to
 ## Classification
 For our classification, we developed a sentiment classification pipeline to process our Reddit corpus, focusing on balancing high accuracy with structural interpretability. The workflow began with extensive data preprocessing to minimize noise, including the removal of URLs, Reddit-specific mentions, and markdown formatting, while preserving emotional punctuation like exclamation marks and question marks. We employed a hybrid methodology utilizing SenticNet as a lightweight subjectivity gate to filter opinionated content before applying transformer-based models like Cardiff RoBERTa and RoBERTa-MNLI. Our benchmarking on a manually labeled 1,000-record ground truth dataset revealed that the Cardiff-only configuration was the superior performer, achieving a macro-F1 score of 0.7808 and an accuracy of 0.7780. To confirm the system’s real-world reliability, we conducted a random accuracy test on the remaining 53,485 records, which demonstrated stable behavior and practical efficiency beyond the initial evaluation set.
 
-To perform the evaluation, input data into redditscraper/data/topic/enriched_results.json, and run 
-```bash
-python classification.ipynb
-```
+### Evaluation
+The evaluation input is /redditscrapper/data/ai_coding_agents_1/evaluation_dataset_1000.csv
+Answer key path is /redditscrapper/data/ai_coding_agents_1/evaluated_dataset_1000.csv
 
-To receive the large classified dataset, run
+run all code blocks in classification/classification.ipynb to run evaluation.
+
+### Classification for Solr Data
+
+To perform classification on the large classified dataset, run input with result from crawling located at data/refined_dataset.csv
 ```bash
 python run_classification.py --input filename
 ```
@@ -87,7 +91,7 @@ default input is classification/input.csv.
 
 Output will be in output as classification/output/run_DATE_TIME/outputClassification.csv in directiory 
 
-To add categorical metadata, obtain final_class and merge sentiment, 
+To add categorical metadata, and merge sentiment into a final_class, 
 input data into indexing/outputClassification.csv, and run 
 ```bash
 python indexing/merge_sentiment.py
