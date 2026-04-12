@@ -105,4 +105,6 @@ These improvements included a:
 * Neutral suppression with margin logic
 * Guarded sarcasm enhancement
 * WSD and NER contextual enrichment
+
+
 Incremental testing against the Cardiff-only baseline showed that while these decision rules slightly decreased predictive performance—with accuracy dropping from 0.7780 to 0.7490—they significantly enhanced system interpretability and control. We also explored contextual enrichment through Word Sense Disambiguation (WSD) and Named Entity Recognition (NER); however, these provided limited aggregate gains in this specific dataset, with NER resulting in a minor accuracy decline of 0.004. Ultimately, the study confirmed that the baseline Cardiff model remained exceptionally robust, while our innovations established a clear roadmap for handling more entity-sensitive sentiment patterns in the future
